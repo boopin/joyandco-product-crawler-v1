@@ -1,13 +1,11 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import subprocess
 import os
 import glob
 import xml.etree.ElementTree as ET
-import json
 from datetime import datetime
-import time
+import requests
 
 st.set_page_config(
     page_title="JoyAndCo Product Feed Generator",
@@ -18,186 +16,126 @@ st.set_page_config(
 st.title("JoyAndCo Product Feed Generator")
 st.markdown("Monitor and control product feeds for Google and Meta shopping ads")
 
-# Sidebar
+# Check GitHub for feed files
+@st.cache_data(ttl=300)  # Cache for 5 minutes
+def get_github_feed_data():
+    # Replace with your GitHub repo details
+    owner = "your-username"
+    repo = "joyandco-product-feed"
+    
+    # Get CSV feed content
+    csv_url = f"https://raw.githubusercontent.com/{owner}/{repo}/main/feeds/google_shopping_feed.csv"
+    try:
+        df = pd.read_csv(csv_url)
+        return df
+    except:
+        st.warning("Could not load feed data from GitHub")
+        return pd.DataFrame()
+    
+# Get GitHub Actions status
+@st.cache_data(ttl=300)  # Cache for 5 minutes
+def get_github_actions_status():
+    # Replace with your repo details
+    owner = "your-username"
+    repo = "joyandco-product-feed"
+    
+    url = f"https://api.github.com/repos/{owner}/{repo}/actions/runs"
+    
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            runs = response.json()["workflow_runs"]
+            if runs:
+                latest_run = runs[0]
+                return {
+                    "status": latest_run["conclusion"] or "running",
+                    "time": latest_run["updated_at"],
+                    "url": latest_run["html_url"]
+                }
+    except:
+        pass
+    return None
+
+# Main content
 st.sidebar.header("Controls")
 
-# Manual feed generation
-if st.sidebar.button("🔄 Generate Feeds Now", help="Run the crawler and generate fresh feeds"):
-    with st.spinner("Crawling products and generating feeds..."):
-        try:
-            process = subprocess.Popen(
-                ["python", "crawler.py"],
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                text=True
-            )
-            
-            # Create a placeholder for live output
-            output_placeholder = st.empty()
-            
-            # Stream the output
-            while True:
-                output = process.stdout.readline()
-                if output == '' and process.poll() is not None:
-                    break
-                if output:
-                    output_placeholder.text(output.strip())
-            
-            returncode = process.poll()
-            
-            if returncode == 0:
-                st.success("✅ Feed generation completed successfully!")
-                time.sleep(2)  # Give time to read the message
-                st.rerun()  # Refresh the page to show new data
-            else:
-                st.error("❌ Feed generation failed. Check the logs below.")
-                error_output = process.stderr.read()
-                st.code(error_output)
-        except Exception as e:
-            st.error(f"An error occurred: {str(e)}")
+# Link to manually trigger GitHub Actions
+st.sidebar.markdown("""
+## Manual Feed Generation
+The crawler runs daily via GitHub Actions.
 
-# Main content area
-tab1, tab2, tab3 = st.tabs(["📊 Dashboard", "🔍 Feed Preview", "📝 Logs"])
+To manually trigger a new feed generation:
+1. [Go to Actions on GitHub](https://github.com/your-username/joyandco-product-feed/actions)
+2. Click on "Generate JoyAndCo Product Feeds"
+3. Click "Run workflow"
+""")
+
+# Main tabs
+tab1, tab2 = st.tabs(["📊 Dashboard", "🔍 Feed Preview"])
 
 with tab1:
-    col1, col2, col3 = st.columns(3)
+    # GitHub Actions status
+    github_status = get_github_actions_status()
+    if github_status:
+        status_color = "green" if github_status["status"] == "success" else "orange" if github_status["status"] == "running" else "red"
+        st.markdown(f"""
+        ### GitHub Actions Status
+        <span style="color:{status_color};font-weight:bold;">{github_status["status"].upper()}</span>
+        
+        Last run: {github_status["time"]}
+        
+        [View Details]({github_status["url"]})
+        """, unsafe_allow_html=True)
     
-    # Check for feed files
-    feed_files = glob.glob("feeds/*.*")
-    last_updated = None
-    if feed_files:
-        last_updated = max([os.path.getmtime(file) for file in feed_files])
-        last_updated = datetime.fromtimestamp(last_updated)
+    # Feed data
+    df = get_github_feed_data()
+    
+    # Display metrics
+    col1, col2 = st.columns(2)
     
     with col1:
-        st.metric(
-            label="Google Feed Status", 
-            value="Active" if any("google" in file for file in feed_files) else "Not Generated"
-        )
-        if last_updated:
-            st.caption(f"Last updated: {last_updated.strftime('%Y-%m-%d %H:%M:%S')}")
+        st.metric("Total Products", len(df) if not df.empty else 0)
     
     with col2:
-        st.metric(
-            label="Meta Feed Status", 
-            value="Active" if any("meta" in file for file in feed_files) else "Not Generated"
-        )
+        st.metric("Feed Status", "Active" if not df.empty else "Not Generated")
     
-    with col3:
-        product_count = 0
-        csv_file = "feeds/google_shopping_feed.csv"
-        if os.path.exists(csv_file):
-            df = pd.read_csv(csv_file)
-            product_count = len(df)
+    # Price distribution
+    if not df.empty and 'price' in df.columns:
+        st.subheader("Price Distribution")
+        fig = px.histogram(df, x="price", nbins=20, title="Product Price Distribution")
+        st.plotly_chart(fig, use_container_width=True)
         
-        st.metric(label="Total Products", value=product_count)
-    
-    # Product data visualization
-    st.subheader("Product Data")
-    
-    if os.path.exists(csv_file) and product_count > 0:
-        df = pd.read_csv(csv_file)
-        
-        # Price distribution
-        if 'price' in df.columns:
-            st.subheader("Price Distribution")
-            fig = px.histogram(df, x="price", nbins=20, title="Product Price Distribution")
-            st.plotly_chart(fig, use_container_width=True)
-        
-        # Product availability
-        if 'availability' in df.columns:
-            st.subheader("Product Availability")
-            availability_counts = df['availability'].value_counts().reset_index()
-            availability_counts.columns = ['Status', 'Count']
-            fig = px.pie(availability_counts, values='Count', names='Status', title="Product Availability")
-            st.plotly_chart(fig, use_container_width=True)
-    else:
-        st.info("No product data available. Generate feeds to see product analytics.")
+        # Product table
+        st.subheader("Products")
+        st.dataframe(df)
 
 with tab2:
     st.subheader("Feed Preview")
     
-    feed_type = st.selectbox(
-        "Select Feed Type",
-        options=["Google Shopping (XML)", "Meta Shopping (XML)", "CSV Feed"]
-    )
+    # Feed URLs
+    st.markdown("""
+    ### Feed URLs
     
-    if feed_type == "Google Shopping (XML)":
-        xml_file = "feeds/google_shopping_feed.xml"
-        if os.path.exists(xml_file):
-            with open(xml_file, 'r') as f:
-                xml_content = f.read()
-            st.code(xml_content[:5000] + "..." if len(xml_content) > 5000 else xml_content, language="xml")
-            
-            # Display structured data
-            try:
-                tree = ET.parse(xml_file)
-                root = tree.getroot()
-                items = root.findall('.//item')
-                
-                if items:
-                    st.subheader(f"Products in Feed: {len(items)}")
-                    sample_item = items[0]
-                    st.json({child.tag.split('}')[-1]: child.text for child in sample_item})
-            except Exception as e:
-                st.error(f"Error parsing XML: {str(e)}")
-        else:
-            st.warning("Google Shopping feed has not been generated yet.")
+    Use these URLs in Google Merchant Center and Meta Business Manager:
     
-    elif feed_type == "Meta Shopping (XML)":
-        xml_file = "feeds/meta_shopping_feed.xml"
-        if os.path.exists(xml_file):
-            with open(xml_file, 'r') as f:
-                xml_content = f.read()
-            st.code(xml_content[:5000] + "..." if len(xml_content) > 5000 else xml_content, language="xml")
-            
-            # Display structured data
-            try:
-                tree = ET.parse(xml_file)
-                root = tree.getroot()
-                items = root.findall('.//item')
-                
-                if items:
-                    st.subheader(f"Products in Feed: {len(items)}")
-                    sample_item = items[0]
-                    st.json({child.tag: child.text for child in sample_item})
-            except Exception as e:
-                st.error(f"Error parsing XML: {str(e)}")
-        else:
-            st.warning("Meta Shopping feed has not been generated yet.")
+    - **Google Shopping Feed (XML):**  
+    `https://raw.githubusercontent.com/your-username/joyandco-product-feed/main/feeds/google_shopping_feed.xml`
     
-    else:  # CSV Feed
-        csv_file = "feeds/google_shopping_feed.csv"
-        if os.path.exists(csv_file):
-            df = pd.read_csv(csv_file)
-            st.dataframe(df, use_container_width=True)
-        else:
-            st.warning("CSV feed has not been generated yet.")
-
-with tab3:
-    st.subheader("Crawler Logs")
+    - **Meta Shopping Feed (XML):**  
+    `https://raw.githubusercontent.com/your-username/joyandco-product-feed/main/feeds/meta_shopping_feed.xml`
     
-    # Check if log file exists and display it
-    log_file = "crawler.log"
-    if os.path.exists(log_file):
-        with open(log_file, 'r') as f:
-            log_content = f.readlines()
-        
-        # Display the most recent logs first (last 100 lines)
-        st.code(''.join(log_content[-100:]), language="bash")
-        
-        if st.button("Clear Logs"):
-            with open(log_file, 'w') as f:
-                f.write("")
-            st.success("Logs cleared successfully")
-            time.sleep(1)
-            st.rerun()
-    else:
-        st.info("No logs available. Run the crawler to generate logs.")
+    - **CSV Feed:**  
+    `https://raw.githubusercontent.com/your-username/joyandco-product-feed/main/feeds/google_shopping_feed.csv`
+    """)
+    
+    # Display feed sample
+    if not df.empty:
+        st.subheader("Sample Product Data")
+        st.dataframe(df.head(5))
 
 # Footer
 st.markdown("---")
 st.markdown(
-    "Made with ❤️ for JoyAndCo | Last Dashboard Update: " + 
+    "Made with ❤️ for JoyAndCo | Dashboard Last Updated: " + 
     datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 )
