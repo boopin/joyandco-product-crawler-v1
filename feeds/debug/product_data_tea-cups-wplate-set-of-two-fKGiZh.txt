@@ -1,0 +1,10 @@
+id: tea-cups-wplate-set-of-two-fKGiZh
+title: Tea Cups W/Plate Set of Two
+description: Tea Cups W/Plate Set of Two
+price: 156
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/2025-02-19-67b634d47cefa.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/tea-cups-wplate-set-of-two-fKGiZh
+brand: Joy and Co

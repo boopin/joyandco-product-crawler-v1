@@ -1,0 +1,10 @@
+id: twist-flicker-candleholder-white-sAsYLc
+title: Twist & Flicker Candleholder White
+description: Twist & Flicker Candleholder White
+price: 145
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/twist-flicker-candleholder-white-sAsYLc
+brand: Joy and Co

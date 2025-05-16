@@ -1,0 +1,10 @@
+id: fancy-purple-candle-holder-Xumq0D
+title: Fancy Purple Candle Holder
+description: Fancy Purple Candle Holder
+price: 349
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/fancy-purple-candle-holder-Xumq0D
+brand: Joy and Co

@@ -1,0 +1,10 @@
+id: flower-girl-candleholder-lilac-l77Ql5
+title: Flower Girl Candleholder Lilac
+description: Flower Girl Candleholder Lilac
+price: 83
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/flower-girl-candleholder-lilac-l77Ql5
+brand: Joy and Co

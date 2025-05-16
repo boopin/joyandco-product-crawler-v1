@@ -1,0 +1,10 @@
+id: abracadabra-round-serving-plate-okCZ5Q
+title: Abracadabra Round Serving Plate
+description: Abracadabra Round Serving Plate
+price: 420
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/abracadabra-round-serving-plate-okCZ5Q
+brand: Joy and Co

@@ -1,0 +1,10 @@
+id: boho-planter-o3q5RN
+title: Boho planter
+description: Boho planter
+price: 330
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/boho-planter-o3q5RN
+brand: Joy and Co

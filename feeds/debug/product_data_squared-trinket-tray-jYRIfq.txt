@@ -1,0 +1,10 @@
+id: squared-trinket-tray-jYRIfq
+title: Squared Trinket Tray
+description: Squared Trinket Tray
+price: 203
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/2025-02-20-67b70ecf94c20.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/squared-trinket-tray-jYRIfq
+brand: Joy and Co

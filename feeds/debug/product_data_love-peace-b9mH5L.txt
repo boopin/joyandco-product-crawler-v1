@@ -1,0 +1,10 @@
+id: love-peace-b9mH5L
+title: Love & Peace
+description: Love & Peace
+price: 1450
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/love-peace-b9mH5L
+brand: Joy and Co

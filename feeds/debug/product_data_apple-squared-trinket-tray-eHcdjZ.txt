@@ -1,0 +1,10 @@
+id: apple-squared-trinket-tray-eHcdjZ
+title: Apple Squared Trinket Tray
+description: Apple Squared Trinket Tray
+price: 203
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/2025-02-20-67b70f0b16460.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/apple-squared-trinket-tray-eHcdjZ
+brand: Joy and Co

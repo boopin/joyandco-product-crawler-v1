@@ -1,0 +1,10 @@
+id: hollandia-flowers-dinner-plate-classics-on-acid-IKSvjk
+title: Hollandia Flowers Dinner Plate - Classics on Acid
+description: Hollandia Flowers Dinner Plate - Classics on Acid
+price: 285
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/hollandia-flowers-dinner-plate-classics-on-acid-IKSvjk
+brand: Joy and Co

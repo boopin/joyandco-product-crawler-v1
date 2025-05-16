@@ -1,0 +1,10 @@
+id: je-taime-photo-frame-f1XBp0
+title: Je t'aime Photo Frame
+description: Je t'aime Photo Frame
+price: 99
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/je-taime-photo-frame-f1XBp0
+brand: Joy and Co

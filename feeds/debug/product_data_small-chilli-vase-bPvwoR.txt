@@ -1,0 +1,10 @@
+id: small-chilli-vase-bPvwoR
+title: Small Chilli Vase
+description: Small Chilli Vase
+price: 595
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/small-chilli-vase-bPvwoR
+brand: Joy and Co

@@ -1,0 +1,10 @@
+id: strawberry-vase-E6CYHt
+title: Strawberry Vase
+description: Strawberry Vase
+price: 750
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/strawberry-vase-E6CYHt
+brand: Joy and Co

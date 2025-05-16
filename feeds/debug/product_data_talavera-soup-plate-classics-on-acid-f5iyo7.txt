@@ -1,0 +1,10 @@
+id: talavera-soup-plate-classics-on-acid-f5iyo7
+title: Talavera Soup Plate - Classics on Acid
+description: Talavera Soup Plate - Classics on Acid
+price: 345
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/talavera-soup-plate-classics-on-acid-f5iyo7
+brand: Joy and Co

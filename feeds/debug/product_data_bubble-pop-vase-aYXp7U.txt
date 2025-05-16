@@ -1,0 +1,10 @@
+id: bubble-pop-vase-aYXp7U
+title: Bubble Pop Vase
+description: Bubble Pop Vase
+price: 550
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/bubble-pop-vase-aYXp7U
+brand: Joy and Co

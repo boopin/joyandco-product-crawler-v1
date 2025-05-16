@@ -1,0 +1,10 @@
+id: abracadabra-destino-dinner-plate-ZwL71a
+title: Abracadabra Destino Dinner Plate
+description: Abracadabra Destino Dinner Plate
+price: 223
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/2025-02-19-67b5a9267f328.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/abracadabra-destino-dinner-plate-ZwL71a
+brand: Joy and Co

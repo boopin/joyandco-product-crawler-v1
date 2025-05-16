@@ -1,0 +1,10 @@
+id: paradise-cocktail-glass-set-of-2-EMpePq
+title: Set of 2 Paradise Cocktail Glass
+description: Set of 2 Paradise Cocktail Glass
+price: 180
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/paradise-cocktail-glass-set-of-2-EMpePq
+brand: Joy and Co

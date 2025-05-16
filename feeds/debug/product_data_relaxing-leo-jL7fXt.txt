@@ -1,0 +1,10 @@
+id: relaxing-leo-jL7fXt
+title: Relaxing Leo
+description: Relaxing Leo
+price: 1950
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/relaxing-leo-jL7fXt
+brand: Joy and Co

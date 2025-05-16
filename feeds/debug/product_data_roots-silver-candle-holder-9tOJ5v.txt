@@ -1,0 +1,10 @@
+id: roots-silver-candle-holder-9tOJ5v
+title: Roots Silver Candle Holder
+description: Roots Silver Candle Holder
+price: 949
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/roots-silver-candle-holder-9tOJ5v
+brand: Joy and Co

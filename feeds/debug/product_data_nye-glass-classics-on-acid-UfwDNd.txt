@@ -1,0 +1,10 @@
+id: nye-glass-classics-on-acid-UfwDNd
+title: NYE Glass - Classics on Acid
+description: NYE Glass - Classics on Acid
+price: 195
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/nye-glass-classics-on-acid-UfwDNd
+brand: Joy and Co

@@ -1,0 +1,10 @@
+id: medium-venice-candle-holder-nal7NS
+title: Medium Venice Candle Holder
+description: Medium Venice Candle Holder
+price: 149
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/medium-venice-candle-holder-nal7NS
+brand: Joy and Co

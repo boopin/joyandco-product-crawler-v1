@@ -1,0 +1,10 @@
+id: ciao-bella-photo-frame-qBTc0B
+title: Ciao Bella Photo Frame
+description: Ciao Bella Photo Frame
+price: 110
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/ciao-bella-photo-frame-qBTc0B
+brand: Joy and Co

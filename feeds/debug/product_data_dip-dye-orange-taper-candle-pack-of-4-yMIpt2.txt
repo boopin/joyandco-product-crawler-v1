@@ -1,0 +1,10 @@
+id: dip-dye-orange-taper-candle-pack-of-4-yMIpt2
+title: Pack of 4 Dip Dye Orange Taper Candle
+description: Pack of 4 Dip Dye Orange Taper Candle
+price: 45
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/dip-dye-orange-taper-candle-pack-of-4-yMIpt2
+brand: Joy and Co

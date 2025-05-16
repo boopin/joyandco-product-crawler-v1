@@ -1,0 +1,10 @@
+id: flower-girl-candleholder-ochre-dtKhkX
+title: Flower Girl Candleholder Ochre
+description: Flower Girl Candleholder Ochre
+price: 83
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/flower-girl-candleholder-ochre-dtKhkX
+brand: Joy and Co

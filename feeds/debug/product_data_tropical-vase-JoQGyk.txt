@@ -1,0 +1,10 @@
+id: tropical-vase-JoQGyk
+title: Tropical Vase
+description: Tropical Vase
+price: 250
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/tropical-vase-JoQGyk
+brand: Joy and Co

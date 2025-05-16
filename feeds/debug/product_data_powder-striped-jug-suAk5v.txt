@@ -1,0 +1,10 @@
+id: powder-striped-jug-suAk5v
+title: Powder Striped Jug
+description: Powder Striped Jug
+price: 279
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/powder-striped-jug-suAk5v
+brand: Joy and Co

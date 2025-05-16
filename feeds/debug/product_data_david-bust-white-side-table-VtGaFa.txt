@@ -1,0 +1,10 @@
+id: david-bust-white-side-table-VtGaFa
+title: David Bust White Side Table
+description: David Bust White Side Table
+price: 1520
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/david-bust-white-side-table-VtGaFa
+brand: Joy and Co

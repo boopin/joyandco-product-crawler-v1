@@ -1,0 +1,10 @@
+id: large-venice-candle-holder-9ERK1X
+title: Large Venice Candle Holder
+description: Large Venice Candle Holder
+price: 160
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/large-venice-candle-holder-9ERK1X
+brand: Joy and Co

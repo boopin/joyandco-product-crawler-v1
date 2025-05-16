@@ -1,0 +1,10 @@
+id: la-tavola-scomposta-cake-stand-ohcRdD
+title: La Tavola Scomposta cake stand
+description: La Tavola Scomposta cake stand
+price: 280
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/la-tavola-scomposta-cake-stand-ohcRdD
+brand: Joy and Co

@@ -1,0 +1,10 @@
+id: samatha-candle-holder-ogP5cL
+title: Samatha Candle Holder
+description: Samatha Candle Holder
+price: 115
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/samatha-candle-holder-ogP5cL
+brand: Joy and Co

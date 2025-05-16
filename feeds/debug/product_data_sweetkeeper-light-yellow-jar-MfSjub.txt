@@ -1,0 +1,10 @@
+id: sweetkeeper-light-yellow-jar-MfSjub
+title: Sweetkeeper Light Yellow Jar
+description: Sweetkeeper Light Yellow Jar
+price: 155
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/sweetkeeper-light-yellow-jar-MfSjub
+brand: Joy and Co

@@ -1,0 +1,10 @@
+id: aurora-vase-QtwQO7
+title: Aurora Vase
+description: Aurora Vase
+price: 490
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/aurora-vase-QtwQO7
+brand: Joy and Co

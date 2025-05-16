@@ -1,0 +1,10 @@
+id: blue-scalloped-dinner-plate-S6VT1h
+title: Blue Scalloped Dinner Plate
+description: Blue Scalloped Dinner Plate
+price: 160
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/blue-scalloped-dinner-plate-S6VT1h
+brand: Joy and Co

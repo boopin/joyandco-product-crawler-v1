@@ -1,0 +1,10 @@
+id: blue-chinoiserie-dinner-plate-classics-on-acid-PVgGP5
+title: Blue Chinoiserie Dinner Plate - Classics on Acid
+description: Blue Chinoiserie Dinner Plate - Classics on Acid
+price: 295
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/blue-chinoiserie-dinner-plate-classics-on-acid-PVgGP5
+brand: Joy and Co

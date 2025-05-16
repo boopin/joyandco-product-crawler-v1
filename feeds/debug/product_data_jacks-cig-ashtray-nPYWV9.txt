@@ -1,0 +1,10 @@
+id: jacks-cig-ashtray-nPYWV9
+title: Jack’s Cig Ashtray
+description: Jack’s Cig Ashtray
+price: 252
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/jacks-cig-ashtray-nPYWV9
+brand: Joy and Co

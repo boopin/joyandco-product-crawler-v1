@@ -1,0 +1,10 @@
+id: sandy-candle-holder-HJHOe0
+title: Sandy Candle Holder
+description: Sandy Candle Holder
+price: 95
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/sandy-candle-holder-HJHOe0
+brand: Joy and Co

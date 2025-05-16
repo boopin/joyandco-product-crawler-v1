@@ -1,0 +1,10 @@
+id: cherry-blossom-lidded-vase-lKXu7G
+title: Cherry Blossom Lidded Vase
+description: Cherry Blossom Lidded Vase
+price: 295
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/cherry-blossom-lidded-vase-lKXu7G
+brand: Joy and Co

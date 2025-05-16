@@ -1,0 +1,10 @@
+id: crystal-hobnail-jug-with-gold-handle-U5RN5L
+title: Crystal Hobnail Jug with Gold Handle
+description: Crystal Hobnail Jug with Gold Handle
+price: 750
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/crystal-hobnail-jug-with-gold-handle-U5RN5L
+brand: Joy and Co

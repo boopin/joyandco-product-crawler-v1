@@ -1,0 +1,10 @@
+id: bronze-palm-trees-linen-napkins-set-of-4-9uqNPG
+title: Bronze Palm Trees Linen Napkins Set of 2
+description: Bronze Palm Trees Linen Napkins Set of 2
+price: 115
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/bronze-palm-trees-linen-napkins-set-of-4-9uqNPG
+brand: Joy and Co

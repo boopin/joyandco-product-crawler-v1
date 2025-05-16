@@ -1,0 +1,10 @@
+id: bowl-lisa-bubblegum-gloss-TyMgca
+title: Bowl 'Lisa' Bubblegum Gloss
+description: Bowl 'Lisa' Bubblegum Gloss
+price: 249
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/bowl-lisa-bubblegum-gloss-TyMgca
+brand: Joy and Co

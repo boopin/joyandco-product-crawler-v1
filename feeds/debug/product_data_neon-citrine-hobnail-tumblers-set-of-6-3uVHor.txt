@@ -1,0 +1,10 @@
+id: neon-citrine-hobnail-tumblers-set-of-6-3uVHor
+title: Set of 6 Neon Citrine Hobnail Tumblers
+description: Set of 6 Neon Citrine Hobnail Tumblers
+price: 680
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/neon-citrine-hobnail-tumblers-set-of-6-3uVHor
+brand: Joy and Co

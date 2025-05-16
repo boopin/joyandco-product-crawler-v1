@@ -1,0 +1,10 @@
+id: edion-oud-3000ml-Fa1UyW
+title: EDION Oud 3000ML
+description: EDION Oud 3000ML
+price: 2790
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/edion-oud-3000ml-Fa1UyW
+brand: Joy and Co

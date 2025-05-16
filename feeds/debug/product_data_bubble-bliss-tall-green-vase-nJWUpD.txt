@@ -1,0 +1,10 @@
+id: bubble-bliss-tall-green-vase-nJWUpD
+title: Bubble Bliss Tall Green Vase
+description: Bubble Bliss Tall Green Vase
+price: 175
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/bubble-bliss-tall-green-vase-nJWUpD
+brand: Joy and Co

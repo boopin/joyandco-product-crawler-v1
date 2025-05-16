@@ -1,0 +1,10 @@
+id: candelabra-eric-bone-matte-GgNYWF
+title: Candelabra 'Eric' Bone Matte
+description: Candelabra 'Eric' Bone Matte
+price: 500
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/candelabra-eric-bone-matte-GgNYWF
+brand: Joy and Co

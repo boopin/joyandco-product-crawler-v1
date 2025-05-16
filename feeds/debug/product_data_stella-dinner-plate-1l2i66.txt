@@ -1,0 +1,10 @@
+id: stella-dinner-plate-1l2i66
+title: Stella Dinner Plate
+description: Stella Dinner Plate
+price: 249
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/2025-02-20-67b70d260d5b0.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/stella-dinner-plate-1l2i66
+brand: Joy and Co

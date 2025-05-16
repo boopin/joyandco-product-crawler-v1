@@ -1,0 +1,10 @@
+id: whimsy-jar-PPY9tL
+title: Whimsy Jar
+description: Whimsy Jar
+price: 125
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/whimsy-jar-PPY9tL
+brand: Joy and Co

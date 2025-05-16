@@ -1,0 +1,10 @@
+id: jug-emily-moss-gloss-x8TBZR
+title: Jug 'Emily' Moss Gloss
+description: Jug 'Emily' Moss Gloss
+price: 540
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/jug-emily-moss-gloss-x8TBZR
+brand: Joy and Co

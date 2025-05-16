@@ -1,0 +1,10 @@
+id: tissue-box-orange-pWgfkV
+title: Tissue Box Orange
+description: Tissue Box Orange
+price: 315
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/tissue-box-orange-pWgfkV
+brand: Joy and Co

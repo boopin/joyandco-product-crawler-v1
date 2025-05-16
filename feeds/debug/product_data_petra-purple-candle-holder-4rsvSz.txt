@@ -1,0 +1,10 @@
+id: petra-purple-candle-holder-4rsvSz
+title: Petra Purple Candle Holder
+description: Petra Purple Candle Holder
+price: 75
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/petra-purple-candle-holder-4rsvSz
+brand: Joy and Co

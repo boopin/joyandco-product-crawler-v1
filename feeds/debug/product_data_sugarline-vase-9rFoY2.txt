@@ -1,0 +1,10 @@
+id: sugarline-vase-9rFoY2
+title: Sugarline Vase
+description: Sugarline Vase
+price: 135
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/sugarline-vase-9rFoY2
+brand: Joy and Co

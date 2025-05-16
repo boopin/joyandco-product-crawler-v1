@@ -1,0 +1,10 @@
+id: philine-candle-holder-hGtibu
+title: Philine Candle Holder
+description: Philine Candle Holder
+price: 95
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/philine-candle-holder-hGtibu
+brand: Joy and Co

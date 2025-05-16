@@ -1,0 +1,10 @@
+id: ramadan-nights-linen-napkins-set-of-4-dTIbPj
+title: Ramadan Nights Linen Napkins Set of 4
+description: Ramadan Nights Linen Napkins Set of 4
+price: 290
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/ramadan-nights-linen-napkins-set-of-4-dTIbPj
+brand: Joy and Co

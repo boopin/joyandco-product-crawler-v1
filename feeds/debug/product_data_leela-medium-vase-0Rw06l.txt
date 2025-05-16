@@ -1,0 +1,10 @@
+id: leela-medium-vase-0Rw06l
+title: Leela Medium Vase
+description: Leela Medium Vase
+price: 195
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/leela-medium-vase-0Rw06l
+brand: Joy and Co

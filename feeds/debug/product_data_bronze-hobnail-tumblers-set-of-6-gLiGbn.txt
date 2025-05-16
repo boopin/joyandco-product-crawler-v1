@@ -1,0 +1,10 @@
+id: bronze-hobnail-tumblers-set-of-6-gLiGbn
+title: Set of 6 Bronze Hobnail Tumblers
+description: Set of 6 Bronze Hobnail Tumblers
+price: 600
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/bronze-hobnail-tumblers-set-of-6-gLiGbn
+brand: Joy and Co

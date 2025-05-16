@@ -1,0 +1,10 @@
+id: romy-candle-holder-bFYHHJ
+title: Romy Candle Holder
+description: Romy Candle Holder
+price: 115
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/romy-candle-holder-bFYHHJ
+brand: Joy and Co

@@ -1,0 +1,10 @@
+id: blue-glass-vase-KAAcTq
+title: Blue Glass Vase
+description: Blue Glass Vase
+price: 99
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/blue-glass-vase-KAAcTq
+brand: Joy and Co

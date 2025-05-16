@@ -1,0 +1,10 @@
+id: bowl-lisa-sky-gloss-jEzrk6
+title: Bowl 'Lisa' Sky Gloss
+description: Bowl 'Lisa' Sky Gloss
+price: 249
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/bowl-lisa-sky-gloss-jEzrk6
+brand: Joy and Co

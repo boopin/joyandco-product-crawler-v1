@@ -1,0 +1,10 @@
+id: disks-vase-lLL4HA
+title: Disks Vase
+description: Disks Vase
+price: 350
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/disks-vase-lLL4HA
+brand: Joy and Co

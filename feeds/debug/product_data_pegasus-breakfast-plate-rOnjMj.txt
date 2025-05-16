@@ -1,0 +1,10 @@
+id: pegasus-breakfast-plate-rOnjMj
+title: Pegasus Breakfast Plate
+description: Pegasus Breakfast Plate
+price: 155
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/pegasus-breakfast-plate-rOnjMj
+brand: Joy and Co

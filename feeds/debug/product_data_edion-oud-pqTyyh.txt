@@ -1,0 +1,10 @@
+id: edion-oud-pqTyyh
+title: EDION Oud 700ML
+description: EDION Oud 700ML
+price: 775
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/edion-oud-pqTyyh
+brand: Joy and Co

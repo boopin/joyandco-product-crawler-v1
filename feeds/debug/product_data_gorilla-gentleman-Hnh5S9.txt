@@ -1,0 +1,10 @@
+id: gorilla-gentleman-Hnh5S9
+title: Gorilla Gentleman
+description: Gorilla Gentleman
+price: 1550
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/gorilla-gentleman-Hnh5S9
+brand: Joy and Co

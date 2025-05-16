@@ -1,0 +1,10 @@
+id: matcha-set-giftbox-pink-fRIAo5
+title: Matcha Set Giftbox Pink
+description: Matcha Set Giftbox Pink
+price: 390
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/matcha-set-giftbox-pink-fRIAo5
+brand: Joy and Co

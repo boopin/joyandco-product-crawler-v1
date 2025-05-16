@@ -1,0 +1,10 @@
+id: maastricht-ship-dinner-plate-classics-on-acid-WJeUWg
+title: Maastricht Ship Dinner Plate - Classics on Acid
+description: Maastricht Ship Dinner Plate - Classics on Acid
+price: 295
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/maastricht-ship-dinner-plate-classics-on-acid-WJeUWg
+brand: Joy and Co

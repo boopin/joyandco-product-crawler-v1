@@ -1,0 +1,10 @@
+id: petra-pink-candle-holder-gmftTY
+title: Petra Pink Candle Holder
+description: Petra Pink Candle Holder
+price: 75
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/petra-pink-candle-holder-gmftTY
+brand: Joy and Co

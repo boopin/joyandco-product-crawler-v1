@@ -1,0 +1,10 @@
+id: classic-yellow-porcelain-vase-m-oMwtLG
+title: Classic Yellow Porcelain Vase M
+description: Classic Yellow Porcelain Vase M
+price: 345
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/classic-yellow-porcelain-vase-m-oMwtLG
+brand: Joy and Co

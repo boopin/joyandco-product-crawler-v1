@@ -1,0 +1,10 @@
+id: good-morning-bowl-fWw1mw
+title: Good Morning Bowl
+description: Good Morning Bowl
+price: 135
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/good-morning-bowl-fWw1mw
+brand: Joy and Co

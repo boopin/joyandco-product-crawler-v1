@@ -1,0 +1,10 @@
+id: fish-fete-plate-set-wiq5aC
+title: Fish Fête Plate Set
+description: Fish Fête Plate Set
+price: 700
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/fish-fete-plate-set-wiq5aC
+brand: Joy and Co

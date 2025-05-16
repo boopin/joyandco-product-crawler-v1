@@ -1,0 +1,10 @@
+id: retro-cushion-orange-pKlI82
+title: Retro Cushion Orange
+description: Retro Cushion Orange
+price: 245
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/retro-cushion-orange-pKlI82
+brand: Joy and Co

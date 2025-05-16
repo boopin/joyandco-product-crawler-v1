@@ -1,0 +1,10 @@
+id: cherry-blossom-lidded-jar-EwKIkl
+title: Cherry Blossom Lidded Jar
+description: Cherry Blossom Lidded Jar
+price: 395
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/cherry-blossom-lidded-jar-EwKIkl
+brand: Joy and Co

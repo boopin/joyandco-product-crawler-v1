@@ -1,0 +1,10 @@
+id: sunshine-glass-vase-Gqvfu5
+title: Sunshine Glass Vase
+description: Sunshine Glass Vase
+price: 99
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/sunshine-glass-vase-Gqvfu5
+brand: Joy and Co

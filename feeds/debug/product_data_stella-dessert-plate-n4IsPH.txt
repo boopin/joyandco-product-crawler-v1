@@ -1,0 +1,10 @@
+id: stella-dessert-plate-n4IsPH
+title: Stella Dessert Plate
+description: Stella Dessert Plate
+price: 180
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/2025-02-20-67b70e3bceed6.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/stella-dessert-plate-n4IsPH
+brand: Joy and Co

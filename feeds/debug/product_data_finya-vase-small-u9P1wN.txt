@@ -1,0 +1,10 @@
+id: finya-vase-small-u9P1wN
+title: Finya Vase Small
+description: Finya Vase Small
+price: 225
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/finya-vase-small-u9P1wN
+brand: Joy and Co

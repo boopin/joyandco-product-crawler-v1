@@ -1,0 +1,10 @@
+id: small-cups-mixed-shapes-set-of-six-ITei5v
+title: Small Cups Mixed Shapes Set of Six
+description: Small Cups Mixed Shapes Set of Six
+price: 407
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/2025-02-19-67b6334140b1a.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/small-cups-mixed-shapes-set-of-six-ITei5v
+brand: Joy and Co

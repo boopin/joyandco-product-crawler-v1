@@ -1,0 +1,10 @@
+id: pink-scalloped-dinner-plate-fMD6g5
+title: Pink Scalloped Dinner Plate
+description: Pink Scalloped Dinner Plate
+price: 160
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/pink-scalloped-dinner-plate-fMD6g5
+brand: Joy and Co

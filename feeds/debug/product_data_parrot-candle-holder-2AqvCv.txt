@@ -1,0 +1,10 @@
+id: parrot-candle-holder-2AqvCv
+title: Parrot Candle Holder
+description: Parrot Candle Holder
+price: 640
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/parrot-candle-holder-2AqvCv
+brand: Joy and Co

@@ -1,0 +1,10 @@
+id: evergreen-vase-waLCAv
+title: Evergreen Vase
+description: Evergreen Vase
+price: 115
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/evergreen-vase-waLCAv
+brand: Joy and Co

@@ -1,0 +1,10 @@
+id: flute-water-glass-classics-on-acid-ENZuHe
+title: Flute Water Glass - Classics on Acid
+description: Flute Water Glass - Classics on Acid
+price: 95
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/flute-water-glass-classics-on-acid-ENZuHe
+brand: Joy and Co

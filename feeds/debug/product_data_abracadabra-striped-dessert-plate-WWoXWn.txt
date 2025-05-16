@@ -1,0 +1,10 @@
+id: abracadabra-striped-dessert-plate-WWoXWn
+title: Abracadabra Striped Dessert Plate
+description: Abracadabra Striped Dessert Plate
+price: 179
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/2025-02-19-67b5b34bba61c.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/abracadabra-striped-dessert-plate-WWoXWn
+brand: Joy and Co

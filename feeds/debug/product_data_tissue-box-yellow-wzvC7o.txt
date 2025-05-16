@@ -1,0 +1,10 @@
+id: tissue-box-yellow-wzvC7o
+title: Tissue Box Yellow
+description: Tissue Box Yellow
+price: 315
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/tissue-box-yellow-wzvC7o
+brand: Joy and Co

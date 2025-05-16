@@ -1,0 +1,10 @@
+id: flower-girl-candleholde-pink-Hv3IdF
+title: Flower Girl Candleholder Pink
+description: Flower Girl Candleholder Pink
+price: 83
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/flower-girl-candleholde-pink-Hv3IdF
+brand: Joy and Co

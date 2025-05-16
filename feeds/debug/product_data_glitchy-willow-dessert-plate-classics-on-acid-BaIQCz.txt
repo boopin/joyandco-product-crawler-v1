@@ -1,0 +1,10 @@
+id: glitchy-willow-dessert-plate-classics-on-acid-BaIQCz
+title: Glitchy Willow Dessert Plate - Classics on Acid
+description: Glitchy Willow Dessert Plate - Classics on Acid
+price: 195
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/glitchy-willow-dessert-plate-classics-on-acid-BaIQCz
+brand: Joy and Co

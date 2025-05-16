@@ -1,0 +1,10 @@
+id: modern-lisa-yk0QO3
+title: Modern Lisa
+description: Modern Lisa
+price: 1450
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/modern-lisa-yk0QO3
+brand: Joy and Co

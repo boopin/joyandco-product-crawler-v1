@@ -1,0 +1,10 @@
+id: hybrid-tea-cup-isidora-HPVap0
+title: Hybrid Tea Cup Isidora
+description: Hybrid Tea Cup Isidora
+price: 165
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/hybrid-tea-cup-isidora-HPVap0
+brand: Joy and Co

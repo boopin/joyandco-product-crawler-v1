@@ -1,0 +1,10 @@
+id: classic-cake-stand-W6jV8f
+title: Classic Cake Stand
+description: Classic Cake Stand
+price: 180
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/classic-cake-stand-W6jV8f
+brand: Joy and Co

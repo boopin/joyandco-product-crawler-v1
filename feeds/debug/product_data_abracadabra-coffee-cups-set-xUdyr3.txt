@@ -1,0 +1,10 @@
+id: abracadabra-coffee-cups-set-xUdyr3
+title: Abracadabra Coffee Cups Set
+description: Abracadabra Coffee Cups Set
+price: 872
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/2025-02-19-67b6328ac1aeb.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/abracadabra-coffee-cups-set-xUdyr3
+brand: Joy and Co

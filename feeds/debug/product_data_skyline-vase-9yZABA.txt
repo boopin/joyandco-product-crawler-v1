@@ -1,0 +1,10 @@
+id: skyline-vase-9yZABA
+title: Skyline Vase
+description: Skyline Vase
+price: 125
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/skyline-vase-9yZABA
+brand: Joy and Co

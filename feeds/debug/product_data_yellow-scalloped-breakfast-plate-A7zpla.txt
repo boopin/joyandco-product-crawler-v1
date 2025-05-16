@@ -1,0 +1,10 @@
+id: yellow-scalloped-breakfast-plate-A7zpla
+title: Yellow Scalloped Breakfast Plate
+description: Yellow Scalloped Breakfast Plate
+price: 140
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/yellow-scalloped-breakfast-plate-A7zpla
+brand: Joy and Co

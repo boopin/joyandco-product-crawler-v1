@@ -1,0 +1,10 @@
+id: crystal-cake-stand-l-1aXHg5
+title: Crystal Cake Stand L
+description: Crystal Cake Stand L
+price: 445
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/crystal-cake-stand-l-1aXHg5
+brand: Joy and Co

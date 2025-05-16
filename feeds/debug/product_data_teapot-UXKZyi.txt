@@ -1,0 +1,10 @@
+id: teapot-UXKZyi
+title: Teapot
+description: Teapot
+price: 173
+currency: AED
+image_link: https://joyandco.com/storage/app/public/product/meta/2025-02-19-67b633d824799.webp
+availability: in stock
+condition: new
+link: https://joyandco.com/product/teapot-UXKZyi
+brand: Joy and Co
