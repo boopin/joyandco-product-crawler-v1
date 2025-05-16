@@ -16,7 +16,7 @@ logging.basicConfig(
 )
 
 BASE_URL = "https://joyandco.com"
-PRODUCT_LIST_URL = f"{BASE_URL}/product/"
+PRODUCT_LIST_URL = f"{BASE_URL}/products/"  # Changed from /product/ to /products/
 
 # Headers to mimic a browser
 HEADERS = {
@@ -71,11 +71,11 @@ def extract_product_links(html_content):
     product_cards = soup.select('.product-card a, .product-item a, .product a, .product-box a, .item a')
     for link in product_cards:
         href = link.get('href')
-        if href and '/product/' in href:
+        if href and '/products/' in href:  # Changed from /product/ to /products/
             product_links.append(urljoin(BASE_URL, href))
     
     # Pattern 2: Find links with product in URL
-    all_links = soup.select('a[href*="/product/"]')
+    all_links = soup.select('a[href*="/products/"]')  # Changed from /product/ to /products/
     for link in all_links:
         href = link.get('href')
         if href:
@@ -304,8 +304,8 @@ def main():
         fallback_links = []
         # Try to generate some product URLs based on common patterns
         for i in range(1, 50):  # Try 50 potential product IDs
-            fallback_links.append(f"{BASE_URL}/product/product-{i}")
-            fallback_links.append(f"{BASE_URL}/product/{i}")
+            fallback_links.append(f"{BASE_URL}/products/product-{i}")  # Changed from /product/ to /products/
+            fallback_links.append(f"{BASE_URL}/products/{i}")  # Changed from /product/ to /products/
         
         product_links = fallback_links
     
