@@ -1,4 +1,4 @@
-# Core dependencies
+# Core dependencies (for crawler only)
 playwright==1.38.0
 asyncio==3.4.3
 lxml==4.9.3
@@ -9,7 +9,7 @@ pytz==2023.3
 streamlit==1.27.0
 pandas==2.1.0
 plotly==5.17.0
-pillow==10.0.1
+pillow>=7.1.0,<10.0.0  # Updated to be compatible with Streamlit 1.27.0
 
 # Utilities
 requests==2.31.0
