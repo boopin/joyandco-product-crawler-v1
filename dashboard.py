@@ -1,11 +1,11 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import requests
 import os
-import glob
 import xml.etree.ElementTree as ET
 from datetime import datetime
-import requests
+import json
 
 st.set_page_config(
     page_title="JoyAndCo Product Feed Generator",
@@ -13,59 +13,64 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("JoyAndCo Product Feed Generator")
-st.markdown("Monitor and control product feeds for Google and Meta shopping ads")
+# Replace with your GitHub username and repo name
+GITHUB_USER = "your-username"
+GITHUB_REPO = "joyandco-product-crawler"
+GITHUB_BRANCH = "main"
 
-# Check GitHub for feed files
-@st.cache_data(ttl=300)  # Cache for 5 minutes
-def get_github_feed_data():
-    # Replace with your GitHub repo details
-    owner = "your-username"
-    repo = "joyandco-product-feed"
-    
-    # Get CSV feed content
-    csv_url = f"https://raw.githubusercontent.com/{owner}/{repo}/main/feeds/google_shopping_feed.csv"
-    try:
-        df = pd.read_csv(csv_url)
-        return df
-    except:
-        st.warning("Could not load feed data from GitHub")
-        return pd.DataFrame()
-    
-# Get GitHub Actions status
-@st.cache_data(ttl=300)  # Cache for 5 minutes
+# Function to get file content from GitHub
+def get_github_file(path):
+    url = f"https://raw.githubusercontent.com/{GITHUB_USER}/{GITHUB_REPO}/{GITHUB_BRANCH}/{path}"
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.text
+    return None
+
+# Function to get GitHub Actions status
 def get_github_actions_status():
-    # Replace with your repo details
-    owner = "your-username"
-    repo = "joyandco-product-feed"
-    
-    url = f"https://api.github.com/repos/{owner}/{repo}/actions/runs"
-    
+    url = f"https://api.github.com/repos/{GITHUB_USER}/{GITHUB_REPO}/actions/runs"
     try:
         response = requests.get(url)
         if response.status_code == 200:
-            runs = response.json()["workflow_runs"]
+            runs = response.json().get("workflow_runs", [])
             if runs:
                 latest_run = runs[0]
                 return {
-                    "status": latest_run["conclusion"] or "running",
-                    "time": latest_run["updated_at"],
-                    "url": latest_run["html_url"]
+                    "status": latest_run.get("conclusion") or "running",
+                    "time": latest_run.get("updated_at"),
+                    "url": latest_run.get("html_url")
                 }
-    except:
-        pass
+    except Exception as e:
+        st.error(f"Error fetching GitHub status: {e}")
     return None
 
+# Function to get CSV feed data
+@st.cache_data(ttl=300)  # Cache for 5 minutes
+def get_csv_feed_data():
+    csv_content = get_github_file("feeds/google_shopping_feed.csv")
+    if csv_content:
+        try:
+            # Use StringIO to convert string to file-like object
+            from io import StringIO
+            return pd.read_csv(StringIO(csv_content))
+        except Exception as e:
+            st.error(f"Error parsing CSV: {e}")
+    return pd.DataFrame()
+
 # Main content
+st.title("JoyAndCo Product Feed Generator")
+st.markdown("Monitor and control product feeds for Google and Meta shopping ads")
+
+# Sidebar
 st.sidebar.header("Controls")
 
-# Link to manually trigger GitHub Actions
+# Manual trigger instructions
 st.sidebar.markdown("""
 ## Manual Feed Generation
 The crawler runs daily via GitHub Actions.
 
 To manually trigger a new feed generation:
-1. [Go to Actions on GitHub](https://github.com/your-username/joyandco-product-feed/actions)
+1. [Go to Actions on GitHub](https://github.com/{GITHUB_USER}/{GITHUB_REPO}/actions)
 2. Click on "Generate JoyAndCo Product Feeds"
 3. Click "Run workflow"
 """)
@@ -86,9 +91,11 @@ with tab1:
         
         [View Details]({github_status["url"]})
         """, unsafe_allow_html=True)
+    else:
+        st.warning("Could not fetch GitHub Actions status")
     
     # Feed data
-    df = get_github_feed_data()
+    df = get_csv_feed_data()
     
     # Display metrics
     col1, col2 = st.columns(2)
@@ -101,41 +108,62 @@ with tab1:
     
     # Price distribution
     if not df.empty and 'price' in df.columns:
-        st.subheader("Price Distribution")
-        fig = px.histogram(df, x="price", nbins=20, title="Product Price Distribution")
-        st.plotly_chart(fig, use_container_width=True)
+        try:
+            st.subheader("Price Distribution")
+            # Convert price to numeric, coercing errors to NaN
+            df['price'] = pd.to_numeric(df['price'], errors='coerce')
+            # Drop NaN values
+            df_clean = df.dropna(subset=['price'])
+            if not df_clean.empty:
+                fig = px.histogram(df_clean, x="price", nbins=20, title="Product Price Distribution")
+                st.plotly_chart(fig, use_container_width=True)
+            else:
+                st.info("No valid price data to display")
+        except Exception as e:
+            st.error(f"Error generating price distribution: {e}")
         
         # Product table
         st.subheader("Products")
         st.dataframe(df)
+    else:
+        st.info("No product data available. Generate feeds to see product analytics.")
 
 with tab2:
     st.subheader("Feed Preview")
     
     # Feed URLs
-    st.markdown("""
+    st.markdown(f"""
     ### Feed URLs
     
     Use these URLs in Google Merchant Center and Meta Business Manager:
     
     - **Google Shopping Feed (XML):**  
-    `https://raw.githubusercontent.com/your-username/joyandco-product-feed/main/feeds/google_shopping_feed.xml`
+    `https://raw.githubusercontent.com/{GITHUB_USER}/{GITHUB_REPO}/{GITHUB_BRANCH}/feeds/google_shopping_feed.xml`
     
     - **Meta Shopping Feed (XML):**  
-    `https://raw.githubusercontent.com/your-username/joyandco-product-feed/main/feeds/meta_shopping_feed.xml`
+    `https://raw.githubusercontent.com/{GITHUB_USER}/{GITHUB_REPO}/{GITHUB_BRANCH}/feeds/meta_shopping_feed.xml`
     
     - **CSV Feed:**  
-    `https://raw.githubusercontent.com/your-username/joyandco-product-feed/main/feeds/google_shopping_feed.csv`
+    `https://raw.githubusercontent.com/{GITHUB_USER}/{GITHUB_REPO}/{GITHUB_BRANCH}/feeds/google_shopping_feed.csv`
     """)
     
     # Display feed sample
     if not df.empty:
         st.subheader("Sample Product Data")
         st.dataframe(df.head(5))
+    else:
+        st.warning("No feed data available yet")
+    
+    # XML preview
+    st.subheader("XML Feed Preview")
+    xml_content = get_github_file("feeds/google_shopping_feed.xml")
+    if xml_content:
+        st.code(xml_content[:2000] + "..." if len(xml_content) > 2000 else xml_content, language="xml")
+    else:
+        st.warning("XML feed not found or not generated yet")
 
 # Footer
 st.markdown("---")
 st.markdown(
-    "Made with ❤️ for JoyAndCo | Dashboard Last Updated: " + 
-    datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    f"Made with ❤️ for JoyAndCo | Dashboard Last Updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
 )
