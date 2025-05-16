@@ -8,6 +8,7 @@ import logging
 import time
 import random
 import pandas as pd
+import json
 from urllib.parse import urljoin
 
 # Configure logging
@@ -113,7 +114,6 @@ def extract_product_data(url, html_content):
     
     for selector in price_selectors:
         elements = soup.select(selector)
-        logging.info(f"Price selector '{selector}' found {len(elements)} elements")
         for element in elements:
             price_text = element.text.strip()
             # Extract numbers only from price
@@ -165,38 +165,148 @@ def extract_product_data(url, html_content):
     if not description:
         description = title
     
-    # Extract image URL
-    image_url = ""
-    image_selectors = [
-        '.product-single__photo img', '.product-featured-img', 
-        '.product-image img', '.product-photo img', 
-        '[itemprop="image"]', '.gallery img', 
-        '.carousel img', '.product img',
-        '.productView-thumbnail-link img'
-    ]
+    # ----- IMPROVED IMAGE EXTRACTION -----
+    image_url = None
     
-    for selector in image_selectors:
-        elements = soup.select(selector)
-        for element in elements:
-            src = element.get('src')
-            if src:
-                image_url = urljoin(BASE_URL, src)
-                break
-        if image_url:
-            break
+    # 1. Try to find Open Graph meta tag images (usually high quality)
+    og_image = soup.find('meta', property='og:image')
+    if og_image and og_image.get('content'):
+        image_url = og_image.get('content')
+        logging.info(f"Found image in og:image meta tag: {image_url}")
     
-    # If no image found, look for data-src which is common for lazy-loaded images
+    # 2. If no OG image, try Twitter card image
     if not image_url:
-        images = soup.select('img[data-src]')
-        if images:
-            data_src = images[0].get('data-src')
-            if data_src:
-                image_url = urljoin(BASE_URL, data_src)
+        twitter_image = soup.find('meta', attrs={'name': 'twitter:image'})
+        if twitter_image and twitter_image.get('content'):
+            image_url = twitter_image.get('content')
+            logging.info(f"Found image in twitter:image meta tag: {image_url}")
     
-    # If still no image, use a placeholder
+    # 3. Look for JSON-LD structured data (common in e-commerce)
+    if not image_url:
+        json_ld_scripts = soup.find_all('script', type='application/ld+json')
+        for script in json_ld_scripts:
+            try:
+                json_data = json.loads(script.string)
+                # Look for images in Product schema
+                if isinstance(json_data, dict):
+                    if '@type' in json_data and json_data['@type'] == 'Product' and 'image' in json_data:
+                        if isinstance(json_data['image'], str):
+                            image_url = json_data['image']
+                            logging.info(f"Found image in JSON-LD: {image_url}")
+                            break
+                        elif isinstance(json_data['image'], list) and len(json_data['image']) > 0:
+                            image_url = json_data['image'][0]
+                            logging.info(f"Found image in JSON-LD array: {image_url}")
+                            break
+            except (json.JSONDecodeError, AttributeError) as e:
+                logging.warning(f"Error parsing JSON-LD: {e}")
+    
+    # 4. Try common image selectors if still no image
+    if not image_url:
+        image_selectors = [
+            '.product-featured-img', '.product-single__photo img',
+            '.product-image img', '.product-photo img', 
+            '.carousel-item.active img', '.slick-active img',
+            '.gallery img:first-child', '.product img:first-child',
+            '#product-image', '.main-product-image img'
+        ]
+        
+        for selector in image_selectors:
+            elements = soup.select(selector)
+            for element in elements:
+                # Try src attribute first
+                src = element.get('src')
+                if src and not src.endswith('.svg') and not 'placeholder' in src.lower():
+                    image_url = urljoin(BASE_URL, src)
+                    logging.info(f"Found image with selector '{selector}': {image_url}")
+                    break
+                
+                # Try data-src for lazy-loaded images
+                data_src = element.get('data-src')
+                if data_src and not data_src.endswith('.svg') and not 'placeholder' in data_src.lower():
+                    image_url = urljoin(BASE_URL, data_src)
+                    logging.info(f"Found image in data-src with selector '{selector}': {image_url}")
+                    break
+            
+            if image_url:
+                break
+    
+    # 5. If still no specific image, try to find any relevant image
+    if not image_url:
+        all_images = soup.find_all('img')
+        for img in all_images:
+            src = img.get('src')
+            if src and not src.endswith('.svg') and not 'placeholder' in src.lower() and not 'logo' in src.lower():
+                if 'product' in src.lower() or 'item' in src.lower() or '/uploads/' in src.lower():
+                    image_url = urljoin(BASE_URL, src)
+                    logging.info(f"Found potential product image: {image_url}")
+                    break
+    
+    # If still no image found, use placeholder
     if not image_url:
         image_url = f"{BASE_URL}/placeholder.jpg"
         logging.warning(f"No image found for {url}, using placeholder")
+    
+    # ----- IMPROVED AVAILABILITY DETECTION -----
+    # Default to in stock unless proven otherwise
+    availability = 'in stock'
+    
+    # 1. Try to find availability in JSON-LD
+    json_ld_scripts = soup.find_all('script', type='application/ld+json')
+    for script in json_ld_scripts:
+        try:
+            json_data = json.loads(script.string)
+            if isinstance(json_data, dict):
+                if '@type' in json_data and json_data['@type'] == 'Product':
+                    # Check for availability in offers
+                    if 'offers' in json_data:
+                        offers = json_data['offers']
+                        if isinstance(offers, dict) and 'availability' in offers:
+                            availability_url = offers['availability']
+                            if 'OutOfStock' in availability_url:
+                                availability = 'out of stock'
+                                logging.info(f"Product is out of stock according to JSON-LD")
+                                break
+                            elif 'InStock' in availability_url:
+                                availability = 'in stock'
+                                logging.info(f"Product is in stock according to JSON-LD")
+                                break
+        except (json.JSONDecodeError, AttributeError) as e:
+            pass
+    
+    # 2. Look for common out-of-stock indicators
+    out_of_stock_selectors = [
+        '.sold-out', '.out-of-stock', '.product-unavailable',
+        '.product-out-of-stock', '.product-inventory.out-of-stock'
+    ]
+    
+    for selector in out_of_stock_selectors:
+        elements = soup.select(selector)
+        if elements:
+            availability = 'out of stock'
+            logging.info(f"Found out-of-stock indicator with selector '{selector}'")
+            break
+    
+    # 3. Look for text patterns indicating stock status
+    stock_phrases = [
+        ('out of stock', 'out of stock'),
+        ('sold out', 'out of stock'),
+        ('unavailable', 'out of stock'),
+        ('currently unavailable', 'out of stock'),
+        ('back in stock soon', 'out of stock'),
+        ('in stock', 'in stock'),
+        ('available for purchase', 'in stock'),
+        ('ships immediately', 'in stock')
+    ]
+    
+    for phrase, status in stock_phrases:
+        # Look for phrase in body text with proximity to product-related elements
+        stock_elements = soup.select('.product-single, .product-info, .product-details, .availability, .inventory, .product-form')
+        for element in stock_elements:
+            if element and phrase.lower() in element.text.lower():
+                availability = status
+                logging.info(f"Found availability from text: '{phrase}' → {status}")
+                break
     
     # Generate ID from URL
     product_id = url.split('/')[-1]
@@ -206,15 +316,28 @@ def extract_product_data(url, html_content):
     # Clean up the ID (remove file extensions, etc.)
     product_id = re.sub(r'\.[^/.]+$', '', product_id)
     
-    # Check stock status
-    availability = 'in stock'  # Default to in stock
-    for stock_text in ['out of stock', 'sold out', 'unavailable']:
-        if stock_text in html_content.lower():
-            availability = 'out of stock'
-            break
-    
     # Extract brand
     brand = 'Joy and Co'  # Default brand
+    
+    # Try to find brand in meta tags or JSON-LD
+    brand_meta = soup.find('meta', attrs={'property': 'og:brand'}) or soup.find('meta', attrs={'name': 'brand'})
+    if brand_meta and brand_meta.get('content'):
+        brand = brand_meta.get('content')
+    else:
+        # Check JSON-LD for brand
+        for script in json_ld_scripts:
+            try:
+                json_data = json.loads(script.string)
+                if isinstance(json_data, dict):
+                    if '@type' in json_data and json_data['@type'] == 'Product' and 'brand' in json_data:
+                        if isinstance(json_data['brand'], dict) and 'name' in json_data['brand']:
+                            brand = json_data['brand']['name']
+                            break
+                        elif isinstance(json_data['brand'], str):
+                            brand = json_data['brand']
+                            break
+            except (json.JSONDecodeError, AttributeError):
+                pass
     
     # Return product data
     product_data = {
@@ -476,87 +599,6 @@ def main():
         with open('feeds/google_shopping_feed.xml', 'w', encoding='utf-8') as f:
             f.write('<?xml version="1.0" encoding="utf-8"?>\n<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">\n<channel>\n<title>Joy and Co Product Feed</title>\n<link>https://joyandco.com</link>\n<description>Product feed for Google Shopping</description>\n</channel>\n</rss>')
             
-        with open('feeds/meta_shopping_feed.xml', 'w', encoding='utf-8') as f:
-            f.write('<?xml version="1.0" encoding="utf-8"?>\n<feed>\n</feed>')
-        
-        debug_summary.append("Created empty feed files")
-        logging.info("Created empty feed files")
-    
-    # Save final debug summary
-    save_debug_info_to_feeds("\n".join(debug_summary), "debug_summary.txt")
-
-if __name__ == "__main__":
-    main()
-
-if __name__ == "__main__":
-    main().0" encoding="utf-8"?>\n<feed>\n</feed>')
-        
-        save_debug_info_to_feeds("\n".join(debug_summary), "debug_summary.txt")
-        return
-    
-    debug_summary.append(f"\nFound {len(product_links)} product URLs in {excel_file_path}")
-    
-    # List a few of the found links in debug
-    debug_summary.append("\nSample of product URLs:")
-    for link in product_links[:5]:  # Show first 5 links
-        debug_summary.append(f"- {link}")
-    if len(product_links) > 5:
-        debug_summary.append(f"... and {len(product_links) - 5} more")
-    
-    # Fetch and extract data for each product
-    products = []
-    product_attempts = []
-    
-    for index, link in enumerate(product_links):
-        logging.info(f"Processing product {index+1}/{len(product_links)}: {link}")
-        product_attempts.append(f"\nProduct {index+1}: {link}")
-        
-        # Add a small delay between requests to avoid rate limiting
-        if index > 0:
-            time.sleep(1 + random.random())
-        
-        product_html = get_page_content(link)
-        if product_html:
-            product_attempts.append(f"  ✓ Successful access")
-            
-            # Get the page title
-            soup = BeautifulSoup(product_html, 'html.parser')
-            page_title = soup.title.text if soup.title else "No title found"
-            product_attempts.append(f"  Page title: {page_title}")
-            
-            product_data = extract_product_data(link, product_html)
-            if product_data:
-                products.append(product_data)
-                product_attempts.append(f"  ✓ Extracted data: {product_data['title']}")
-                logging.info(f"Extracted data for: {product_data['title']}")
-            else:
-                product_attempts.append(f"  ✗ Failed to extract product data")
-                logging.warning(f"Skipping product at {link} due to missing critical data")
-        else:
-            product_attempts.append(f"  ✗ Failed to access")
-            logging.error(f"Failed to fetch product page: {link}")
-    
-    debug_summary.append("\nProduct fetch attempts:")
-    debug_summary.extend(product_attempts)
-    
-    # Generate feeds
-    if products:
-        generate_csv_feed(products)
-        generate_xml_feed(products)
-        debug_summary.append(f"\nSUCCESS: Generated product feeds for {len(products)} products")
-        logging.info(f"Successfully generated product feeds for {len(products)} products")
-    else:
-        debug_summary.append("\nERROR: No products found to generate feeds")
-        logging.warning("No products found to generate feeds")
-        
-        # Create empty feed files to avoid errors
-        os.makedirs('feeds', exist_ok=True)
-        with open('feeds/google_shopping_feed.csv', 'w', encoding='utf-8') as f:
-            f.write("id,title,description,link,image_link,price,currency,availability,condition,brand\n")
-        
-        with open('feeds/google_shopping_feed.xml', 'w', encoding='utf-8') as f:
-            f.write('<?xml version="1.0" encoding="utf-8"?>\n<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">\n<channel>\n<title>Joy and Co Product Feed</title>\n<link>https://joyandco.com</link>\n<description>Product feed for Google Shopping</description>\n</channel>\n</rss>')
-        
         with open('feeds/meta_shopping_feed.xml', 'w', encoding='utf-8') as f:
             f.write('<?xml version="1.0" encoding="utf-8"?>\n<feed>\n</feed>')
         
