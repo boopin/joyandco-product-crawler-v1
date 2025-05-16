@@ -1,0 +1,132 @@
+JoyAndCo Crawler Debug Summary
+
+Base URL: https://joyandco.com
+Product List URL: https://joyandco.com/products/
+
+Attempted URLs:
+- https://joyandco.com/products/
+  ✓ Successful access
+  Page title: 
+         Products    
+
+Product links found: 18
+
+Sample of found product links:
+- https://joyandco.com/product/pink-kiss-planter-wNl1qY
+- https://joyandco.com/product/twist-glow-candleholder-orange-3nhp4A
+- https://joyandco.com/product/flower-girl-set-of-4-ADbOHH
+- https://joyandco.com/product/azure-tower-vase-usiPgp
+- https://joyandco.com/product/flower-girl-candleholde-pink-Hv3IdF
+... and 13 more
+
+Product fetch attempts:
+
+Product 1: https://joyandco.com/product/pink-kiss-planter-wNl1qY
+  ✓ Successful access
+  Page title: 
+        Pink Kiss Planter    
+  ✓ Extracted data: Country and language
+
+Product 2: https://joyandco.com/product/twist-glow-candleholder-orange-3nhp4A
+  ✓ Successful access
+  Page title: 
+        Twist & Glow Candleholder Orange    
+  ✓ Extracted data: Country and language
+
+Product 3: https://joyandco.com/product/flower-girl-set-of-4-ADbOHH
+  ✓ Successful access
+  Page title: 
+        Flower Girl Set Of 4    
+  ✓ Extracted data: Country and language
+
+Product 4: https://joyandco.com/product/azure-tower-vase-usiPgp
+  ✓ Successful access
+  Page title: 
+        Azure Tower Vase    
+  ✓ Extracted data: Country and language
+
+Product 5: https://joyandco.com/product/flower-girl-candleholde-pink-Hv3IdF
+  ✓ Successful access
+  Page title: 
+        Flower Girl Candleholder Pink    
+  ✓ Extracted data: Country and language
+
+Product 6: https://joyandco.com/product/twist-flicker-candleholder-pink-JT2eWd
+  ✓ Successful access
+  Page title: 
+        Twist & Flicker Candleholder Pink    
+  ✓ Extracted data: Country and language
+
+Product 7: https://joyandco.com/product/candle-dip-dye-yellow-tJ1CSM
+  ✓ Successful access
+  Page title: 
+        Candle Dip Dye yellow    
+  ✓ Extracted data: Country and language
+
+Product 8: https://joyandco.com/product/flower-girl-candleholder-ochre-dtKhkX
+  ✓ Successful access
+  Page title: 
+        Flower Girl Candleholder Ochre    
+  ✓ Extracted data: Country and language
+
+Product 9: https://joyandco.com/product/sugarline-vase-9rFoY2
+  ✓ Successful access
+  Page title: 
+        Sugarline Vase    
+  ✓ Extracted data: Country and language
+
+Product 10: https://joyandco.com/product/skyline-vase-9yZABA
+  ✓ Successful access
+  Page title: 
+        Skyline Vase    
+  ✓ Extracted data: Country and language
+
+Product 11: https://joyandco.com/product/chrome-kiss-planter-nTDrA9
+  ✓ Successful access
+  Page title: 
+        Chrome Kiss Planter    
+  ✓ Extracted data: Country and language
+
+Product 12: https://joyandco.com/product/flower-girl-candleholder-lilac-l77Ql5
+  ✓ Successful access
+  Page title: 
+        Flower Girl Candleholder Lilac    
+  ✓ Extracted data: Country and language
+
+Product 13: https://joyandco.com/product/twist-glow-candleholder-green-bbkcUk
+  ✓ Successful access
+  Page title: 
+        Twist & Glow Candleholder Green    
+  ✓ Extracted data: Country and language
+
+Product 14: https://joyandco.com/product/bowl-lisa-coral-gloss-QuUwOW
+  ✓ Successful access
+  Page title: 
+        Bowl 'Lisa' Coral Gloss    
+  ✓ Extracted data: Country and language
+
+Product 15: https://joyandco.com/product/flower-girl-candleholder-yellow-CA8gpn
+  ✓ Successful access
+  Page title: 
+        Flower Girl Candleholder Yellow    
+  ✓ Extracted data: Country and language
+
+Product 16: https://joyandco.com/product/twist-flicker-candleholder-white-sAsYLc
+  ✓ Successful access
+  Page title: 
+        Twist & Flicker Candleholder White    
+  ✓ Extracted data: Country and language
+
+Product 17: https://joyandco.com/product/bowl-lisa-bone-gloss-BSKFl3
+  ✓ Successful access
+  Page title: 
+        Bowl 'Lisa' Bone Gloss    
+  ✓ Extracted data: Country and language
+
+Product 18: https://joyandco.com/product/bowl-lisa-bubblegum-gloss-TyMgca
+  ✓ Successful access
+  Page title: 
+        Bowl 'Lisa' Bubblegum Gloss    
+  ✓ Extracted data: Country and language
+
+SUCCESS: Generated product feeds for 18 products

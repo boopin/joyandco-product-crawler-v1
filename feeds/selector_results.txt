@@ -1,0 +1,1 @@
+Selector '.image-wrapper a' found 0 elements
