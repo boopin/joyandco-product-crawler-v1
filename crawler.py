@@ -57,11 +57,11 @@ def save_debug_html(html_content, filename):
     logging.info(f"Saved debug HTML to debug/{filename}.html")
 
 def save_debug_info_to_feeds(content, filename):
-    """Save debug information to the feeds directory so it gets committed"""
-    os.makedirs('feeds', exist_ok=True)
-    with open(f'feeds/{filename}', 'w', encoding='utf-8') as f:
+    """Save debug information to the feeds/debug directory so it gets committed"""
+    os.makedirs('feeds/debug', exist_ok=True)
+    with open(f'feeds/debug/{filename}', 'w', encoding='utf-8') as f:
         f.write(content)
-    logging.info(f"Saved debug info to feeds/{filename}")
+    logging.info(f"Saved debug info to feeds/debug/{filename}")
 
 def read_product_urls_from_excel(excel_file_path):
     """Read product URLs from an Excel file"""
@@ -238,12 +238,12 @@ def extract_product_data(url, html_content):
 
 def generate_csv_feed(products):
     """Generate CSV feed for Google Shopping"""
-    os.makedirs('feeds', exist_ok=True)
+    os.makedirs('feeds/google', exist_ok=True)
     
     logging.info(f"Generating CSV feed with {len(products)} products")
     
     try:
-        with open('feeds/google_shopping_feed.csv', 'w', newline='', encoding='utf-8') as csvfile:
+        with open('feeds/google/shopping_feed.csv', 'w', newline='', encoding='utf-8') as csvfile:
             fieldnames = ['id', 'title', 'description', 'link', 'image_link', 'price', 'currency', 'availability', 'condition', 'brand']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             
@@ -251,13 +251,22 @@ def generate_csv_feed(products):
             for product in products:
                 writer.writerow(product)
                 
-        logging.info(f"CSV feed generated at feeds/google_shopping_feed.csv")
+        logging.info(f"CSV feed generated at feeds/google/shopping_feed.csv")
+        
+        # Also create a copy in the main feeds folder for backward compatibility
+        with open('feeds/google_shopping_feed.csv', 'w', newline='', encoding='utf-8') as csvfile:
+            fieldnames = ['id', 'title', 'description', 'link', 'image_link', 'price', 'currency', 'availability', 'condition', 'brand']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            
+            writer.writeheader()
+            for product in products:
+                writer.writerow(product)
     except Exception as e:
         logging.error(f"Error generating CSV feed: {e}")
 
 def generate_xml_feed(products):
     """Generate XML feed for Google Shopping"""
-    os.makedirs('feeds', exist_ok=True)
+    os.makedirs('feeds/google', exist_ok=True)
     
     logging.info(f"Generating XML feed with {len(products)} products")
     
@@ -285,11 +294,14 @@ def generate_xml_feed(products):
             ET.SubElement(item, 'g:condition').text = product['condition']
             ET.SubElement(item, 'g:brand').text = product['brand']
         
-        # Write to file
+        # Write to the new organized location
         tree = ET.ElementTree(root)
+        tree.write('feeds/google/shopping_feed.xml', encoding='utf-8', xml_declaration=True)
+        
+        # Also write to the original location for backward compatibility
         tree.write('feeds/google_shopping_feed.xml', encoding='utf-8', xml_declaration=True)
         
-        logging.info(f"Google Shopping XML feed generated at feeds/google_shopping_feed.xml")
+        logging.info(f"Google Shopping XML feed generated at feeds/google/shopping_feed.xml")
         
         # Create a separate XML feed for Meta shopping ads
         generate_meta_xml_feed(products)
@@ -299,6 +311,9 @@ def generate_xml_feed(products):
 def generate_meta_xml_feed(products):
     """Generate XML feed for Meta Catalog"""
     try:
+        # Create subdirectory for Meta feeds
+        os.makedirs('feeds/meta', exist_ok=True)
+        
         # Create XML structure for Meta Catalog
         root = ET.Element('feed')
         
@@ -315,16 +330,24 @@ def generate_meta_xml_feed(products):
             ET.SubElement(item, 'condition').text = product['condition']
             ET.SubElement(item, 'brand').text = product['brand']
         
-        # Write to file
+        # Write to the new organized location
         tree = ET.ElementTree(root)
+        tree.write('feeds/meta/shopping_feed.xml', encoding='utf-8', xml_declaration=True)
+        
+        # Also write to the original location for backward compatibility
         tree.write('feeds/meta_shopping_feed.xml', encoding='utf-8', xml_declaration=True)
         
-        logging.info(f"Meta Shopping XML feed generated at feeds/meta_shopping_feed.xml")
+        logging.info(f"Meta Shopping XML feed generated at feeds/meta/shopping_feed.xml")
     except Exception as e:
         logging.error(f"Error generating Meta XML feed: {e}")
 
 def main():
     logging.info("Starting crawler for JoyAndCo products")
+    
+    # Create feed directory structure
+    os.makedirs('feeds/google', exist_ok=True)
+    os.makedirs('feeds/meta', exist_ok=True)
+    os.makedirs('feeds/debug', exist_ok=True)
     
     # Create debug info summary file
     debug_summary = ["JoyAndCo Crawler Debug Summary\n"]
@@ -339,13 +362,22 @@ def main():
         logging.error(f"No product URLs found in {excel_file_path}")
         
         # Create empty feed files to avoid errors
-        os.makedirs('feeds', exist_ok=True)
-        with open('feeds/google_shopping_feed.csv', 'w', encoding='utf-8') as f:
+        with open('feeds/google/shopping_feed.csv', 'w', encoding='utf-8') as f:
             f.write("id,title,description,link,image_link,price,currency,availability,condition,brand\n")
         
-        with open('feeds/google_shopping_feed.xml', 'w', encoding='utf-8') as f:
+        with open('feeds/google/shopping_feed.xml', 'w', encoding='utf-8') as f:
             f.write('<?xml version="1.0" encoding="utf-8"?>\n<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">\n<channel>\n<title>Joy and Co Product Feed</title>\n<link>https://joyandco.com</link>\n<description>Product feed for Google Shopping</description>\n</channel>\n</rss>')
         
+        with open('feeds/meta/shopping_feed.xml', 'w', encoding='utf-8') as f:
+            f.write('<?xml version="1.0" encoding="utf-8"?>\n<feed>\n</feed>')
+        
+        # Create compatibility copies
+        with open('feeds/google_shopping_feed.csv', 'w', encoding='utf-8') as f:
+            f.write("id,title,description,link,image_link,price,currency,availability,condition,brand\n")
+            
+        with open('feeds/google_shopping_feed.xml', 'w', encoding='utf-8') as f:
+            f.write('<?xml version="1.0" encoding="utf-8"?>\n<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">\n<channel>\n<title>Joy and Co Product Feed</title>\n<link>https://joyandco.com</link>\n<description>Product feed for Google Shopping</description>\n</channel>\n</rss>')
+            
         with open('feeds/meta_shopping_feed.xml', 'w', encoding='utf-8') as f:
             f.write('<?xml version="1.0" encoding="utf-8"?>\n<feed>\n</feed>')
         
@@ -415,19 +447,35 @@ def main():
         generate_csv_feed(products)
         generate_xml_feed(products)
         debug_summary.append(f"\nSUCCESS: Generated product feeds for {len(products)} products")
+        debug_summary.append(f"\nFeed files created:")
+        debug_summary.append(f"- feeds/google/shopping_feed.csv")
+        debug_summary.append(f"- feeds/google/shopping_feed.xml")
+        debug_summary.append(f"- feeds/meta/shopping_feed.xml")
+        debug_summary.append(f"- feeds/google_shopping_feed.csv (compatibility copy)")
+        debug_summary.append(f"- feeds/google_shopping_feed.xml (compatibility copy)")
+        debug_summary.append(f"- feeds/meta_shopping_feed.xml (compatibility copy)")
         logging.info(f"Successfully generated product feeds for {len(products)} products")
     else:
         debug_summary.append("\nERROR: No products found to generate feeds")
         logging.warning("No products found to generate feeds")
         
         # Create empty feed files to avoid errors
-        os.makedirs('feeds', exist_ok=True)
-        with open('feeds/google_shopping_feed.csv', 'w', encoding='utf-8') as f:
+        with open('feeds/google/shopping_feed.csv', 'w', encoding='utf-8') as f:
             f.write("id,title,description,link,image_link,price,currency,availability,condition,brand\n")
         
-        with open('feeds/google_shopping_feed.xml', 'w', encoding='utf-8') as f:
+        with open('feeds/google/shopping_feed.xml', 'w', encoding='utf-8') as f:
             f.write('<?xml version="1.0" encoding="utf-8"?>\n<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">\n<channel>\n<title>Joy and Co Product Feed</title>\n<link>https://joyandco.com</link>\n<description>Product feed for Google Shopping</description>\n</channel>\n</rss>')
         
+        with open('feeds/meta/shopping_feed.xml', 'w', encoding='utf-8') as f:
+            f.write('<?xml version="1.0" encoding="utf-8"?>\n<feed>\n</feed>')
+            
+        # Create compatibility copies
+        with open('feeds/google_shopping_feed.csv', 'w', encoding='utf-8') as f:
+            f.write("id,title,description,link,image_link,price,currency,availability,condition,brand\n")
+            
+        with open('feeds/google_shopping_feed.xml', 'w', encoding='utf-8') as f:
+            f.write('<?xml version="1.0" encoding="utf-8"?>\n<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">\n<channel>\n<title>Joy and Co Product Feed</title>\n<link>https://joyandco.com</link>\n<description>Product feed for Google Shopping</description>\n</channel>\n</rss>')
+            
         with open('feeds/meta_shopping_feed.xml', 'w', encoding='utf-8') as f:
             f.write('<?xml version="1.0" encoding="utf-8"?>\n<feed>\n</feed>')
         
@@ -436,6 +484,9 @@ def main():
     
     # Save final debug summary
     save_debug_info_to_feeds("\n".join(debug_summary), "debug_summary.txt")
+
+if __name__ == "__main__":
+    main()
 
 if __name__ == "__main__":
     main().0" encoding="utf-8"?>\n<feed>\n</feed>')
