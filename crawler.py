@@ -365,6 +365,97 @@ def main():
     products = []
     product_attempts = []
     
+    # Process a batch of products at a time to avoid overwhelming
+    batch_size = 50  # Process in batches for better handling
+    
+    for batch_start in range(0, len(product_links), batch_size):
+        batch_end = min(batch_start + batch_size, len(product_links))
+        batch = product_links[batch_start:batch_end]
+        
+        logging.info(f"Processing batch {batch_start//batch_size + 1} ({batch_start}-{batch_end-1})")
+        
+        for index, link in enumerate(batch):
+            overall_index = batch_start + index
+            logging.info(f"Processing product {overall_index+1}/{len(product_links)}: {link}")
+            product_attempts.append(f"\nProduct {overall_index+1}: {link}")
+            
+            # Add a small delay between requests to avoid rate limiting
+            if index > 0:
+                time.sleep(1 + random.random())
+            
+            product_html = get_page_content(link)
+            if product_html:
+                product_attempts.append(f"  ✓ Successful access")
+                
+                # Get the page title
+                soup = BeautifulSoup(product_html, 'html.parser')
+                page_title = soup.title.text if soup.title else "No title found"
+                product_attempts.append(f"  Page title: {page_title}")
+                
+                product_data = extract_product_data(link, product_html)
+                if product_data:
+                    products.append(product_data)
+                    product_attempts.append(f"  ✓ Extracted data: {product_data['title']}")
+                    product_attempts.append(f"    • Image: {product_data['image_link']}")
+                    product_attempts.append(f"    • Price: {product_data['price']} {product_data['currency']}")
+                    product_attempts.append(f"    • Availability: {product_data['availability']}")
+                    logging.info(f"Extracted data for: {product_data['title']}")
+                else:
+                    product_attempts.append(f"  ✗ Failed to extract product data")
+                    logging.warning(f"Skipping product at {link} due to missing critical data")
+            else:
+                product_attempts.append(f"  ✗ Failed to access")
+                logging.error(f"Failed to fetch product page: {link}")
+    
+    debug_summary.append("\nProduct fetch attempts:")
+    debug_summary.extend(product_attempts)
+    
+    # Generate feeds
+    if products:
+        generate_csv_feed(products)
+        generate_xml_feed(products)
+        debug_summary.append(f"\nSUCCESS: Generated product feeds for {len(products)} products")
+        logging.info(f"Successfully generated product feeds for {len(products)} products")
+    else:
+        debug_summary.append("\nERROR: No products found to generate feeds")
+        logging.warning("No products found to generate feeds")
+        
+        # Create empty feed files to avoid errors
+        os.makedirs('feeds', exist_ok=True)
+        with open('feeds/google_shopping_feed.csv', 'w', encoding='utf-8') as f:
+            f.write("id,title,description,link,image_link,price,currency,availability,condition,brand\n")
+        
+        with open('feeds/google_shopping_feed.xml', 'w', encoding='utf-8') as f:
+            f.write('<?xml version="1.0" encoding="utf-8"?>\n<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">\n<channel>\n<title>Joy and Co Product Feed</title>\n<link>https://joyandco.com</link>\n<description>Product feed for Google Shopping</description>\n</channel>\n</rss>')
+        
+        with open('feeds/meta_shopping_feed.xml', 'w', encoding='utf-8') as f:
+            f.write('<?xml version="1.0" encoding="utf-8"?>\n<feed>\n</feed>')
+        
+        debug_summary.append("Created empty feed files")
+        logging.info("Created empty feed files")
+    
+    # Save final debug summary
+    save_debug_info_to_feeds("\n".join(debug_summary), "debug_summary.txt")
+
+if __name__ == "__main__":
+    main().0" encoding="utf-8"?>\n<feed>\n</feed>')
+        
+        save_debug_info_to_feeds("\n".join(debug_summary), "debug_summary.txt")
+        return
+    
+    debug_summary.append(f"\nFound {len(product_links)} product URLs in {excel_file_path}")
+    
+    # List a few of the found links in debug
+    debug_summary.append("\nSample of product URLs:")
+    for link in product_links[:5]:  # Show first 5 links
+        debug_summary.append(f"- {link}")
+    if len(product_links) > 5:
+        debug_summary.append(f"... and {len(product_links) - 5} more")
+    
+    # Fetch and extract data for each product
+    products = []
+    product_attempts = []
+    
     for index, link in enumerate(product_links):
         logging.info(f"Processing product {index+1}/{len(product_links)}: {link}")
         product_attempts.append(f"\nProduct {index+1}: {link}")
