@@ -14,7 +14,7 @@ st.set_page_config(
 )
 
 # Replace with your GitHub username and repo name
-GITHUB_USER = "your-username"
+GITHUB_USER = "boopin"
 GITHUB_REPO = "joyandco-product-crawler"
 GITHUB_BRANCH = "main"
 
