@@ -1,11 +1,13 @@
-import asyncio
-from playwright.async_api import async_playwright
+import requests
+from bs4 import BeautifulSoup
 import csv
 import xml.etree.ElementTree as ET
-from datetime import datetime
 import os
 import re
 import logging
+import time
+import random
+from urllib.parse import urljoin
 
 # Configure logging
 logging.basicConfig(
@@ -16,309 +18,179 @@ logging.basicConfig(
 BASE_URL = "https://joyandco.com"
 PRODUCT_LIST_URL = f"{BASE_URL}/product/"
 
-async def save_page_screenshot(page, filename):
-    """Save a screenshot for debugging"""
-    os.makedirs('debug', exist_ok=True)
-    await page.screenshot(path=f'debug/{filename}.png', full_page=True)
+# Headers to mimic a browser
+HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'Accept-Language': 'en-US,en;q=0.5',
+    'Connection': 'keep-alive',
+    'Upgrade-Insecure-Requests': '1',
+}
 
-async def main():
-    logging.info("Starting crawler for JoyAndCo products")
-    
-    async with async_playwright() as p:
-        # Launch browser with more verbose options
-        browser = await p.chromium.launch(
-            headless=True,
-            args=['--no-sandbox', '--disable-dev-shm-usage']
-        )
-        
-        context = await browser.new_context(
-            viewport={'width': 1280, 'height': 800},
-            user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        )
-        
-        page = await context.new_page()
-        page.set_default_timeout(30000)  # 30 seconds timeout
-        
-        # Navigate to products page with robust error handling
+def get_page_content(url, max_retries=3, delay=2):
+    """Get page content with retries and random delay to avoid rate limiting"""
+    retries = 0
+    while retries < max_retries:
         try:
-            logging.info(f"Navigating to product list: {PRODUCT_LIST_URL}")
-            response = await page.goto(PRODUCT_LIST_URL, wait_until="networkidle")
+            # Random delay between requests
+            if retries > 0:
+                sleep_time = delay + random.random() * 2
+                logging.info(f"Retry {retries}/{max_retries}, waiting {sleep_time:.2f} seconds...")
+                time.sleep(sleep_time)
             
-            if not response.ok:
-                logging.error(f"Failed to load page: {response.status} {response.status_text}")
-                await save_page_screenshot(page, "error_page_load")
-            else:
-                logging.info(f"Successfully loaded product list page")
-                await save_page_screenshot(page, "product_list_initial")
-        except Exception as e:
-            logging.error(f"Error loading product page: {e}")
-            await save_page_screenshot(page, "exception_page_load")
-            # Continue anyway to see if we can recover
-        
-        # Get the page HTML for debugging
-        page_content = await page.content()
-        logging.info(f"Page content length: {len(page_content)} characters")
-        if len(page_content) < 1000:
-            logging.warning("Page content seems too short, might indicate a problem")
-            logging.info(f"Page content: {page_content[:500]}...")
-        
-        # Click "view more" until all products are loaded
-        view_more_clicks = 0
-        max_clicks = 10  # Prevent infinite loops
-        
-        while view_more_clicks < max_clicks:
-            try:
-                # Wait a moment for any dynamic content to load
-                await page.wait_for_timeout(2000)
-                
-                # Try multiple selector patterns for the view more button
-                view_more_button = await page.query_selector(
-                    "button.view-more, a.view-more, .load-more, #load-more, button:has-text('View More'), a:has-text('View More'), button:has-text('Load More')"
-                )
-                
-                if not view_more_button:
-                    logging.info(f"No more 'view more' buttons found after {view_more_clicks} clicks")
-                    break
-                
-                # Check if the button is visible
-                is_visible = await view_more_button.is_visible()
-                if not is_visible:
-                    logging.info("View more button exists but is not visible")
-                    break
-                
-                logging.info(f"Clicking 'view more' button (click #{view_more_clicks + 1})")
-                await view_more_button.click()
-                view_more_clicks += 1
-                
-                # Wait for new products to load
-                await page.wait_for_timeout(3000)
-                await save_page_screenshot(page, f"after_view_more_click_{view_more_clicks}")
-                
-            except Exception as e:
-                logging.error(f"Error clicking 'view more' button: {e}")
-                await save_page_screenshot(page, f"view_more_error_{view_more_clicks}")
+            response = requests.get(url, headers=HEADERS, timeout=30)
+            response.raise_for_status()  # Raise exception for 4XX/5XX responses
+            
+            return response.text
+        except requests.exceptions.RequestException as e:
+            logging.error(f"Error fetching {url}: {e}")
+            retries += 1
+    
+    logging.error(f"Failed to fetch {url} after {max_retries} retries")
+    return None
+
+def save_debug_html(html_content, filename):
+    """Save HTML content for debugging"""
+    os.makedirs('debug', exist_ok=True)
+    with open(f'debug/{filename}.html', 'w', encoding='utf-8') as f:
+        f.write(html_content)
+    logging.info(f"Saved debug HTML to debug/{filename}.html")
+
+def extract_product_links(html_content):
+    """Extract product links from the product listing page"""
+    if not html_content:
+        return []
+    
+    soup = BeautifulSoup(html_content, 'html.parser')
+    save_debug_html(str(soup.prettify()), "product_list_page")
+    
+    # Try different selector patterns to find product links
+    product_links = []
+    
+    # Pattern 1: Common product card patterns
+    product_cards = soup.select('.product-card a, .product-item a, .product a, .product-box a, .item a')
+    for link in product_cards:
+        href = link.get('href')
+        if href and '/product/' in href:
+            product_links.append(urljoin(BASE_URL, href))
+    
+    # Pattern 2: Find links with product in URL
+    all_links = soup.select('a[href*="/product/"]')
+    for link in all_links:
+        href = link.get('href')
+        if href:
+            product_links.append(urljoin(BASE_URL, href))
+    
+    # Pattern 3: Find product images and get their parent links
+    product_images = soup.select('.product img, .product-item img')
+    for img in product_images:
+        parent_link = img.find_parent('a')
+        if parent_link and parent_link.get('href'):
+            href = parent_link.get('href')
+            product_links.append(urljoin(BASE_URL, href))
+    
+    # Remove duplicates
+    product_links = list(set(product_links))
+    logging.info(f"Found {len(product_links)} unique product links")
+    
+    # Save links for debugging
+    os.makedirs('debug', exist_ok=True)
+    with open('debug/product_links.txt', 'w') as f:
+        for link in product_links:
+            f.write(f"{link}\n")
+    
+    return product_links
+
+def extract_product_data(url, html_content):
+    """Extract product data from a product page"""
+    if not html_content:
+        return None
+    
+    soup = BeautifulSoup(html_content, 'html.parser')
+    
+    # Debugging save
+    page_name = url.split('/')[-1].replace('.', '_')
+    save_debug_html(str(soup.prettify()), f"product_{page_name}")
+    
+    # Try different selectors to find product info
+    title = None
+    for selector in ['h1.product-title', '.product-details h1', '.product-name', '.product-title', '.product h1', 'h1', '.title']:
+        element = soup.select_one(selector)
+        if element and element.text.strip():
+            title = element.text.strip()
+            break
+    
+    price = None
+    for selector in ['.product-price', '.price', '.product-info .price', '[itemprop="price"]', '.amount', '.current-price']:
+        element = soup.select_one(selector)
+        if element and element.text.strip():
+            # Extract numbers only from price
+            price_text = element.text.strip()
+            price_numbers = re.findall(r'\d+\.?\d*', price_text)
+            if price_numbers:
+                price = price_numbers[0]
                 break
-        
-        # Extract all product links with enhanced selectors
-        logging.info("Extracting product links")
-        product_links = await page.evaluate('''
-            () => {
-                // Try multiple selector patterns to find product links
-                let links = [];
-                
-                // Pattern 1: Common product card pattern
-                const productCardLinks = Array.from(document.querySelectorAll('.product-card a, .product-item a, .product a, .product-box a, .item a'));
-                if (productCardLinks.length > 0) {
-                    links = [...links, ...productCardLinks];
-                }
-                
-                // Pattern 2: Generic product links
-                const allLinks = Array.from(document.querySelectorAll('a[href*="/product/"]'));
-                if (allLinks.length > 0) {
-                    links = [...links, ...allLinks];
-                }
-                
-                // Pattern 3: Image links inside product containers
-                const imageLinks = Array.from(document.querySelectorAll('.product img, .product-item img')).map(img => img.closest('a'));
-                if (imageLinks.length > 0) {
-                    links = [...links, ...imageLinks.filter(link => link !== null)];
-                }
-                
-                // Log what we found to console for debugging
-                console.log('Found product links with these patterns:', {
-                    'product-card links': productCardLinks.length,
-                    'href-contains-product links': allLinks.length,
-                    'image links': imageLinks.filter(link => link !== null).length
-                });
-                
-                // Filter and deduplicate
-                return [...new Set(links.filter(link => link && link.href && link.href.includes('/product/')).map(link => link.href))];
-            }
-        ''')
-        
-        # Remove duplicates
-        product_links = list(set(product_links))
-        logging.info(f"Found {len(product_links)} unique product links")
-        
-        # If no product links found, try a different approach
-        if not product_links:
-            logging.warning("No product links found with primary selectors, trying fallback approach")
-            # Get all links on the page and filter for likely product links
-            all_links = await page.evaluate('''
-                () => {
-                    return Array.from(document.querySelectorAll('a[href]'))
-                        .map(a => a.href)
-                        .filter(href => 
-                            href.includes('/product/') || 
-                            href.includes('/item/') || 
-                            href.includes('/p/') ||
-                            href.match(/\/[a-z0-9-]+\.html$/) ||
-                            href.match(/\/[a-z0-9-]+\/$/)
-                        );
-                }
-            ''')
-            product_links = list(set(all_links))
-            logging.info(f"Fallback approach found {len(product_links)} potential product links")
-        
-        # Save product links for debugging
-        os.makedirs('debug', exist_ok=True)
-        with open('debug/product_links.txt', 'w') as f:
-            for link in product_links:
-                f.write(f"{link}\n")
-        
-        products = []
-        
-        # Visit each product page and extract details
-        for index, link in enumerate(product_links):
-            try:
-                logging.info(f"Processing product {index+1}/{len(product_links)}: {link}")
-                
-                # Navigate to the product page
-                await page.goto(link, wait_until="networkidle")
-                await save_page_screenshot(page, f"product_{index}_page")
-                
-                # Try different selectors for product details
-                product_data = await page.evaluate('''
-                    () => {
-                        // Helper function to get text content safely
-                        const getText = (selector) => {
-                            const el = document.querySelector(selector);
-                            return el ? el.innerText.trim() : '';
-                        };
-                        
-                        // Try different selectors to find product info
-                        const titleSelectors = [
-                            'h1.product-title', '.product-details h1', '.product-name', 
-                            '.product-title', '.product h1', 'h1', '.title'
-                        ];
-                        
-                        const priceSelectors = [
-                            '.product-price', '.price', '.product-info .price', 
-                            '[itemprop="price"]', '.amount', '.current-price'
-                        ];
-                        
-                        const descriptionSelectors = [
-                            '.product-description', '.description', '[itemprop="description"]',
-                            '.product-short-description', '.details', '.product-details'
-                        ];
-                        
-                        const imageSelectors = [
-                            '.product-image img', '.product-gallery img', 
-                            '.product-photo img', '[itemprop="image"]',
-                            '.gallery img', '.carousel img', '.product img'
-                        ];
-                        
-                        // Find the first matching selector
-                        const findText = (selectors) => {
-                            for (const selector of selectors) {
-                                const text = getText(selector);
-                                if (text) return text;
-                            }
-                            return '';
-                        };
-                        
-                        // Find the first matching image
-                        const findImage = (selectors) => {
-                            for (const selector of selectors) {
-                                const img = document.querySelector(selector);
-                                if (img && img.src) return img.src;
-                            }
-                            return '';
-                        };
-                        
-                        // Get product details
-                        const title = findText(titleSelectors);
-                        const priceText = findText(priceSelectors);
-                        const description = findText(descriptionSelectors);
-                        const imageUrl = findImage(imageSelectors);
-                        
-                        // Clean price text
-                        const price = priceText.replace(/[^0-9.]/g, '');
-                        
-                        // Generate a unique ID
-                        const id = document.querySelector('[data-product-id]')?.getAttribute('data-product-id') || 
-                                window.location.pathname.split('/').pop().replace(/\.[^/.]+$/, "");  // Remove file extension
-                        
-                        // Check stock status
-                        const stockTexts = ['in stock', 'out of stock', 'available', 'unavailable', 'sold out'];
-                        let stockStatus = '';
-                        
-                        for (const text of stockTexts) {
-                            const regex = new RegExp(text, 'i');
-                            if (document.body.innerText.match(regex)) {
-                                stockStatus = text.toLowerCase();
-                                break;
-                            }
-                        }
-                        
-                        // Default to in stock if no status found
-                        const availability = stockStatus.includes('out') || 
-                                          stockStatus.includes('unavailable') || 
-                                          stockStatus.includes('sold') 
-                                          ? 'out of stock' : 'in stock';
-                        
-                        // Extract brand info
-                        const brandSelectors = ['.brand', '[itemprop="brand"]', '.manufacturer'];
-                        const brand = findText(brandSelectors) || 'Joy and Co';
-                        
-                        // For debugging
-                        const debugInfo = {
-                            foundTitle: !!title,
-                            foundPrice: !!price,
-                            foundDescription: !!description,
-                            foundImage: !!imageUrl,
-                            titleSelector: titleSelectors.find(s => document.querySelector(s)),
-                            priceSelector: priceSelectors.find(s => document.querySelector(s)),
-                            descSelector: descriptionSelectors.find(s => document.querySelector(s)),
-                            imageSelector: imageSelectors.find(s => document.querySelector(s))
-                        };
-                        
-                        console.log('Product data debug:', debugInfo);
-                        
-                        return {
-                            id: id,
-                            title: title,
-                            description: description,
-                            price: price,
-                            currency: 'AED', // Dubai currency
-                            image_link: imageUrl ? (imageUrl.startsWith('http') ? imageUrl : window.location.origin + imageUrl) : '',
-                            availability: availability,
-                            condition: 'new',
-                            link: window.location.href,
-                            brand: brand,
-                            debug: debugInfo
-                        };
-                    }
-                ''')
-                
-                # Log the debug info
-                if 'debug' in product_data:
-                    debug_info = product_data.pop('debug')
-                    logging.info(f"Product debug info: {debug_info}")
-                
-                # Only add products with valid data
-                if product_data['title'] and product_data['price']:
-                    products.append(product_data)
-                    logging.info(f"Extracted data for: {product_data['title']}")
-                else:
-                    logging.warning(f"Skipping product at {link} due to missing critical data")
-                    logging.info(f"Partial data: {product_data}")
-            except Exception as e:
-                logging.error(f"Error processing {link}: {e}")
-                await save_page_screenshot(page, f"product_{index}_error")
-        
-        await browser.close()
-        
-        # Generate feeds
-        if products:
-            generate_csv_feed(products)
-            generate_xml_feed(products)
-            logging.info(f"Successfully generated product feeds for {len(products)} products")
-        else:
-            logging.warning("No products found to generate feeds")
+    
+    description = None
+    for selector in ['.product-description', '.description', '[itemprop="description"]', '.product-short-description', '.details', '.product-details']:
+        element = soup.select_one(selector)
+        if element and element.text.strip():
+            description = element.text.strip()
+            break
+    
+    image_url = None
+    for selector in ['.product-image img', '.product-gallery img', '.product-photo img', '[itemprop="image"]', '.gallery img', '.carousel img', '.product img']:
+        element = soup.select_one(selector)
+        if element and element.get('src'):
+            image_src = element.get('src')
+            image_url = urljoin(BASE_URL, image_src)
+            break
+    
+    # Generate ID from URL
+    product_id = url.split('/')[-1]
+    if not product_id:
+        product_id = url.split('/')[-2]
+    
+    # Clean up the ID (remove file extensions, etc.)
+    product_id = re.sub(r'\.[^/.]+$', '', product_id)
+    
+    # Check stock status
+    availability = 'in stock'  # Default to in stock
+    for stock_text in ['out of stock', 'sold out', 'unavailable']:
+        if stock_text in html_content.lower():
+            availability = 'out of stock'
+            break
+    
+    # Extract brand
+    brand = None
+    for selector in ['.brand', '[itemprop="brand"]', '.manufacturer']:
+        element = soup.select_one(selector)
+        if element and element.text.strip():
+            brand = element.text.strip()
+            break
+    
+    if not brand:
+        brand = 'Joy and Co'  # Default brand
+    
+    # Only return if essential fields are present
+    if title and price:
+        return {
+            'id': product_id,
+            'title': title,
+            'description': description or '',
+            'price': price,
+            'currency': 'AED',  # Dubai currency
+            'image_link': image_url or '',
+            'availability': availability,
+            'condition': 'new',
+            'link': url,
+            'brand': brand
+        }
+    
+    return None
 
 def generate_csv_feed(products):
-    # Ensure output directory exists
+    """Generate CSV feed for Google Shopping"""
     os.makedirs('feeds', exist_ok=True)
     
     logging.info(f"Generating CSV feed with {len(products)} products")
@@ -337,7 +209,7 @@ def generate_csv_feed(products):
         logging.error(f"Error generating CSV feed: {e}")
 
 def generate_xml_feed(products):
-    # Ensure output directory exists
+    """Generate XML feed for Google Shopping"""
     os.makedirs('feeds', exist_ok=True)
     
     logging.info(f"Generating XML feed with {len(products)} products")
@@ -378,6 +250,7 @@ def generate_xml_feed(products):
         logging.error(f"Error generating Google XML feed: {e}")
 
 def generate_meta_xml_feed(products):
+    """Generate XML feed for Meta Catalog"""
     try:
         # Create XML structure for Meta Catalog
         root = ET.Element('feed')
@@ -403,5 +276,79 @@ def generate_meta_xml_feed(products):
     except Exception as e:
         logging.error(f"Error generating Meta XML feed: {e}")
 
+def handle_pagination(html_content):
+    """This function would handle pagination if the site has it instead of view more button
+    For now it returns the original HTML as we're initially focusing on the first page"""
+    # This would be implemented if the site uses pagination
+    return html_content
+
+def main():
+    logging.info("Starting crawler for JoyAndCo products")
+    
+    # Fetch the product listing page
+    product_list_html = get_page_content(PRODUCT_LIST_URL)
+    if not product_list_html:
+        logging.error("Failed to fetch product listing page")
+        return
+    
+    # Handle pagination if needed
+    all_products_html = handle_pagination(product_list_html)
+    
+    # Extract product links
+    product_links = extract_product_links(all_products_html)
+    if not product_links:
+        logging.warning("No product links found on the page")
+        logging.info(f"Trying fallback approach with direct URL fetching")
+        
+        # Fallback: Try to guess some product URLs
+        fallback_links = []
+        # Try to generate some product URLs based on common patterns
+        for i in range(1, 50):  # Try 50 potential product IDs
+            fallback_links.append(f"{BASE_URL}/product/product-{i}")
+            fallback_links.append(f"{BASE_URL}/product/{i}")
+        
+        product_links = fallback_links
+    
+    # Fetch and extract data for each product
+    products = []
+    for index, link in enumerate(product_links):
+        logging.info(f"Processing product {index+1}/{len(product_links)}: {link}")
+        
+        # Add a small delay between requests to avoid rate limiting
+        if index > 0:
+            time.sleep(1 + random.random())
+        
+        product_html = get_page_content(link)
+        if product_html:
+            product_data = extract_product_data(link, product_html)
+            if product_data:
+                products.append(product_data)
+                logging.info(f"Extracted data for: {product_data['title']}")
+            else:
+                logging.warning(f"Skipping product at {link} due to missing critical data")
+        else:
+            logging.error(f"Failed to fetch product page: {link}")
+    
+    # Generate feeds
+    if products:
+        generate_csv_feed(products)
+        generate_xml_feed(products)
+        logging.info(f"Successfully generated product feeds for {len(products)} products")
+    else:
+        logging.warning("No products found to generate feeds")
+        
+        # Create empty feed files to avoid errors
+        os.makedirs('feeds', exist_ok=True)
+        with open('feeds/google_shopping_feed.csv', 'w', encoding='utf-8') as f:
+            f.write("id,title,description,link,image_link,price,currency,availability,condition,brand\n")
+        
+        with open('feeds/google_shopping_feed.xml', 'w', encoding='utf-8') as f:
+            f.write('<?xml version="1.0" encoding="utf-8"?>\n<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">\n<channel>\n<title>Joy and Co Product Feed</title>\n<link>https://joyandco.com</link>\n<description>Product feed for Google Shopping</description>\n</channel>\n</rss>')
+        
+        with open('feeds/meta_shopping_feed.xml', 'w', encoding='utf-8') as f:
+            f.write('<?xml version="1.0" encoding="utf-8"?>\n<feed>\n</feed>')
+        
+        logging.info("Created empty feed files")
+
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
