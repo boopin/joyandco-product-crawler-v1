@@ -461,8 +461,39 @@ def generate_meta_xml_feed(products):
         tree.write('feeds/meta_shopping_feed.xml', encoding='utf-8', xml_declaration=True)
         
         logging.info(f"Meta Shopping XML feed generated at feeds/meta/shopping_feed.xml")
+        
+        # Generate CSV feed for Meta as well
+        generate_meta_csv_feed(products)
     except Exception as e:
         logging.error(f"Error generating Meta XML feed: {e}")
+        
+def generate_meta_csv_feed(products):
+    """Generate CSV feed for Meta Catalog"""
+    os.makedirs('feeds/meta', exist_ok=True)
+    
+    logging.info(f"Generating CSV feed for Meta with {len(products)} products")
+    
+    try:
+        with open('feeds/meta/shopping_feed.csv', 'w', newline='', encoding='utf-8') as csvfile:
+            # Meta uses similar fields to Google but with some differences
+            fieldnames = ['id', 'title', 'description', 'link', 'image_link', 'price', 'availability', 'condition', 'brand']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            
+            writer.writeheader()
+            for product in products:
+                # Format the product data for Meta
+                meta_product = product.copy()
+                meta_product['price'] = f"{product['price']} {product['currency']}"
+                
+                # Remove currency field as it's now part of price
+                if 'currency' in meta_product:
+                    del meta_product['currency']
+                
+                writer.writerow(meta_product)
+                
+        logging.info(f"CSV feed for Meta generated at feeds/meta/shopping_feed.csv")
+    except Exception as e:
+        logging.error(f"Error generating CSV feed for Meta: {e}")
 
 def main():
     logging.info("Starting crawler for JoyAndCo products")
@@ -493,6 +524,9 @@ def main():
         
         with open('feeds/meta/shopping_feed.xml', 'w', encoding='utf-8') as f:
             f.write('<?xml version="1.0" encoding="utf-8"?>\n<feed>\n</feed>')
+            
+        with open('feeds/meta/shopping_feed.csv', 'w', encoding='utf-8') as f:
+            f.write("id,title,description,link,image_link,price,availability,condition,brand\n")
         
         # Create compatibility copies
         with open('feeds/google_shopping_feed.csv', 'w', encoding='utf-8') as f:
@@ -574,6 +608,7 @@ def main():
         debug_summary.append(f"- feeds/google/shopping_feed.csv")
         debug_summary.append(f"- feeds/google/shopping_feed.xml")
         debug_summary.append(f"- feeds/meta/shopping_feed.xml")
+        debug_summary.append(f"- feeds/meta/shopping_feed.csv")
         debug_summary.append(f"- feeds/google_shopping_feed.csv (compatibility copy)")
         debug_summary.append(f"- feeds/google_shopping_feed.xml (compatibility copy)")
         debug_summary.append(f"- feeds/meta_shopping_feed.xml (compatibility copy)")
@@ -591,6 +626,9 @@ def main():
         
         with open('feeds/meta/shopping_feed.xml', 'w', encoding='utf-8') as f:
             f.write('<?xml version="1.0" encoding="utf-8"?>\n<feed>\n</feed>')
+            
+        with open('feeds/meta/shopping_feed.csv', 'w', encoding='utf-8') as f:
+            f.write("id,title,description,link,image_link,price,availability,condition,brand\n")
             
         # Create compatibility copies
         with open('feeds/google_shopping_feed.csv', 'w', encoding='utf-8') as f:
