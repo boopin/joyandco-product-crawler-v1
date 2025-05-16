@@ -32,29 +32,23 @@ jobs:
         # Create feeds directory if it doesn't exist
         mkdir -p feeds
         mkdir -p debug
-        # Run crawler
+        # Run crawler with detailed output
         python crawler.py
+        # Show debug directory contents for logging
+        ls -la debug/ || true
     
-    - name: Upload debug information
-      uses: actions/upload-artifact@v2
-      with:
-        name: debug-files
-        path: debug/
-        retention-days: 5
-      
     - name: Commit and push feed files
       run: |
         git config --global user.name 'GitHub Actions Bot'
         git config --global user.email 'actions@github.com'
         
-        # Add the feeds directory and any debug screenshots
+        # Add the feeds directory
         git add feeds/
-        git add debug/ || true
         
         # Check if there are any changes to commit
-        if [ -n "$(git status --porcelain)" ]; then
+        if [ -n "$(git status --porcelain feeds/)" ]; then
           git commit -m "Update product feeds $(date +'%Y-%m-%d')"
           git push
         else
-          echo "No changes to commit"
+          echo "No changes to commit in feeds directory"
         fi
