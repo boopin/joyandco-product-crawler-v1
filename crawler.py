@@ -7,6 +7,7 @@ import re
 import logging
 import time
 import random
+import pandas as pd
 from urllib.parse import urljoin
 
 # Configure logging
@@ -16,7 +17,6 @@ logging.basicConfig(
 )
 
 BASE_URL = "https://joyandco.com"
-PRODUCT_LIST_URL = f"{BASE_URL}/products/"  # This is correct
 
 # Headers to mimic a browser
 HEADERS = {
@@ -63,60 +63,24 @@ def save_debug_info_to_feeds(content, filename):
         f.write(content)
     logging.info(f"Saved debug info to feeds/{filename}")
 
-def extract_product_links(html_content):
-    """Extract product links from the product listing page"""
-    if not html_content:
+def read_product_urls_from_excel(excel_file_path):
+    """Read product URLs from an Excel file"""
+    try:
+        # Read the Excel file
+        df = pd.read_excel(excel_file_path)
+        
+        # Check if 'product_url' column exists
+        if 'product_url' in df.columns:
+            # Get the list of product URLs
+            product_urls = df['product_url'].tolist()
+            logging.info(f"Read {len(product_urls)} product URLs from Excel file")
+            return product_urls
+        else:
+            logging.error(f"Column 'product_url' not found in Excel file. Available columns: {df.columns.tolist()}")
+            return []
+    except Exception as e:
+        logging.error(f"Error reading Excel file: {e}")
         return []
-    
-    soup = BeautifulSoup(html_content, 'html.parser')
-    save_debug_html(str(soup.prettify()), "product_list_page")
-    
-    # Save a snippet of the HTML to the feeds directory
-    html_snippet = html_content[:5000] if len(html_content) > 5000 else html_content
-    save_debug_info_to_feeds(html_snippet, "product_page_snippet.html")
-    
-    # DEBUG: Log all links on the page to see what's available
-    all_links = soup.find_all('a')
-    logging.info(f"All links on page: {len(all_links)}")
-    
-    links_debug_text = ""
-    for link in all_links:
-        href = link.get('href')
-        if href:
-            links_debug_text += f"{href}\n"
-    
-    # Save all links to the feeds directory
-    save_debug_info_to_feeds(links_debug_text, "all_page_links.txt")
-    
-    # Try different selector patterns to find product links
-    product_links = []
-    
-    # Log page title to make sure we're on the right page
-    page_title = soup.title.text if soup.title else "No title found"
-    logging.info(f"Page title: {page_title}")
-    
-    # Save page title to feeds
-    save_debug_info_to_feeds(f"Page title: {page_title}\n", "page_info.txt")
-    
-    # Find all links with "/product/" in the URL - this seems to be the pattern for JoyAndCo
-    product_paths = ['/product/']
-    for path in product_paths:
-        for link in all_links:
-            href = link.get('href')
-            if href and path in href:
-                full_url = urljoin(BASE_URL, href)
-                product_links.append(full_url)
-                logging.info(f"Found product link: {full_url}")
-    
-    # Remove duplicates
-    product_links = list(set(product_links))
-    logging.info(f"Found {len(product_links)} unique product links")
-    
-    # Save links for debugging
-    links_text = "\n".join(product_links)
-    save_debug_info_to_feeds(links_text, "found_product_links.txt")
-    
-    return product_links
 
 def extract_product_data(url, html_content):
     """Extract product data from a product page"""
@@ -365,23 +329,15 @@ def main():
     # Create debug info summary file
     debug_summary = ["JoyAndCo Crawler Debug Summary\n"]
     debug_summary.append(f"Base URL: {BASE_URL}")
-    debug_summary.append(f"Product List URL: {PRODUCT_LIST_URL}")
-    debug_summary.append("\nAttempted URLs:")
     
-    # First check if we can access the main products page
-    debug_summary.append(f"- {PRODUCT_LIST_URL}")
-    product_list_html = get_page_content(PRODUCT_LIST_URL)
+    # Read product URLs from Excel file
+    excel_file_path = 'product_urls.xlsx'
+    product_links = read_product_urls_from_excel(excel_file_path)
     
-    # If main products page succeeds
-    if product_list_html:
-        debug_summary.append(f"  ✓ Successful access")
-        # Get the page title to see what we're looking at
-        soup = BeautifulSoup(product_list_html, 'html.parser')
-        page_title = soup.title.text if soup.title else "No title found"
-        debug_summary.append(f"  Page title: {page_title}")
-    else:
-        debug_summary.append(f"  ✗ Failed to access")
-        logging.error("Failed to fetch product listing page")
+    if not product_links:
+        debug_summary.append(f"ERROR: No product URLs found in {excel_file_path}")
+        logging.error(f"No product URLs found in {excel_file_path}")
+        
         # Create empty feed files to avoid errors
         os.makedirs('feeds', exist_ok=True)
         with open('feeds/google_shopping_feed.csv', 'w', encoding='utf-8') as f:
@@ -396,32 +352,14 @@ def main():
         save_debug_info_to_feeds("\n".join(debug_summary), "debug_summary.txt")
         return
     
-    # Extract product links
-    product_links = extract_product_links(product_list_html)
-    debug_summary.append(f"\nProduct links found: {len(product_links)}")
+    debug_summary.append(f"\nFound {len(product_links)} product URLs in {excel_file_path}")
     
-    if product_links:
-        # List a few of the found links in debug
-        debug_summary.append("\nSample of found product links:")
-        for link in product_links[:5]:  # Show first 5 links
-            debug_summary.append(f"- {link}")
-        if len(product_links) > 5:
-            debug_summary.append(f"... and {len(product_links) - 5} more")
-    else:
-        debug_summary.append("No product links found on the page")
-        # Create empty feed files to avoid errors
-        os.makedirs('feeds', exist_ok=True)
-        with open('feeds/google_shopping_feed.csv', 'w', encoding='utf-8') as f:
-            f.write("id,title,description,link,image_link,price,currency,availability,condition,brand\n")
-        
-        with open('feeds/google_shopping_feed.xml', 'w', encoding='utf-8') as f:
-            f.write('<?xml version="1.0" encoding="utf-8"?>\n<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">\n<channel>\n<title>Joy and Co Product Feed</title>\n<link>https://joyandco.com</link>\n<description>Product feed for Google Shopping</description>\n</channel>\n</rss>')
-        
-        with open('feeds/meta_shopping_feed.xml', 'w', encoding='utf-8') as f:
-            f.write('<?xml version="1.0" encoding="utf-8"?>\n<feed>\n</feed>')
-        
-        save_debug_info_to_feeds("\n".join(debug_summary), "debug_summary.txt")
-        return
+    # List a few of the found links in debug
+    debug_summary.append("\nSample of product URLs:")
+    for link in product_links[:5]:  # Show first 5 links
+        debug_summary.append(f"- {link}")
+    if len(product_links) > 5:
+        debug_summary.append(f"... and {len(product_links) - 5} more")
     
     # Fetch and extract data for each product
     products = []
