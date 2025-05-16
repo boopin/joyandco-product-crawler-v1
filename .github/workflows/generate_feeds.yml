@@ -21,11 +21,26 @@ jobs:
       with:
         python-version: '3.10'
     
-    - name: Install dependencies
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        # Install required system dependencies for Playwright
+        sudo apt-get install -y libasound2t64 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libdbus-1-3 \
+          libxkbcommon0 libatspi2.0-0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libpango-1.0-0 \
+          libcairo2 libnss3 libxss1 libnspr4
+    
+    - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        python -m playwright install chromium --with-deps
+    
+    - name: Install Playwright browsers
+      run: |
+        # Use the skip browser download flag and install manually
+        PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 pip install playwright
+        # Install Chromium browser with system dependencies
+        playwright install-deps chromium
+        playwright install chromium
     
     - name: Run crawler
       run: |
