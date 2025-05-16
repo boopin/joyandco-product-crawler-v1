@@ -16,7 +16,7 @@ logging.basicConfig(
 )
 
 BASE_URL = "https://joyandco.com"
-PRODUCT_LIST_URL = f"{BASE_URL}/products/"  # Changed from /product/ to /products/
+PRODUCT_LIST_URL = f"{BASE_URL}/products/"  # This is correct
 
 # Headers to mimic a browser
 HEADERS = {
@@ -64,30 +64,48 @@ def extract_product_links(html_content):
     soup = BeautifulSoup(html_content, 'html.parser')
     save_debug_html(str(soup.prettify()), "product_list_page")
     
+    # DEBUG: Log all links on the page to see what's available
+    all_links = soup.find_all('a')
+    logging.info(f"All links on page: {len(all_links)}")
+    with open('debug/all_links.txt', 'w', encoding='utf-8') as f:
+        for link in all_links:
+            href = link.get('href')
+            if href:
+                f.write(f"{href}\n")
+                logging.info(f"Found link: {href}")
+    
     # Try different selector patterns to find product links
     product_links = []
     
-    # Pattern 1: Common product card patterns
-    product_cards = soup.select('.product-card a, .product-item a, .product a, .product-box a, .item a')
+    # Updated selectors based on common Shopify/WooCommerce patterns
+    product_cards = soup.select('.product-card a, .product-item a, .product a, .product-box a, .item a, .product-grid-item a, .products a, .collection-item a, li.product a')
+    logging.info(f"Product cards found: {len(product_cards)}")
     for link in product_cards:
         href = link.get('href')
-        if href and '/products/' in href:  # Changed from /product/ to /products/
-            product_links.append(urljoin(BASE_URL, href))
+        if href:
+            # Accept any URL with /products/ or /product/ in it
+            if '/products/' in href or '/product/' in href or '/collection/' in href:
+                product_links.append(urljoin(BASE_URL, href))
+                logging.info(f"Found product link: {href}")
     
-    # Pattern 2: Find links with product in URL
-    all_links = soup.select('a[href*="/products/"]')  # Changed from /product/ to /products/
+    # Find all links that might be product links
+    all_links = soup.select('a[href*="/products/"], a[href*="/product/"], a[href*="/collections/"]')
+    logging.info(f"Product links by href: {len(all_links)}")
     for link in all_links:
         href = link.get('href')
         if href:
             product_links.append(urljoin(BASE_URL, href))
+            logging.info(f"Found product link by href: {href}")
     
-    # Pattern 3: Find product images and get their parent links
-    product_images = soup.select('.product img, .product-item img')
+    # Find product images and get their parent links
+    product_images = soup.select('.product img, .product-item img, .product-image img, .collection-item img, li.product img')
+    logging.info(f"Product images found: {len(product_images)}")
     for img in product_images:
         parent_link = img.find_parent('a')
         if parent_link and parent_link.get('href'):
             href = parent_link.get('href')
             product_links.append(urljoin(BASE_URL, href))
+            logging.info(f"Found product link from image: {href}")
     
     # Remove duplicates
     product_links = list(set(product_links))
@@ -95,7 +113,7 @@ def extract_product_links(html_content):
     
     # Save links for debugging
     os.makedirs('debug', exist_ok=True)
-    with open('debug/product_links.txt', 'w') as f:
+    with open('debug/product_links.txt', 'w', encoding='utf-8') as f:
         for link in product_links:
             f.write(f"{link}\n")
     
@@ -282,14 +300,43 @@ def handle_pagination(html_content):
     # This would be implemented if the site uses pagination
     return html_content
 
+def check_shopify_collections():
+    """Check if the site uses Shopify collections structure"""
+    collection_urls = [
+        f"{BASE_URL}/collections/all",
+        f"{BASE_URL}/collections/featured",
+        f"{BASE_URL}/collections/new-arrivals",
+        f"{BASE_URL}/collections/best-sellers"
+    ]
+    
+    for url in collection_urls:
+        logging.info(f"Checking collection URL: {url}")
+        html_content = get_page_content(url)
+        if html_content:
+            logging.info(f"Successfully accessed collection: {url}")
+            save_debug_html(html_content, f"collection_{url.split('/')[-1]}")
+            return url, html_content
+    
+    return None, None
+
 def main():
     logging.info("Starting crawler for JoyAndCo products")
     
-    # Fetch the product listing page
+    # First check if we can access the main products page
     product_list_html = get_page_content(PRODUCT_LIST_URL)
+    
+    # If main products page fails, check if site uses Shopify collections
     if not product_list_html:
         logging.error("Failed to fetch product listing page")
-        return
+        logging.info("Checking if site uses Shopify collections structure")
+        collection_url, collection_html = check_shopify_collections()
+        
+        if collection_html:
+            logging.info(f"Using collection page: {collection_url}")
+            product_list_html = collection_html
+        else:
+            logging.error("Could not find any valid product listing pages")
+            return
     
     # Handle pagination if needed
     all_products_html = handle_pagination(product_list_html)
@@ -300,12 +347,27 @@ def main():
         logging.warning("No product links found on the page")
         logging.info(f"Trying fallback approach with direct URL fetching")
         
+        # Try directly accessing products URLs
+        direct_product_urls = [
+            f"{BASE_URL}/products/example-product-1",
+            f"{BASE_URL}/products/example-product-2",
+            f"{BASE_URL}/collections/all/products/example-product-1"
+        ]
+        
+        for url in direct_product_urls:
+            logging.info(f"Trying direct product URL: {url}")
+            html = get_page_content(url)
+            if html:
+                logging.info(f"Successfully accessed direct product: {url}")
+                save_debug_html(html, f"direct_product_{url.split('/')[-1]}")
+        
         # Fallback: Try to guess some product URLs
         fallback_links = []
         # Try to generate some product URLs based on common patterns
-        for i in range(1, 50):  # Try 50 potential product IDs
-            fallback_links.append(f"{BASE_URL}/products/product-{i}")  # Changed from /product/ to /products/
-            fallback_links.append(f"{BASE_URL}/products/{i}")  # Changed from /product/ to /products/
+        for i in range(1, 10):  # Reduce the number of guesses to avoid too many failures
+            fallback_links.append(f"{BASE_URL}/products/product-{i}")
+            fallback_links.append(f"{BASE_URL}/products/{i}")
+            fallback_links.append(f"{BASE_URL}/collections/all/products/product-{i}")
         
         product_links = fallback_links
     
