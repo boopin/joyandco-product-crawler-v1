@@ -1,0 +1,10 @@
+id: chrome-kiss-planter-nTDrA9
+title: Chrome Kiss Planter
+description: Chrome Kiss Planter
+price: 375
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/chrome-kiss-planter-nTDrA9
+brand: Joy and Co

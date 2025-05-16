@@ -1,0 +1,10 @@
+id: nora-purple-candle-holder-kwNBcR
+title: Nora Purple Candle Holder
+description: Nora Purple Candle Holder
+price: 105
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/nora-purple-candle-holder-kwNBcR
+brand: Joy and Co

@@ -1,0 +1,10 @@
+id: bisou-photo-frame-I8aWvJ
+title: Bisou Photo Frame
+description: Bisou Photo Frame
+price: 99
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/bisou-photo-frame-I8aWvJ
+brand: Joy and Co

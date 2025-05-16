@@ -1,0 +1,10 @@
+id: crazy-quarter-dark-green-line-fuZS9K
+title: Crazy Quarter Dark Green Line
+description: Crazy Quarter Dark Green Line
+price: 145
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/crazy-quarter-dark-green-line-fuZS9K
+brand: Joy and Co

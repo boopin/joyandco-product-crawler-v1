@@ -1,0 +1,10 @@
+id: birdy-bowl-BJBWFJ
+title: Birdy Bowl
+description: Birdy Bowl
+price: 567
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/birdy-bowl-BJBWFJ
+brand: Joy and Co

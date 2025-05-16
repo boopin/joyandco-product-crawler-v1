@@ -1,0 +1,10 @@
+id: roots-black-candle-holder-5uYzA6
+title: Roots Black Candle Holder
+description: Roots Black Candle Holder
+price: 949
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/roots-black-candle-holder-5uYzA6
+brand: Joy and Co

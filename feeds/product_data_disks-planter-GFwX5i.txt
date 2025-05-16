@@ -1,0 +1,10 @@
+id: disks-planter-GFwX5i
+title: Disks Planter
+description: Disks Planter
+price: 250
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/disks-planter-GFwX5i
+brand: Joy and Co

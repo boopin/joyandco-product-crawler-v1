@@ -1,0 +1,10 @@
+id: petra-candle-holder-5RJlNo
+title: Petra Green Candle Holder
+description: Petra Green Candle Holder
+price: 75
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/petra-candle-holder-5RJlNo
+brand: Joy and Co

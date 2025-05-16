@@ -1,0 +1,10 @@
+id: hybrid-teapot-smeraldina-jP5GhE
+title: Hybrid Teapot Smeraldina
+description: Hybrid Teapot Smeraldina
+price: 510
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/hybrid-teapot-smeraldina-jP5GhE
+brand: Joy and Co

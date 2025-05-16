@@ -1,0 +1,10 @@
+id: checkmate-vase-o3SZCR
+title: Checkmate Vase
+description: Checkmate Vase
+price: 199
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/checkmate-vase-o3SZCR
+brand: Joy and Co

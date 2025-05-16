@@ -1,0 +1,10 @@
+id: pink-kiss-planter-wNl1qY
+title: Pink Kiss Planter
+description: Pink Kiss Planter
+price: 375
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/pink-kiss-planter-wNl1qY
+brand: Joy and Co

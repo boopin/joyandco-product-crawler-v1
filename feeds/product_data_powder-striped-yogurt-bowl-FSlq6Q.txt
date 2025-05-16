@@ -1,0 +1,10 @@
+id: powder-striped-yogurt-bowl-FSlq6Q
+title: Powder Striped Yogurt Bowl
+description: Powder Striped Yogurt Bowl
+price: 129
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/powder-striped-yogurt-bowl-FSlq6Q
+brand: Joy and Co

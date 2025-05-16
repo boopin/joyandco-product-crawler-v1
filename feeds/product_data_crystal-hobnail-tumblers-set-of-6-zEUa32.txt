@@ -1,0 +1,10 @@
+id: crystal-hobnail-tumblers-set-of-6-zEUa32
+title: Set of 6 Crystal Hobnail Tumblers
+description: Set of 6 Crystal Hobnail Tumblers
+price: 600
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/crystal-hobnail-tumblers-set-of-6-zEUa32
+brand: Joy and Co

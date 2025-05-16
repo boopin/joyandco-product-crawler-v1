@@ -1,0 +1,10 @@
+id: aquamarine-hobnail-jug-tall-KMO9Fr
+title: Aquamarine Hobnail Jug Tall
+description: Aquamarine Hobnail Jug Tall
+price: 475
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/aquamarine-hobnail-jug-tall-KMO9Fr
+brand: Joy and Co

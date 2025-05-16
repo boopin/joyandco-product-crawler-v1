@@ -1,0 +1,10 @@
+id: bronze-hobnail-jug-tall-MItwRN
+title: Bronze Hobnail Jug Tall
+description: Bronze Hobnail Jug Tall
+price: 475
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/bronze-hobnail-jug-tall-MItwRN
+brand: Joy and Co

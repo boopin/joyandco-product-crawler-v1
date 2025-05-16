@@ -1,0 +1,10 @@
+id: tangerine-twist-vase-m7G1iP
+title: Tangerine Twist Vase
+description: Tangerine Twist Vase
+price: 235
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/tangerine-twist-vase-m7G1iP
+brand: Joy and Co

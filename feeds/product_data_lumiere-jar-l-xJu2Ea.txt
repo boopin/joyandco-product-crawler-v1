@@ -1,0 +1,10 @@
+id: lumiere-jar-l-xJu2Ea
+title: Lumiere Jar L
+description: Lumiere Jar L
+price: 190
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/lumiere-jar-l-xJu2Ea
+brand: Joy and Co

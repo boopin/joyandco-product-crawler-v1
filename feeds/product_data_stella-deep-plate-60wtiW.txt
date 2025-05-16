@@ -1,0 +1,10 @@
+id: stella-deep-plate-60wtiW
+title: Stella Deep Plate
+description: Stella Deep Plate
+price: 210
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/stella-deep-plate-60wtiW
+brand: Joy and Co

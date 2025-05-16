@@ -1,0 +1,10 @@
+id: fancy-pink-candle-holder-wSTBIb
+title: Fancy Pink Candle Holder
+description: Fancy Pink Candle Holder
+price: 190
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/fancy-pink-candle-holder-wSTBIb
+brand: Joy and Co

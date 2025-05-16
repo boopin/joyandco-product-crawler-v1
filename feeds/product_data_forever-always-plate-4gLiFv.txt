@@ -1,0 +1,10 @@
+id: forever-always-plate-4gLiFv
+title: Forever Always Plate
+description: Forever Always Plate
+price: 163
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/forever-always-plate-4gLiFv
+brand: Joy and Co

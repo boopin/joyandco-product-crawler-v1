@@ -1,0 +1,10 @@
+id: flower-bird-soup-plate-classics-on-acid-6Q6xUy
+title: Flower Bird Soup Plate - Classics on Acid
+description: Flower Bird Soup Plate - Classics on Acid
+price: 345
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/flower-bird-soup-plate-classics-on-acid-6Q6xUy
+brand: Joy and Co

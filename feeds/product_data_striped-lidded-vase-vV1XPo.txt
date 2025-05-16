@@ -1,0 +1,10 @@
+id: striped-lidded-vase-vV1XPo
+title: Striped Lidded Vase
+description: Striped Lidded Vase
+price: 680
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/striped-lidded-vase-vV1XPo
+brand: Joy and Co

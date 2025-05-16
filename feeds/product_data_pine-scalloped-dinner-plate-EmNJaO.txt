@@ -1,0 +1,10 @@
+id: pine-scalloped-dinner-plate-EmNJaO
+title: Pine Scalloped Dinner Plate
+description: Pine Scalloped Dinner Plate
+price: 165
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/pine-scalloped-dinner-plate-EmNJaO
+brand: Joy and Co

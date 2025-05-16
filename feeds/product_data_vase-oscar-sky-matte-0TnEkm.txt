@@ -1,0 +1,10 @@
+id: vase-oscar-sky-matte-0TnEkm
+title: Vase 'Óscar' Sky Matte
+description: Vase 'Óscar' Sky Matte
+price: 700
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/vase-oscar-sky-matte-0TnEkm
+brand: Joy and Co

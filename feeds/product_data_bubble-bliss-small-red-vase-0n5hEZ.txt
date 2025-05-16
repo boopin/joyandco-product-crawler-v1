@@ -1,0 +1,10 @@
+id: bubble-bliss-small-red-vase-0n5hEZ
+title: Bubble Bliss Small Red Vase
+description: Bubble Bliss Small Red Vase
+price: 135
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/bubble-bliss-small-red-vase-0n5hEZ
+brand: Joy and Co

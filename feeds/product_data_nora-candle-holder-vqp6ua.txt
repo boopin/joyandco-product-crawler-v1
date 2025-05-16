@@ -1,0 +1,10 @@
+id: nora-candle-holder-vqp6ua
+title: Nora Pink Candle Holder
+description: Nora Pink Candle Holder
+price: 105
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/nora-candle-holder-vqp6ua
+brand: Joy and Co

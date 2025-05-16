@@ -1,0 +1,10 @@
+id: mandarino-vase-oSs5Fd
+title: Mandarino Vase
+description: Mandarino Vase
+price: 495
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/mandarino-vase-oSs5Fd
+brand: Joy and Co

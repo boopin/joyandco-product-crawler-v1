@@ -1,132 +1,1403 @@
 JoyAndCo Crawler Debug Summary
 
 Base URL: https://joyandco.com
-Product List URL: https://joyandco.com/products/
 
-Attempted URLs:
-- https://joyandco.com/products/
-  ✓ Successful access
-  Page title: 
-         Products    
+Found 231 product URLs in product_urls.xlsx
 
-Product links found: 18
-
-Sample of found product links:
-- https://joyandco.com/product/pink-kiss-planter-wNl1qY
-- https://joyandco.com/product/twist-glow-candleholder-orange-3nhp4A
-- https://joyandco.com/product/flower-girl-set-of-4-ADbOHH
-- https://joyandco.com/product/azure-tower-vase-usiPgp
-- https://joyandco.com/product/flower-girl-candleholde-pink-Hv3IdF
-... and 13 more
+Sample of product URLs:
+- https://joyandco.com/product/cello-suite-n29-montecarlo-night-700ml-LJv3uf
+- https://joyandco.com/product/flower-girl-candleholder-ochre-dtKhkX
+- https://joyandco.com/product/powder-striped-yogurt-bowl-FSlq6Q
+- https://joyandco.com/product/pegasus-breakfast-plate-rOnjMj
+- https://joyandco.com/product/powder-striped-jug-suAk5v
+... and 226 more
 
 Product fetch attempts:
 
-Product 1: https://joyandco.com/product/pink-kiss-planter-wNl1qY
+Product 1: https://joyandco.com/product/cello-suite-n29-montecarlo-night-700ml-LJv3uf
   ✓ Successful access
   Page title: 
-        Pink Kiss Planter    
-  ✓ Extracted data: Country and language
+        Cello suite n.29 Montecarlo Night 700ML    
+  ✓ Extracted data: Cello suite n.29 Montecarlo Night 700ML
 
-Product 2: https://joyandco.com/product/twist-glow-candleholder-orange-3nhp4A
-  ✓ Successful access
-  Page title: 
-        Twist & Glow Candleholder Orange    
-  ✓ Extracted data: Country and language
-
-Product 3: https://joyandco.com/product/flower-girl-set-of-4-ADbOHH
-  ✓ Successful access
-  Page title: 
-        Flower Girl Set Of 4    
-  ✓ Extracted data: Country and language
-
-Product 4: https://joyandco.com/product/azure-tower-vase-usiPgp
-  ✓ Successful access
-  Page title: 
-        Azure Tower Vase    
-  ✓ Extracted data: Country and language
-
-Product 5: https://joyandco.com/product/flower-girl-candleholde-pink-Hv3IdF
-  ✓ Successful access
-  Page title: 
-        Flower Girl Candleholder Pink    
-  ✓ Extracted data: Country and language
-
-Product 6: https://joyandco.com/product/twist-flicker-candleholder-pink-JT2eWd
-  ✓ Successful access
-  Page title: 
-        Twist & Flicker Candleholder Pink    
-  ✓ Extracted data: Country and language
-
-Product 7: https://joyandco.com/product/candle-dip-dye-yellow-tJ1CSM
-  ✓ Successful access
-  Page title: 
-        Candle Dip Dye yellow    
-  ✓ Extracted data: Country and language
-
-Product 8: https://joyandco.com/product/flower-girl-candleholder-ochre-dtKhkX
+Product 2: https://joyandco.com/product/flower-girl-candleholder-ochre-dtKhkX
   ✓ Successful access
   Page title: 
         Flower Girl Candleholder Ochre    
-  ✓ Extracted data: Country and language
+  ✓ Extracted data: Flower Girl Candleholder Ochre
 
-Product 9: https://joyandco.com/product/sugarline-vase-9rFoY2
+Product 3: https://joyandco.com/product/powder-striped-yogurt-bowl-FSlq6Q
   ✓ Successful access
   Page title: 
-        Sugarline Vase    
-  ✓ Extracted data: Country and language
+        Powder Striped Yogurt Bowl    
+  ✓ Extracted data: Powder Striped Yogurt Bowl
 
-Product 10: https://joyandco.com/product/skyline-vase-9yZABA
+Product 4: https://joyandco.com/product/pegasus-breakfast-plate-rOnjMj
   ✓ Successful access
   Page title: 
-        Skyline Vase    
-  ✓ Extracted data: Country and language
+        Pegasus Breakfast Plate    
+  ✓ Extracted data: Pegasus Breakfast Plate
 
-Product 11: https://joyandco.com/product/chrome-kiss-planter-nTDrA9
+Product 5: https://joyandco.com/product/powder-striped-jug-suAk5v
   ✓ Successful access
   Page title: 
-        Chrome Kiss Planter    
-  ✓ Extracted data: Country and language
+        Powder Striped Jug    
+  ✓ Extracted data: Powder Striped Jug
 
-Product 12: https://joyandco.com/product/flower-girl-candleholder-lilac-l77Ql5
-  ✓ Successful access
-  Page title: 
-        Flower Girl Candleholder Lilac    
-  ✓ Extracted data: Country and language
-
-Product 13: https://joyandco.com/product/twist-glow-candleholder-green-bbkcUk
-  ✓ Successful access
-  Page title: 
-        Twist & Glow Candleholder Green    
-  ✓ Extracted data: Country and language
-
-Product 14: https://joyandco.com/product/bowl-lisa-coral-gloss-QuUwOW
-  ✓ Successful access
-  Page title: 
-        Bowl 'Lisa' Coral Gloss    
-  ✓ Extracted data: Country and language
-
-Product 15: https://joyandco.com/product/flower-girl-candleholder-yellow-CA8gpn
+Product 6: https://joyandco.com/product/flower-girl-candleholder-yellow-CA8gpn
   ✓ Successful access
   Page title: 
         Flower Girl Candleholder Yellow    
-  ✓ Extracted data: Country and language
+  ✓ Extracted data: Flower Girl Candleholder Yellow
 
-Product 16: https://joyandco.com/product/twist-flicker-candleholder-white-sAsYLc
+Product 7: https://joyandco.com/product/glitchy-willow-dessert-plate-classics-on-acid-BaIQCz
   ✓ Successful access
   Page title: 
-        Twist & Flicker Candleholder White    
-  ✓ Extracted data: Country and language
+        Glitchy Willow Dessert Plate - Classics on Acid    
+  ✓ Extracted data: Glitchy Willow Dessert Plate - Classics on Acid
 
-Product 17: https://joyandco.com/product/bowl-lisa-bone-gloss-BSKFl3
+Product 8: https://joyandco.com/product/candle-dip-dye-yellow-tJ1CSM
   ✓ Successful access
   Page title: 
-        Bowl 'Lisa' Bone Gloss    
-  ✓ Extracted data: Country and language
+        Candle Dip Dye yellow    
+  ✓ Extracted data: Candle Dip Dye yellow
 
-Product 18: https://joyandco.com/product/bowl-lisa-bubblegum-gloss-TyMgca
+Product 9: https://joyandco.com/product/hybrid-teapot-smeraldina-jP5GhE
+  ✓ Successful access
+  Page title: 
+        Hybrid Teapot Smeraldina    
+  ✓ Extracted data: Hybrid Teapot Smeraldina
+
+Product 10: https://joyandco.com/product/flower-girl-candleholder-lilac-l77Ql5
+  ✓ Successful access
+  Page title: 
+        Flower Girl Candleholder Lilac    
+  ✓ Extracted data: Flower Girl Candleholder Lilac
+
+Product 11: https://joyandco.com/product/neon-citrine-hobnail-tumblers-set-of-6-3uVHor
+  ✓ Successful access
+  Page title: 
+        Set of 6 Neon Citrine Hobnail Tumblers    
+  ✓ Extracted data: Set of 6 Neon Citrine Hobnail Tumblers
+
+Product 12: https://joyandco.com/product/flower-girl-set-of-4-ADbOHH
+  ✓ Successful access
+  Page title: 
+        Flower Girl Set Of 4    
+  ✓ Extracted data: Flower Girl Set Of 4
+
+Product 13: https://joyandco.com/product/crystal-hobnail-jug-with-gold-handle-U5RN5L
+  ✓ Successful access
+  Page title: 
+        Crystal Hobnail Jug with Gold Handle    
+  ✓ Extracted data: Crystal Hobnail Jug with Gold Handle
+
+Product 14: https://joyandco.com/product/pine-scalloped-dinner-plate-EmNJaO
+  ✓ Successful access
+  Page title: 
+        Pine Scalloped Dinner Plate    
+  ✓ Extracted data: Pine Scalloped Dinner Plate
+
+Product 15: https://joyandco.com/product/birdy-bowl-BJBWFJ
+  ✓ Successful access
+  Page title: 
+        Birdy Bowl    
+  ✓ Extracted data: Birdy Bowl
+
+Product 16: https://joyandco.com/product/dip-dye-coral-taper-candle-j9N4V8
+  ✓ Successful access
+  Page title: 
+        Pack of 4 Dip Dye Coral Taper Candle    
+  ✓ Extracted data: Pack of 4 Dip Dye Coral Taper Candle
+
+Product 17: https://joyandco.com/product/stella-dinner-plate-1l2i66
+  ✓ Successful access
+  Page title: 
+        Stella Dinner Plate    
+  ✓ Extracted data: Stella Dinner Plate
+
+Product 18: https://joyandco.com/product/tropical-vase-JoQGyk
+  ✓ Successful access
+  Page title: 
+        Tropical Vase    
+  ✓ Extracted data: Tropical Vase
+
+Product 19: https://joyandco.com/product/abracadabra-coffee-cups-set-xUdyr3
+  ✓ Successful access
+  Page title: 
+        Abracadabra Coffee Cups Set    
+  ✓ Extracted data: Abracadabra Coffee Cups Set
+
+Product 20: https://joyandco.com/product/mandarino-vase-oSs5Fd
+  ✓ Successful access
+  Page title: 
+        Mandarino Vase    
+  ✓ Extracted data: Mandarino Vase
+
+Product 21: https://joyandco.com/product/pink-scalloped-dinner-plate-fMD6g5
+  ✓ Successful access
+  Page title: 
+        Pink Scalloped Dinner Plate    
+  ✓ Extracted data: Pink Scalloped Dinner Plate
+
+Product 22: https://joyandco.com/product/chinoiserie-birds-linen-runner-Jp2Omz
+  ✓ Successful access
+  Page title: 
+        Chinoiserie Birds Linen Runner    
+  ✓ Extracted data: Chinoiserie Birds Linen Runner
+
+Product 23: https://joyandco.com/product/sugar-bowl-KoIAB8
+  ✓ Successful access
+  Page title: 
+        Sugar Bowl    
+  ✓ Extracted data: Sugar Bowl
+
+Product 24: https://joyandco.com/product/bold-stripes-vase-IErdVl
+  ✓ Successful access
+  Page title: 
+        Bold Stripes Vase    
+  ✓ Extracted data: Bold Stripes Vase
+
+Product 25: https://joyandco.com/product/large-venice-candle-holder-9ERK1X
+  ✓ Successful access
+  Page title: 
+        Large Venice Candle Holder    
+  ✓ Extracted data: Large Venice Candle Holder
+
+Product 26: https://joyandco.com/product/flower-bird-soup-plate-classics-on-acid-6Q6xUy
+  ✓ Successful access
+  Page title: 
+        Flower Bird Soup Plate - Classics on Acid    
+  ✓ Extracted data: Flower Bird Soup Plate - Classics on Acid
+
+Product 27: https://joyandco.com/product/comic-art-teddy-olpPI9
+  ✓ Successful access
+  Page title: 
+        Comic Art Teddy    
+  ✓ Extracted data: Comic Art Teddy
+
+Product 28: https://joyandco.com/product/classic-love-cappucino-mug-8stYME
+  ✓ Successful access
+  Page title: 
+        Classic Love Cappucino Mug    
+  ✓ Extracted data: Classic Love Cappucino Mug
+
+Product 29: https://joyandco.com/product/apple-squared-trinket-tray-eHcdjZ
+  ✓ Successful access
+  Page title: 
+        Apple Squared Trinket Tray    
+  ✓ Extracted data: Apple Squared Trinket Tray
+
+Product 30: https://joyandco.com/product/matcha-set-giftbox-yellow-igGm0V
+  ✓ Successful access
+  Page title: 
+        Matcha set giftbox yellow    
+  ✓ Extracted data: Matcha set giftbox yellow
+
+Product 31: https://joyandco.com/product/birdy-vase-1ivN0A
+  ✓ Successful access
+  Page title: 
+        Birdy Vase    
+  ✓ Extracted data: Birdy Vase
+
+Product 32: https://joyandco.com/product/crystal-cake-stand-l-1aXHg5
+  ✓ Successful access
+  Page title: 
+        Crystal Cake Stand L    
+  ✓ Extracted data: Crystal Cake Stand L
+
+Product 33: https://joyandco.com/product/i-love-you-mug-JY2Lvh
+  ✓ Successful access
+  Page title: 
+        I Love you Mug    
+  ✓ Extracted data: I Love you Mug
+
+Product 34: https://joyandco.com/product/sugarvault-jar-m-q7f2Tq
+  ✓ Successful access
+  Page title: 
+        SugarVault Jar M    
+  ✓ Extracted data: SugarVault Jar M
+
+Product 35: https://joyandco.com/product/ramadan-nights-linen-napkins-set-of-4-dTIbPj
+  ✓ Successful access
+  Page title: 
+        Ramadan Nights Linen Napkins Set of 4    
+  ✓ Extracted data: Ramadan Nights Linen Napkins Set of 4
+
+Product 36: https://joyandco.com/product/cello-suite-n7-woods-harmony-700ml-Sj5LDL
+  ✓ Successful access
+  Page title: 
+        Cello suite n.7 Woods Harmony 700ML    
+  ✓ Extracted data: Cello suite n.7 Woods Harmony 700ML
+
+Product 37: https://joyandco.com/product/david-bust-white-side-table-VtGaFa
+  ✓ Successful access
+  Page title: 
+        David Bust White Side Table    
+  ✓ Extracted data: David Bust White Side Table
+
+Product 38: https://joyandco.com/product/nala-candle-holder-UsgmDg
+  ✓ Successful access
+  Page title: 
+        Nala Candle Holder    
+  ✓ Extracted data: Nala Candle Holder
+
+Product 39: https://joyandco.com/product/sandy-candle-holder-HJHOe0
+  ✓ Successful access
+  Page title: 
+        Sandy Candle Holder    
+  ✓ Extracted data: Sandy Candle Holder
+
+Product 40: https://joyandco.com/product/cherry-blossom-lidded-jar-EwKIkl
+  ✓ Successful access
+  Page title: 
+        Cherry Blossom Lidded Jar    
+  ✓ Extracted data: Cherry Blossom Lidded Jar
+
+Product 41: https://joyandco.com/product/pegasus-striped-cake-platter-gGfYcN
+  ✓ Successful access
+  Page title: 
+        Pegasus Striped Cake Platter    
+  ✓ Extracted data: Pegasus Striped Cake Platter
+
+Product 42: https://joyandco.com/product/vase-oscar-bone-gloss-aA1JJf
+  ✓ Successful access
+  Page title: 
+        Vase 'Óscar' Bone Gloss    
+  ✓ Extracted data: Vase 'Óscar' Bone Gloss
+
+Product 43: https://joyandco.com/product/shut-up-mug-91SeML
+  ✓ Successful access
+  Page title: 
+        Shut Up Mug    
+  ✓ Extracted data: Shut Up Mug
+
+Product 44: https://joyandco.com/product/nora-purple-candle-holder-kwNBcR
+  ✓ Successful access
+  Page title: 
+        Nora Purple Candle Holder    
+  ✓ Extracted data: Nora Purple Candle Holder
+
+Product 45: https://joyandco.com/product/cherry-blossom-lidded-vase-lKXu7G
+  ✓ Successful access
+  Page title: 
+        Cherry Blossom Lidded Vase    
+  ✓ Extracted data: Cherry Blossom Lidded Vase
+
+Product 46: https://joyandco.com/product/gorilla-gentleman-Hnh5S9
+  ✓ Successful access
+  Page title: 
+        Gorilla Gentleman    
+  ✓ Extracted data: Gorilla Gentleman
+
+Product 47: https://joyandco.com/product/palm-tree-linen-napkins-set-of-4-H8N5uf
+  ✓ Successful access
+  Page title: 
+        Palm Tree Linen Placemat Set of 4    
+  ✓ Extracted data: Palm Tree Linen Placemat Set of 4
+
+Product 48: https://joyandco.com/product/blue-scalloped-dinner-plate-S6VT1h
+  ✓ Successful access
+  Page title: 
+        Blue Scalloped Dinner Plate    
+  ✓ Extracted data: Blue Scalloped Dinner Plate
+
+Product 49: https://joyandco.com/product/checkmate-vase-o3SZCR
+  ✓ Successful access
+  Page title: 
+        Checkmate Vase    
+  ✓ Extracted data: Checkmate Vase
+
+Product 50: https://joyandco.com/product/rock-style-wqoBAi
+  ✓ Successful access
+  Page title: 
+        Rock Style    
+  ✓ Extracted data: Rock Style
+
+Product 51: https://joyandco.com/product/whimsy-jar-PPY9tL
+  ✓ Successful access
+  Page title: 
+        Whimsy Jar    
+  ✓ Extracted data: Whimsy Jar
+
+Product 52: https://joyandco.com/product/tea-cups-wplate-set-of-two-fKGiZh
+  ✓ Successful access
+  Page title: 
+        Tea Cups W/Plate Set of Two    
+  ✓ Extracted data: Tea Cups W/Plate Set of Two
+
+Product 53: https://joyandco.com/product/abracadabra-incanto-deep-plate-f6f3Fa
+  ✓ Successful access
+  Page title: 
+        Abracadabra Incanto Deep Plate    
+  ✓ Extracted data: Abracadabra Incanto Deep Plate
+
+Product 54: https://joyandco.com/product/crazy-quarter-dark-green-line-fuZS9K
+  ✓ Successful access
+  Page title: 
+        Crazy Quarter Dark Green Line    
+  ✓ Extracted data: Crazy Quarter Dark Green Line
+
+Product 55: https://joyandco.com/product/black-vase-m-J1WakU
+  ✓ Successful access
+  Page title: 
+        Black Vase M    
+  ✓ Extracted data: Black Vase M
+
+Product 56: https://joyandco.com/product/edion-oud-pqTyyh
+  ✓ Successful access
+  Page title: 
+        EDION Oud 700ML    
+  ✓ Extracted data: EDION Oud 700ML
+
+Product 57: https://joyandco.com/product/talavera-soup-plate-classics-on-acid-f5iyo7
+  ✓ Successful access
+  Page title: 
+        Talavera Soup Plate - Classics on Acid    
+  ✓ Extracted data: Talavera Soup Plate - Classics on Acid
+
+Product 58: https://joyandco.com/product/fancy-pink-candle-holder-wSTBIb
+  ✓ Successful access
+  Page title: 
+        Fancy Pink Candle Holder    
+  ✓ Extracted data: Fancy Pink Candle Holder
+
+Product 59: https://joyandco.com/product/mug-i-know-qcJ8sD
+  ✓ Successful access
+  Page title: 
+        Mug I Know    
+  ✓ Extracted data: Mug I Know
+
+Product 60: https://joyandco.com/product/ciao-bella-photo-frame-qBTc0B
+  ✓ Successful access
+  Page title: 
+        Ciao Bella Photo Frame    
+  ✓ Extracted data: Ciao Bella Photo Frame
+
+Product 61: https://joyandco.com/product/fiorentino-dessert-plate-classics-on-acid-LwzVgz
+  ✓ Successful access
+  Page title: 
+        Fiorentino Dessert Plate - Classics on Acid    
+  ✓ Extracted data: Fiorentino Dessert Plate - Classics on Acid
+
+Product 62: https://joyandco.com/product/ylvie-candle-holder-aLS7Cd
+  ✓ Successful access
+  Page title: 
+        Ylvie Candle Holder    
+  ✓ Extracted data: Ylvie Candle Holder
+
+Product 63: https://joyandco.com/product/love-in-bloom-gold-vase-RNElJR
+  ✓ Successful access
+  Page title: 
+        Love in Bloom Gold Vase    
+  ✓ Extracted data: Love in Bloom Gold Vase
+
+Product 64: https://joyandco.com/product/david-bust-black-side-table-lU4Fj5
+  ✓ Successful access
+  Page title: 
+        David Bust Black Side Table    
+  ✓ Extracted data: David Bust Black Side Table
+
+Product 65: https://joyandco.com/product/aquamarine-hobnail-jug-tall-KMO9Fr
+  ✓ Successful access
+  Page title: 
+        Aquamarine Hobnail Jug Tall    
+  ✓ Extracted data: Aquamarine Hobnail Jug Tall
+
+Product 66: https://joyandco.com/product/tissue-box-yellow-wzvC7o
+  ✓ Successful access
+  Page title: 
+        Tissue Box Yellow    
+  ✓ Extracted data: Tissue Box Yellow
+
+Product 67: https://joyandco.com/product/cello-suite-n29-montecarlo-night-3000ml-u5FFZ6
+  ✓ Successful access
+  Page title: 
+        Cello suite n.29 Montecarlo Night 3000ML    
+  ✓ Extracted data: Cello suite n.29 Montecarlo Night 3000ML
+
+Product 68: https://joyandco.com/product/samatha-candle-holder-ogP5cL
+  ✓ Successful access
+  Page title: 
+        Samatha Candle Holder    
+  ✓ Extracted data: Samatha Candle Holder
+
+Product 69: https://joyandco.com/product/retro-cushion-pink-0s6NHY
+  ✓ Successful access
+  Page title: 
+        Retro Cushion Pink    
+  ✓ Extracted data: Retro Cushion Pink
+
+Product 70: https://joyandco.com/product/zigzag-groove-vase-1IcRW8
+  ✓ Successful access
+  Page title: 
+        Zigzag Groove Vase    
+  ✓ Extracted data: Zigzag Groove Vase
+
+Product 71: https://joyandco.com/product/petra-pink-candle-holder-gmftTY
+  ✓ Successful access
+  Page title: 
+        Petra Pink Candle Holder    
+  ✓ Extracted data: Petra Pink Candle Holder
+
+Product 72: https://joyandco.com/product/blush-wave-vase-VgygWF
+  ✓ Successful access
+  Page title: 
+        Blush Wave Vase    
+  ✓ Extracted data: Blush Wave Vase
+
+Product 73: https://joyandco.com/product/jug-emily-sky-matte-sjVqjD
+  ✓ Successful access
+  Page title: 
+        Jug 'Emily' Sky Matte    
+  ✓ Extracted data: Jug 'Emily' Sky Matte
+
+Product 74: https://joyandco.com/product/twist-glow-candleholder-green-bbkcUk
+  ✓ Successful access
+  Page title: 
+        Twist & Glow Candleholder Green    
+  ✓ Extracted data: Twist & Glow Candleholder Green
+
+Product 75: https://joyandco.com/product/roots-silver-candle-holder-9tOJ5v
+  ✓ Successful access
+  Page title: 
+        Roots Silver Candle Holder    
+  ✓ Extracted data: Roots Silver Candle Holder
+
+Product 76: https://joyandco.com/product/parrot-candelabra-Kiv1zP
+  ✓ Successful access
+  Page title: 
+        Parrot Candelabra    
+  ✓ Extracted data: Parrot Candelabra
+
+Product 77: https://joyandco.com/product/vivid-vase-Gqxs54
+  ✓ Successful access
+  Page title: 
+        Vivid Vase    
+  ✓ Extracted data: Vivid Vase
+
+Product 78: https://joyandco.com/product/jug-emily-moss-gloss-x8TBZR
+  ✓ Successful access
+  Page title: 
+        Jug 'Emily' Moss Gloss    
+  ✓ Extracted data: Jug 'Emily' Moss Gloss
+
+Product 79: https://joyandco.com/product/crystal-hobnail-tumblers-set-of-6-zEUa32
+  ✓ Successful access
+  Page title: 
+        Set of 6 Crystal Hobnail Tumblers    
+  ✓ Extracted data: Set of 6 Crystal Hobnail Tumblers
+
+Product 80: https://joyandco.com/product/lumiere-jar-m-rRxnFq
+  ✓ Successful access
+  Page title: 
+        Lumiere Jar M    
+  ✓ Extracted data: Lumiere Jar M
+
+Product 81: https://joyandco.com/product/cello-suite-n29-montecarlo-night-3000ml-ecMhk9
+  ✓ Successful access
+  Page title: 
+        Cello suite n.29 Montecarlo Night 3000ML    
+  ✓ Extracted data: Cello suite n.29 Montecarlo Night 3000ML
+
+Product 82: https://joyandco.com/product/jug-emily-yolk-matte-gIGtmY
+  ✓ Successful access
+  Page title: 
+        Jug 'Emily' Yolk matte    
+  ✓ Extracted data: Jug 'Emily' Yolk matte
+
+Product 83: https://joyandco.com/product/classic-yellow-porcelain-vase-l-Tex3ve
+  ✓ Successful access
+  Page title: 
+        Classic Yellow Porcelain Vase L    
+  ✓ Extracted data: Classic Yellow Porcelain Vase L
+
+Product 84: https://joyandco.com/product/delf-rose-dessert-plate-classics-on-acide-1rmfAV
+  ✓ Successful access
+  Page title: 
+        Delf Rose Dessert Plate - Classics on Acide    
+  ✓ Extracted data: Delf Rose Dessert Plate - Classics on Acide
+
+Product 85: https://joyandco.com/product/sunny-wave-vase-j1TarN
+  ✓ Successful access
+  Page title: 
+        Sunny Wave Vase    
+  ✓ Extracted data: Sunny Wave Vase
+
+Product 86: https://joyandco.com/product/bubble-bliss-small-green-vase-fELe5t
+  ✓ Successful access
+  Page title: 
+        Bubble Bliss Small Green Vase    
+  ✓ Extracted data: Bubble Bliss Small Green Vase
+
+Product 87: https://joyandco.com/product/small-cups-mixed-shapes-set-of-six-ITei5v
+  ✓ Successful access
+  Page title: 
+        Small Cups Mixed Shapes Set of Six    
+  ✓ Extracted data: Small Cups Mixed Shapes Set of Six
+
+Product 88: https://joyandco.com/product/maastricht-ship-dinner-plate-classics-on-acid-WJeUWg
+  ✓ Successful access
+  Page title: 
+        Maastricht Ship Dinner Plate - Classics on Acid    
+  ✓ Extracted data: Maastricht Ship Dinner Plate - Classics on Acid
+
+Product 89: https://joyandco.com/product/romy-candle-holder-bFYHHJ
+  ✓ Successful access
+  Page title: 
+        Romy Candle Holder    
+  ✓ Extracted data: Romy Candle Holder
+
+Product 90: https://joyandco.com/product/sunbeam-vase-iSeYkN
+  ✓ Successful access
+  Page title: 
+        Sunbeam Vase    
+  ✓ Extracted data: Sunbeam Vase
+
+Product 91: https://joyandco.com/product/papillion-lidded-jar-hEOqcQ
+  ✓ Successful access
+  Page title: 
+        Papillion Lidded Jar    
+  ✓ Extracted data: Papillion Lidded Jar
+
+Product 92: https://joyandco.com/product/nora-green-candle-holder-hLo94e
+  ✓ Successful access
+  Page title: 
+        Nora Green Candle Holder    
+  ✓ Extracted data: Nora Green Candle Holder
+
+Product 93: https://joyandco.com/product/neon-citrine-hobnail-jug-PmY5xi
+  ✓ Successful access
+  Page title: 
+        Neon Citrine Hobnail Jug    
+  ✓ Extracted data: Neon Citrine Hobnail Jug
+
+Product 94: https://joyandco.com/product/petra-candle-holder-5RJlNo
+  ✓ Successful access
+  Page title: 
+        Petra Green Candle Holder    
+  ✓ Extracted data: Petra Green Candle Holder
+
+Product 95: https://joyandco.com/product/stella-round-plate-UP0upm
+  ✓ Successful access
+  Page title: 
+        Stella Round Plate    
+  ✓ Extracted data: Stella Round Plate
+
+Product 96: https://joyandco.com/product/leopard-candle-holder-set-of-2-W54Wir
+  ✓ Successful access
+  Page title: 
+        Set of 2 Leopard Candle Holder    
+  ✓ Extracted data: Set of 2 Leopard Candle Holder
+
+Product 97: https://joyandco.com/product/twist-flicker-candleholder-pink-JT2eWd
+  ✓ Successful access
+  Page title: 
+        Twist & Flicker Candleholder Pink    
+  ✓ Extracted data: Twist & Flicker Candleholder Pink
+
+Product 98: https://joyandco.com/product/paint-the-world-with-love-V6VbrO
+  ✓ Successful access
+  Page title: 
+        Paint the World with Love    
+  ✓ Extracted data: Paint the World with Love
+
+Product 99: https://joyandco.com/product/classic-love-dessert-plate-vHavwn
+  ✓ Successful access
+  Page title: 
+        Classic Love Dessert Plate    
+  ✓ Extracted data: Classic Love Dessert Plate
+
+Product 100: https://joyandco.com/product/english-delft-dinner-plate-classics-on-acid-f5m2Cz
+  ✓ Successful access
+  Page title: 
+        English Delft Dinner Plate - Classics on Acid    
+  ✓ Extracted data: English Delft Dinner Plate - Classics on Acid
+
+Product 101: https://joyandco.com/product/aquamarine-hobnail-tumblers-set-of-6-LbUM2N
+  ✓ Successful access
+  Page title: 
+        Set of 6 Aquamarine Hobnail Tumblers    
+  ✓ Extracted data: Set of 6 Aquamarine Hobnail Tumblers
+
+Product 102: https://joyandco.com/product/palm-tree-linen-napkins-set-of-4-Q7LhiL
+  ✓ Successful access
+  Page title: 
+        Palm Tree Linen Napkins Set of 4    
+  ✓ Extracted data: Palm Tree Linen Napkins Set of 4
+
+Product 103: https://joyandco.com/product/powder-striped-cappuccino-mug-S4e6w4
+  ✓ Successful access
+  Page title: 
+        Powder Striped Cappuccino Mug    
+  ✓ Extracted data: Powder Striped Cappuccino Mug
+
+Product 104: https://joyandco.com/product/sugarvault-jar-s-NejKK6
+  ✓ Successful access
+  Page title: 
+        SugarVault Jar S    
+  ✓ Extracted data: SugarVault Jar S
+
+Product 105: https://joyandco.com/product/black-vase-l-bnkl7X
+  ✓ Successful access
+  Page title: 
+        Black Vase L    
+  ✓ Extracted data: Black Vase L
+
+Product 106: https://joyandco.com/product/stella-deep-plate-60wtiW
+  ✓ Successful access
+  Page title: 
+        Stella Deep Plate    
+  ✓ Extracted data: Stella Deep Plate
+
+Product 107: https://joyandco.com/product/bronze-hobnail-tumblers-set-of-6-gLiGbn
+  ✓ Successful access
+  Page title: 
+        Set of 6 Bronze Hobnail Tumblers    
+  ✓ Extracted data: Set of 6 Bronze Hobnail Tumblers
+
+Product 108: https://joyandco.com/product/jardin-lidded-vase-F3AkBV
+  ✓ Successful access
+  Page title: 
+        Jardin Lidded Vase    
+  ✓ Extracted data: Jardin Lidded Vase
+
+Product 109: https://joyandco.com/product/candelabra-eric-bone-matte-GgNYWF
+  ✓ Successful access
+  Page title: 
+        Candelabra 'Eric' Bone Matte    
+  ✓ Extracted data: Candelabra 'Eric' Bone Matte
+
+Product 110: https://joyandco.com/product/comic-art-mouse-FICTbs
+  ✓ Successful access
+  Page title: 
+        Comic Art Mouse    
+  ✓ Extracted data: Comic Art Mouse
+
+Product 111: https://joyandco.com/product/crystal-cake-stand-s-w5p3bW
+  ✓ Successful access
+  Page title: 
+        Crystal Cake Stand S    
+  ✓ Extracted data: Crystal Cake Stand S
+
+Product 112: https://joyandco.com/product/jug-emily-bone-gloss-YqW4Rm
+  ✓ Successful access
+  Page title: 
+        Jug 'Emily' Bone gloss    
+  ✓ Extracted data: Jug 'Emily' Bone gloss
+
+Product 113: https://joyandco.com/product/retro-cushion-orange-pKlI82
+  ✓ Successful access
+  Page title: 
+        Retro Cushion Orange    
+  ✓ Extracted data: Retro Cushion Orange
+
+Product 114: https://joyandco.com/product/fancy-purple-candle-holder-Xumq0D
+  ✓ Successful access
+  Page title: 
+        Fancy Purple Candle Holder    
+  ✓ Extracted data: Fancy Purple Candle Holder
+
+Product 115: https://joyandco.com/product/fruit-feast-plate-PGRiVb
+  ✓ Successful access
+  Page title: 
+        Fruit Feast Plate    
+  ✓ Extracted data: Fruit Feast Plate
+
+Product 116: https://joyandco.com/product/small-chilli-vase-bPvwoR
+  ✓ Successful access
+  Page title: 
+        Small Chilli Vase    
+  ✓ Extracted data: Small Chilli Vase
+
+Product 117: https://joyandco.com/product/bisou-photo-frame-I8aWvJ
+  ✓ Successful access
+  Page title: 
+        Bisou Photo Frame    
+  ✓ Extracted data: Bisou Photo Frame
+
+Product 118: https://joyandco.com/product/tangerine-twist-vase-m7G1iP
+  ✓ Successful access
+  Page title: 
+        Tangerine Twist Vase    
+  ✓ Extracted data: Tangerine Twist Vase
+
+Product 119: https://joyandco.com/product/soup-plate-pagoda-classics-on-acid-x829dw
+  ✓ Successful access
+  Page title: 
+        Soup Plate Pagoda - Classics on Acid    
+  ✓ Extracted data: Soup Plate Pagoda - Classics on Acid
+
+Product 120: https://joyandco.com/product/lemon-vase-jWcote
+  ✓ Successful access
+  Page title: 
+        Lemon Vase    
+  ✓ Extracted data: Lemon Vase
+
+Product 121: https://joyandco.com/product/chrome-kiss-planter-nTDrA9
+  ✓ Successful access
+  Page title: 
+        Chrome Kiss Planter    
+  ✓ Extracted data: Chrome Kiss Planter
+
+Product 122: https://joyandco.com/product/jacks-cig-ashtray-large-1w8qhm
+  ✓ Successful access
+  Page title: 
+        Jack’s Cig Ashtray Large    
+  ✓ Extracted data: Jack’s Cig Ashtray Large
+
+Product 123: https://joyandco.com/product/finya-vase-small-u9P1wN
+  ✓ Successful access
+  Page title: 
+        Finya Vase Small    
+  ✓ Extracted data: Finya Vase Small
+
+Product 124: https://joyandco.com/product/bowl-lisa-coral-gloss-QuUwOW
+  ✓ Successful access
+  Page title: 
+        Bowl 'Lisa' Coral Gloss    
+  ✓ Extracted data: Bowl 'Lisa' Coral Gloss
+
+Product 125: https://joyandco.com/product/cello-suite-n27-cotton-harmony-700ml-iQ4sd1
+  ✓ Successful access
+  Page title: 
+        Cello suite n.27 Cotton Harmony 700ML    
+  ✓ Extracted data: Cello suite n.27 Cotton Harmony 700ML
+
+Product 126: https://joyandco.com/product/bubble-bliss-tall-green-vase-nJWUpD
+  ✓ Successful access
+  Page title: 
+        Bubble Bliss Tall Green Vase    
+  ✓ Extracted data: Bubble Bliss Tall Green Vase
+
+Product 127: https://joyandco.com/product/aurora-vase-QtwQO7
+  ✓ Successful access
+  Page title: 
+        Aurora Vase    
+  ✓ Extracted data: Aurora Vase
+
+Product 128: https://joyandco.com/product/fancy-candle-holder-OnKt5h
+  ✓ Successful access
+  Page title: 
+        Fancy Candle Holder    
+  ✓ Extracted data: Fancy Candle Holder
+
+Product 129: https://joyandco.com/product/bowl-lisa-sky-gloss-jEzrk6
+  ✓ Successful access
+  Page title: 
+        Bowl 'Lisa' Sky Gloss    
+  ✓ Extracted data: Bowl 'Lisa' Sky Gloss
+
+Product 130: https://joyandco.com/product/good-morning-breakfast-plate-apSbJE
+  ✓ Successful access
+  Page title: 
+        Good Morning Breakfast Plate    
+  ✓ Extracted data: Good Morning Breakfast Plate
+
+Product 131: https://joyandco.com/product/boho-planter-o3q5RN
+  ✓ Successful access
+  Page title: 
+        Boho planter    
+  ✓ Extracted data: Boho planter
+
+Product 132: https://joyandco.com/product/bubble-bliss-tall-blue-vase-unbqYB
+  ✓ Successful access
+  Page title: 
+        Bubble Bliss Tall Blue Vase    
+  ✓ Extracted data: Bubble Bliss Tall Blue Vase
+
+Product 133: https://joyandco.com/product/hybrid-tea-cup-isidora-HPVap0
+  ✓ Successful access
+  Page title: 
+        Hybrid Tea Cup Isidora    
+  ✓ Extracted data: Hybrid Tea Cup Isidora
+
+Product 134: https://joyandco.com/product/bubble-bliss-small-blue-vase-TV97xt
+  ✓ Successful access
+  Page title: 
+        Bubble Bliss Small Blue Vase    
+  ✓ Extracted data: Bubble Bliss Small Blue Vase
+
+Product 135: https://joyandco.com/product/nora-candle-holder-vqp6ua
+  ✓ Successful access
+  Page title: 
+        Nora Pink Candle Holder    
+  ✓ Extracted data: Nora Pink Candle Holder
+
+Product 136: https://joyandco.com/product/bubble-bliss-small-red-vase-0n5hEZ
+  ✓ Successful access
+  Page title: 
+        Bubble Bliss Small Red Vase    
+  ✓ Extracted data: Bubble Bliss Small Red Vase
+
+Product 137: https://joyandco.com/product/sunshine-glass-vase-Gqvfu5
+  ✓ Successful access
+  Page title: 
+        Sunshine Glass Vase    
+  ✓ Extracted data: Sunshine Glass Vase
+
+Product 138: https://joyandco.com/product/strawberry-vase-E6CYHt
+  ✓ Successful access
+  Page title: 
+        Strawberry Vase    
+  ✓ Extracted data: Strawberry Vase
+
+Product 139: https://joyandco.com/product/papillion-lidded-vase-oSf7xQ
+  ✓ Successful access
+  Page title: 
+        Papillion Lidded Vase    
+  ✓ Extracted data: Papillion Lidded Vase
+
+Product 140: https://joyandco.com/product/fancy-tea-cup-set-with-saucer-gW5enB
+  ✓ Successful access
+  Page title: 
+        Fancy Tea Cup Set with Saucer    
+  ✓ Extracted data: Fancy Tea Cup Set with Saucer
+
+Product 141: https://joyandco.com/product/delft-tulip-vase-FMhv5X
+  ✓ Successful access
+  Page title: 
+        Delft Tulip Vase    
+  ✓ Extracted data: Delft Tulip Vase
+
+Product 142: https://joyandco.com/product/azure-tower-vase-usiPgp
+  ✓ Successful access
+  Page title: 
+        Azure Tower Vase    
+  ✓ Extracted data: Azure Tower Vase
+
+Product 143: https://joyandco.com/product/bronze-palm-trees-linen-napkins-set-of-4-9uqNPG
+  ✓ Successful access
+  Page title: 
+        Bronze Palm Trees Linen Napkins Set of 2    
+  ✓ Extracted data: Bronze Palm Trees Linen Napkins Set of 2
+
+Product 144: https://joyandco.com/product/vase-oscar-sky-matte-0TnEkm
+  ✓ Successful access
+  Page title: 
+        Vase 'Óscar' Sky Matte    
+  ✓ Extracted data: Vase 'Óscar' Sky Matte
+
+Product 145: https://joyandco.com/product/philine-candle-holder-hGtibu
+  ✓ Successful access
+  Page title: 
+        Philine Candle Holder    
+  ✓ Extracted data: Philine Candle Holder
+
+Product 146: https://joyandco.com/product/paradise-cocktail-glass-set-of-2-EMpePq
+  ✓ Successful access
+  Page title: 
+        Set of 2 Paradise Cocktail Glass    
+  ✓ Extracted data: Set of 2 Paradise Cocktail Glass
+
+Product 147: https://joyandco.com/product/bliss-cocktail-glass-set-of-2-wVoWvZ
+  ✓ Successful access
+  Page title: 
+        Set of 2 Bliss Cocktail Glass    
+  ✓ Extracted data: Set of 2 Bliss Cocktail Glass
+
+Product 148: https://joyandco.com/product/mandarino-vase-RRwhKz
+  ✓ Successful access
+  Page title: 
+        Mandarino Vase    
+  ✓ Extracted data: Mandarino Vase
+
+Product 149: https://joyandco.com/product/roots-black-candle-holder-5uYzA6
+  ✓ Successful access
+  Page title: 
+        Roots Black Candle Holder    
+  ✓ Extracted data: Roots Black Candle Holder
+
+Product 150: https://joyandco.com/product/bowl-lisa-bubblegum-gloss-TyMgca
   ✓ Successful access
   Page title: 
         Bowl 'Lisa' Bubblegum Gloss    
-  ✓ Extracted data: Country and language
+  ✓ Extracted data: Bowl 'Lisa' Bubblegum Gloss
 
-SUCCESS: Generated product feeds for 18 products
+Product 151: https://joyandco.com/product/twist-flicker-candleholder-white-sAsYLc
+  ✓ Successful access
+  Page title: 
+        Twist & Flicker Candleholder White    
+  ✓ Extracted data: Twist & Flicker Candleholder White
+
+Product 152: https://joyandco.com/product/jacks-cig-ashtray-nPYWV9
+  ✓ Successful access
+  Page title: 
+        Jack’s Cig Ashtray    
+  ✓ Extracted data: Jack’s Cig Ashtray
+
+Product 153: https://joyandco.com/product/wine-chiller-vYnM0O
+  ✓ Successful access
+  Page title: 
+        Wine Chiller    
+  ✓ Extracted data: Wine Chiller
+
+Product 154: https://joyandco.com/product/vase-oscar-bubblegum-gloss-NiYPpf
+  ✓ Successful access
+  Page title: 
+        Vase 'Óscar' Bubblegum Gloss    
+  ✓ Extracted data: Vase 'Óscar' Bubblegum Gloss
+
+Product 155: https://joyandco.com/product/i-love-you-plate-sUITA2
+  ✓ Successful access
+  Page title: 
+        Ti Amo Plate    
+  ✓ Extracted data: Ti Amo Plate
+
+Product 156: https://joyandco.com/product/flute-water-glass-classics-on-acid-ENZuHe
+  ✓ Successful access
+  Page title: 
+        Flute Water Glass - Classics on Acid    
+  ✓ Extracted data: Flute Water Glass - Classics on Acid
+
+Product 157: https://joyandco.com/product/love-peace-b9mH5L
+  ✓ Successful access
+  Page title: 
+        Love & Peace    
+  ✓ Extracted data: Love & Peace
+
+Product 158: https://joyandco.com/product/fancy-purple-candle-holder-ntWr5K
+  ✓ Successful access
+  Page title: 
+        Fancy Purple Candle Holder    
+  ✓ Extracted data: Fancy Purple Candle Holder
+
+Product 159: https://joyandco.com/product/con-amore-plate-5ky8Z4
+  ✓ Successful access
+  Page title: 
+        Con Amore Plate    
+  ✓ Extracted data: Con Amore Plate
+
+Product 160: https://joyandco.com/product/medium-venice-candle-holder-nal7NS
+  ✓ Successful access
+  Page title: 
+        Medium Venice Candle Holder    
+  ✓ Extracted data: Medium Venice Candle Holder
+
+Product 161: https://joyandco.com/product/cello-suite-n7-woods-harmony-3000ml-ACrk7O
+  ✓ Successful access
+  Page title: 
+        Cello suite n.7 Woods Harmony 3000ML    
+  ✓ Extracted data: Cello suite n.7 Woods Harmony 3000ML
+
+Product 162: https://joyandco.com/product/teapot-UXKZyi
+  ✓ Successful access
+  Page title: 
+        Teapot    
+  ✓ Extracted data: Teapot
+
+Product 163: https://joyandco.com/product/classic-yellow-porcelain-vase-m-oMwtLG
+  ✓ Successful access
+  Page title: 
+        Classic Yellow Porcelain Vase M    
+  ✓ Extracted data: Classic Yellow Porcelain Vase M
+
+Product 164: https://joyandco.com/product/leela-large-vase-Yz1pBc
+  ✓ Successful access
+  Page title: 
+        Leela Large Vase    
+  ✓ Extracted data: Leela Large Vase
+
+Product 165: https://joyandco.com/product/emma-candle-holder-5q00Ow
+  ✓ Successful access
+  Page title: 
+        Emma Candle Holder    
+  ✓ Extracted data: Emma Candle Holder
+
+Product 166: https://joyandco.com/product/la-tavola-scomposta-cake-stand-ohcRdD
+  ✓ Successful access
+  Page title: 
+        La Tavola Scomposta cake stand    
+  ✓ Extracted data: La Tavola Scomposta cake stand
+
+Product 167: https://joyandco.com/product/crystal-tray-FV9aIm
+  ✓ Successful access
+  Page title: 
+        Crystal Tray    
+  ✓ Extracted data: Crystal Tray
+
+Product 168: https://joyandco.com/product/fish-fete-plate-set-wiq5aC
+  ✓ Successful access
+  Page title: 
+        Fish Fête Plate Set    
+  ✓ Extracted data: Fish Fête Plate Set
+
+Product 169: https://joyandco.com/product/abracadabra-destino-dinner-plate-ZwL71a
+  ✓ Successful access
+  Page title: 
+        Abracadabra Destino Dinner Plate    
+  ✓ Extracted data: Abracadabra Destino Dinner Plate
+
+Product 170: https://joyandco.com/product/twist-glow-candleholder-orange-3nhp4A
+  ✓ Successful access
+  Page title: 
+        Twist & Glow Candleholder Orange    
+  ✓ Extracted data: Twist & Glow Candleholder Orange
+
+Product 171: https://joyandco.com/product/je-taime-photo-frame-f1XBp0
+  ✓ Successful access
+  Page title: 
+        Je t'aime Photo Frame    
+  ✓ Extracted data: Je t'aime Photo Frame
+
+Product 172: https://joyandco.com/product/petra-purple-candle-holder-4rsvSz
+  ✓ Successful access
+  Page title: 
+        Petra Purple Candle Holder    
+  ✓ Extracted data: Petra Purple Candle Holder
+
+Product 173: https://joyandco.com/product/tissue-box-orange-pWgfkV
+  ✓ Successful access
+  Page title: 
+        Tissue Box Orange    
+  ✓ Extracted data: Tissue Box Orange
+
+Product 174: https://joyandco.com/product/evergreen-vase-waLCAv
+  ✓ Successful access
+  Page title: 
+        Evergreen Vase    
+  ✓ Extracted data: Evergreen Vase
+
+Product 175: https://joyandco.com/product/nye-glass-classics-on-acid-UfwDNd
+  ✓ Successful access
+  Page title: 
+        NYE Glass - Classics on Acid    
+  ✓ Extracted data: NYE Glass - Classics on Acid
+
+Product 176: https://joyandco.com/product/yellow-scalloped-breakfast-plate-A7zpla
+  ✓ Successful access
+  Page title: 
+        Yellow Scalloped Breakfast Plate    
+  ✓ Extracted data: Yellow Scalloped Breakfast Plate
+
+Product 177: https://joyandco.com/product/bubble-bliss-tall-red-vase-BdGIlV
+  ✓ Successful access
+  Page title: 
+        Bubble Bliss Tall Red Vase    
+  ✓ Extracted data: Bubble Bliss Tall Red Vase
+
+Product 178: https://joyandco.com/product/bubble-bliss-small-pink-vase-vc9h1y
+  ✓ Successful access
+  Page title: 
+        Bubble Bliss Small Pink Vase    
+  ✓ Extracted data: Bubble Bliss Small Pink Vase
+
+Product 179: https://joyandco.com/product/parrot-candle-holder-2AqvCv
+  ✓ Successful access
+  Page title: 
+        Parrot Candle Holder    
+  ✓ Extracted data: Parrot Candle Holder
+
+Product 180: https://joyandco.com/product/good-morning-mug-Qe5Bej
+  ✓ Successful access
+  Page title: 
+        Good Morning Mug    
+  ✓ Extracted data: Good Morning Mug
+
+Product 181: https://joyandco.com/product/bubble-pop-vase-aYXp7U
+  ✓ Successful access
+  Page title: 
+        Bubble Pop Vase    
+  ✓ Extracted data: Bubble Pop Vase
+
+Product 182: https://joyandco.com/product/bowl-lisa-bone-gloss-BSKFl3
+  ✓ Successful access
+  Page title: 
+        Bowl 'Lisa' Bone Gloss    
+  ✓ Extracted data: Bowl 'Lisa' Bone Gloss
+
+Product 183: https://joyandco.com/product/disks-planter-GFwX5i
+  ✓ Successful access
+  Page title: 
+        Disks Planter    
+  ✓ Extracted data: Disks Planter
+
+Product 184: https://joyandco.com/product/hybrid-tea-cup-zora-with-saucer-xxizYV
+  ✓ Successful access
+  Page title: 
+        Hybrid Tea Cup Zora with Saucer    
+  ✓ Extracted data: Hybrid Tea Cup Zora with Saucer
+
+Product 185: https://joyandco.com/product/good-morning-bowl-fWw1mw
+  ✓ Successful access
+  Page title: 
+        Good Morning Bowl    
+  ✓ Extracted data: Good Morning Bowl
+
+Product 186: https://joyandco.com/product/abracadabra-striped-dessert-plate-WWoXWn
+  ✓ Successful access
+  Page title: 
+        Abracadabra Striped Dessert Plate    
+  ✓ Extracted data: Abracadabra Striped Dessert Plate
+
+Product 187: https://joyandco.com/product/pink-kiss-planter-wNl1qY
+  ✓ Successful access
+  Page title: 
+        Pink Kiss Planter    
+  ✓ Extracted data: Pink Kiss Planter
+
+Product 188: https://joyandco.com/product/leela-medium-vase-0Rw06l
+  ✓ Successful access
+  Page title: 
+        Leela Medium Vase    
+  ✓ Extracted data: Leela Medium Vase
+
+Product 189: https://joyandco.com/product/sugarline-vase-9rFoY2
+  ✓ Successful access
+  Page title: 
+        Sugarline Vase    
+  ✓ Extracted data: Sugarline Vase
+
+Product 190: https://joyandco.com/product/blue-chinoiserie-dinner-plate-classics-on-acid-PVgGP5
+  ✓ Successful access
+  Page title: 
+        Blue Chinoiserie Dinner Plate - Classics on Acid    
+  ✓ Extracted data: Blue Chinoiserie Dinner Plate - Classics on Acid
+
+Product 191: https://joyandco.com/product/relaxing-leo-jL7fXt
+  ✓ Successful access
+  Page title: 
+        Relaxing Leo    
+  ✓ Extracted data: Relaxing Leo
+
+Product 192: https://joyandco.com/product/abracadabra-round-serving-plate-okCZ5Q
+  ✓ Successful access
+  Page title: 
+        Abracadabra Round Serving Plate    
+  ✓ Extracted data: Abracadabra Round Serving Plate
+
+Product 193: https://joyandco.com/product/edion-oud-3000ml-Fa1UyW
+  ✓ Successful access
+  Page title: 
+        EDION Oud 3000ML    
+  ✓ Extracted data: EDION Oud 3000ML
+
+Product 194: https://joyandco.com/product/dip-dye-orange-taper-candle-pack-of-4-yMIpt2
+  ✓ Successful access
+  Page title: 
+        Pack of 4 Dip Dye Orange Taper Candle    
+  ✓ Extracted data: Pack of 4 Dip Dye Orange Taper Candle
+
+Product 195: https://joyandco.com/product/psycho-salad-bowl-classics-on-acid-I0fOr5
+  ✓ Successful access
+  Page title: 
+        Psycho Salad Bowl - Classics on Acid    
+  ✓ Extracted data: Psycho Salad Bowl - Classics on Acid
+
+Product 196: https://joyandco.com/product/crazy-quarter-plate-dark-green-blob-Up8RMG
+  ✓ Successful access
+  Page title: 
+        Crazy Quarter Plate Dark Green Blob    
+  ✓ Extracted data: Crazy Quarter Plate Dark Green Blob
+
+Product 197: https://joyandco.com/product/modern-lisa-yk0QO3
+  ✓ Successful access
+  Page title: 
+        Modern Lisa    
+  ✓ Extracted data: Modern Lisa
+
+Product 198: https://joyandco.com/product/cozy-cappuccino-mug-set-ik8yLK
+  ✓ Successful access
+  Page title: 
+        Cozy Cappuccino Mug Set    
+  ✓ Extracted data: Cozy Cappuccino Mug Set
+
+Product 199: https://joyandco.com/product/crystal-cake-stand-m-znlBxJ
+  ✓ Successful access
+  Page title: 
+        Crystal Cake Stand M    
+  ✓ Extracted data: Crystal Cake Stand M
+
+Product 200: https://joyandco.com/product/large-chilli-vase-jgfHcr
+  ✓ Successful access
+  Page title: 
+        Large Chilli Vase    
+  ✓ Extracted data: Large Chilli Vase
+
+Product 201: https://joyandco.com/product/flower-girl-candleholde-pink-Hv3IdF
+  ✓ Successful access
+  Page title: 
+        Flower Girl Candleholder Pink    
+  ✓ Extracted data: Flower Girl Candleholder Pink
+
+Product 202: https://joyandco.com/product/striped-lidded-vase-vV1XPo
+  ✓ Successful access
+  Page title: 
+        Striped Lidded Vase    
+  ✓ Extracted data: Striped Lidded Vase
+
+Product 203: https://joyandco.com/product/sweetkeeper-light-yellow-jar-MfSjub
+  ✓ Successful access
+  Page title: 
+        Sweetkeeper Light Yellow Jar    
+  ✓ Extracted data: Sweetkeeper Light Yellow Jar
+
+Product 204: https://joyandco.com/product/blue-vase-4UH9rD
+  ✓ Successful access
+  Page title: 
+        Blue Vase    
+  ✓ Extracted data: Blue Vase
+
+Product 205: https://joyandco.com/product/dip-dye-blue-taper-candle-pack-of-4-G107PE
+  ✓ Successful access
+  Page title: 
+        Pack of 4 Dip Dye Blue Taper Candle    
+  ✓ Extracted data: Pack of 4 Dip Dye Blue Taper Candle
+
+Product 206: https://joyandco.com/product/wire-to-the-moon-Xk0Z0H
+  ✓ Successful access
+  Page title: 
+        Wire to The Moon    
+  ✓ Extracted data: Wire to The Moon
+
+Product 207: https://joyandco.com/product/stella-dessert-plate-n4IsPH
+  ✓ Successful access
+  Page title: 
+        Stella Dessert Plate    
+  ✓ Extracted data: Stella Dessert Plate
+
+Product 208: https://joyandco.com/product/lobster-plate-large-vZKc7Q
+  ✓ Successful access
+  Page title: 
+        Lobster Plate Large    
+  ✓ Extracted data: Lobster Plate Large
+
+Product 209: https://joyandco.com/product/squared-trinket-tray-jYRIfq
+  ✓ Successful access
+  Page title: 
+        Squared Trinket Tray    
+  ✓ Extracted data: Squared Trinket Tray
+
+Product 210: https://joyandco.com/product/saluti-photo-frame-S3nQjl
+  ✓ Successful access
+  Page title: 
+        Saluti Photo Frame    
+  ✓ Extracted data: Saluti Photo Frame
+
+Product 211: https://joyandco.com/product/the-joy-frame-set-GTfjJy
+  ✓ Successful access
+  Page title: 
+        The Joy Frame Set    
+  ✓ Extracted data: The Joy Frame Set
+
+Product 212: https://joyandco.com/product/matcha-set-giftbox-pink-fRIAo5
+  ✓ Successful access
+  Page title: 
+        Matcha Set Giftbox Pink    
+  ✓ Extracted data: Matcha Set Giftbox Pink
+
+Product 213: https://joyandco.com/product/glow-jar-CIqmuy
+  ✓ Successful access
+  Page title: 
+        Glow Jar    
+  ✓ Extracted data: Glow Jar
+
+Product 214: https://joyandco.com/product/cello-suite-n27-cotton-harmony-3000ml-yYYbh0
+  ✓ Successful access
+  Page title: 
+        Cello suite n.27 Cotton Harmony 3000ML    
+  ✓ Extracted data: Cello suite n.27 Cotton Harmony 3000ML
+
+Product 215: https://joyandco.com/product/classic-cake-stand-W6jV8f
+  ✓ Successful access
+  Page title: 
+        Classic Cake Stand    
+  ✓ Extracted data: Classic Cake Stand
+
+Product 216: https://joyandco.com/product/finya-vase-medium-xUMUdo
+  ✓ Successful access
+  Page title: 
+        Finya Vase Medium    
+  ✓ Extracted data: Finya Vase Medium
+
+Product 217: https://joyandco.com/product/retro-cushion-yellow-YRVYAZ
+  ✓ Successful access
+  Page title: 
+        Retro Cushion Yellow    
+  ✓ Extracted data: Retro Cushion Yellow
+
+Product 218: https://joyandco.com/product/lumiere-jar-l-xJu2Ea
+  ✓ Successful access
+  Page title: 
+        Lumiere Jar L    
+  ✓ Extracted data: Lumiere Jar L
+
+Product 219: https://joyandco.com/product/skyline-vase-9yZABA
+  ✓ Successful access
+  Page title: 
+        Skyline Vase    
+  ✓ Extracted data: Skyline Vase
+
+Product 220: https://joyandco.com/product/fancy-yellow-candle-holder-06TVHr
+  ✓ Successful access
+  Page title: 
+        Fancy Yellow Candle Holder    
+  ✓ Extracted data: Fancy Yellow Candle Holder
+
+Product 221: https://joyandco.com/product/hollandia-flowers-dinner-plate-classics-on-acid-IKSvjk
+  ✓ Successful access
+  Page title: 
+        Hollandia Flowers Dinner Plate - Classics on Acid    
+  ✓ Extracted data: Hollandia Flowers Dinner Plate - Classics on Acid
+
+Product 222: https://joyandco.com/product/forever-always-plate-4gLiFv
+  ✓ Successful access
+  Page title: 
+        Forever Always Plate    
+  ✓ Extracted data: Forever Always Plate
+
+Product 223: https://joyandco.com/product/blue-glass-vase-KAAcTq
+  ✓ Successful access
+  Page title: 
+        Blue Glass Vase    
+  ✓ Extracted data: Blue Glass Vase
+
+Product 224: https://joyandco.com/product/disks-vase-lLL4HA
+  ✓ Successful access
+  Page title: 
+        Disks Vase    
+  ✓ Extracted data: Disks Vase
+
+Product 225: https://joyandco.com/product/deer-dessert-plate-classics-on-acid-vJvbu7
+  ✓ Successful access
+  Page title: 
+        Deer Dessert Plate - Classics on Acid    
+  ✓ Extracted data: Deer Dessert Plate - Classics on Acid
+
+Product 226: https://joyandco.com/product/bubble-bliss-tall-pink-vase-kRaPzX
+  ✓ Successful access
+  Page title: 
+        Bubble Bliss Tall Pink Vase    
+  ✓ Extracted data: Bubble Bliss Tall Pink Vase
+
+Product 227: https://joyandco.com/product/chinoiserie-birds-linen-placemat-set-of-4-BVCL8N
+  ✓ Successful access
+  Page title: 
+        Chinoiserie Birds Linen Placemat Set of 4    
+  ✓ Extracted data: Chinoiserie Birds Linen Placemat Set of 4
+
+Product 228: https://joyandco.com/product/bronze-palm-trees-linen-placemat-set-of-4-uPYQ5E
+  ✓ Successful access
+  Page title: 
+        Bronze Palm Trees Linen Placemat Set of 2    
+  ✓ Extracted data: Bronze Palm Trees Linen Placemat Set of 2
+
+Product 229: https://joyandco.com/product/bronze-hobnail-jug-tall-MItwRN
+  ✓ Successful access
+  Page title: 
+        Bronze Hobnail Jug Tall    
+  ✓ Extracted data: Bronze Hobnail Jug Tall
+
+Product 230: https://joyandco.com/product/sugarvault-jar-l-bykFhe
+  ✓ Successful access
+  Page title: 
+        SugarVault Jar L    
+  ✓ Extracted data: SugarVault Jar L
+
+Product 231: https://joyandco.com/product/classic-lidded-jar-iFyZoK
+  ✓ Successful access
+  Page title: 
+        Classic Lidded Jar    
+  ✓ Extracted data: Classic Lidded Jar
+
+SUCCESS: Generated product feeds for 231 products

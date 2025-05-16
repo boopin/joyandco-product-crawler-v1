@@ -1,0 +1,10 @@
+id: azure-tower-vase-usiPgp
+title: Azure Tower Vase
+description: Azure Tower Vase
+price: 155
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/azure-tower-vase-usiPgp
+brand: Joy and Co

@@ -1,0 +1,10 @@
+id: bubble-bliss-tall-pink-vase-kRaPzX
+title: Bubble Bliss Tall Pink Vase
+description: Bubble Bliss Tall Pink Vase
+price: 175
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/bubble-bliss-tall-pink-vase-kRaPzX
+brand: Joy and Co

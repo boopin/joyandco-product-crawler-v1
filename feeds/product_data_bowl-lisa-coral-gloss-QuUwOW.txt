@@ -1,0 +1,10 @@
+id: bowl-lisa-coral-gloss-QuUwOW
+title: Bowl 'Lisa' Coral Gloss
+description: Bowl 'Lisa' Coral Gloss
+price: 249
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/bowl-lisa-coral-gloss-QuUwOW
+brand: Joy and Co

@@ -1,0 +1,10 @@
+id: sugarvault-jar-s-NejKK6
+title: SugarVault Jar S
+description: SugarVault Jar S
+price: 125
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/sugarvault-jar-s-NejKK6
+brand: Joy and Co

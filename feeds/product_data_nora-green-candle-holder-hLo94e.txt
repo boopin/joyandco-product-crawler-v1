@@ -1,0 +1,10 @@
+id: nora-green-candle-holder-hLo94e
+title: Nora Green Candle Holder
+description: Nora Green Candle Holder
+price: 105
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/nora-green-candle-holder-hLo94e
+brand: Joy and Co

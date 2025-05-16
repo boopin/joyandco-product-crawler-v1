@@ -1,0 +1,10 @@
+id: leopard-candle-holder-set-of-2-W54Wir
+title: Set of 2 Leopard Candle Holder
+description: Set of 2 Leopard Candle Holder
+price: 227
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/leopard-candle-holder-set-of-2-W54Wir
+brand: Joy and Co

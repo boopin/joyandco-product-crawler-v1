@@ -1,0 +1,10 @@
+id: deer-dessert-plate-classics-on-acid-vJvbu7
+title: Deer Dessert Plate - Classics on Acid
+description: Deer Dessert Plate - Classics on Acid
+price: 195
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/deer-dessert-plate-classics-on-acid-vJvbu7
+brand: Joy and Co

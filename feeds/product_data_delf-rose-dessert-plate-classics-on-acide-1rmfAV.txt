@@ -1,0 +1,10 @@
+id: delf-rose-dessert-plate-classics-on-acide-1rmfAV
+title: Delf Rose Dessert Plate - Classics on Acide
+description: Delf Rose Dessert Plate - Classics on Acide
+price: 195
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/delf-rose-dessert-plate-classics-on-acide-1rmfAV
+brand: Joy and Co

@@ -1,0 +1,10 @@
+id: bubble-bliss-small-blue-vase-TV97xt
+title: Bubble Bliss Small Blue Vase
+description: Bubble Bliss Small Blue Vase
+price: 135
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/bubble-bliss-small-blue-vase-TV97xt
+brand: Joy and Co

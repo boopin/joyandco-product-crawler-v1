@@ -1,0 +1,10 @@
+id: lobster-plate-large-vZKc7Q
+title: Lobster Plate Large
+description: Lobster Plate Large
+price: 225
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/lobster-plate-large-vZKc7Q
+brand: Joy and Co

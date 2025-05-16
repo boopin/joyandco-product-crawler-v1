@@ -1,0 +1,10 @@
+id: vase-oscar-bone-gloss-aA1JJf
+title: Vase 'Óscar' Bone Gloss
+description: Vase 'Óscar' Bone Gloss
+price: 700
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/vase-oscar-bone-gloss-aA1JJf
+brand: Joy and Co

@@ -1,0 +1,10 @@
+id: bubble-bliss-tall-red-vase-BdGIlV
+title: Bubble Bliss Tall Red Vase
+description: Bubble Bliss Tall Red Vase
+price: 175
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/bubble-bliss-tall-red-vase-BdGIlV
+brand: Joy and Co

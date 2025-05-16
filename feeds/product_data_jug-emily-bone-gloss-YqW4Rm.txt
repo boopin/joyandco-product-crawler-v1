@@ -1,0 +1,10 @@
+id: jug-emily-bone-gloss-YqW4Rm
+title: Jug 'Emily' Bone gloss
+description: Jug 'Emily' Bone gloss
+price: 540
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/jug-emily-bone-gloss-YqW4Rm
+brand: Joy and Co

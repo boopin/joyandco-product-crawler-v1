@@ -1,0 +1,10 @@
+id: dip-dye-blue-taper-candle-pack-of-4-G107PE
+title: Pack of 4 Dip Dye Blue Taper Candle
+description: Pack of 4 Dip Dye Blue Taper Candle
+price: 45
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/dip-dye-blue-taper-candle-pack-of-4-G107PE
+brand: Joy and Co

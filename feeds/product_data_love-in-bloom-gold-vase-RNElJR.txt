@@ -1,0 +1,10 @@
+id: love-in-bloom-gold-vase-RNElJR
+title: Love in Bloom Gold Vase
+description: Love in Bloom Gold Vase
+price: 360
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/love-in-bloom-gold-vase-RNElJR
+brand: Joy and Co

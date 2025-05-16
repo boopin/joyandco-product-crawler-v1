@@ -1,0 +1,10 @@
+id: fancy-yellow-candle-holder-06TVHr
+title: Fancy Yellow Candle Holder
+description: Fancy Yellow Candle Holder
+price: 720
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/fancy-yellow-candle-holder-06TVHr
+brand: Joy and Co

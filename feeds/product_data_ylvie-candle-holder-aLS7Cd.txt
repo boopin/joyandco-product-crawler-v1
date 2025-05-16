@@ -1,0 +1,10 @@
+id: ylvie-candle-holder-aLS7Cd
+title: Ylvie Candle Holder
+description: Ylvie Candle Holder
+price: 105
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/ylvie-candle-holder-aLS7Cd
+brand: Joy and Co

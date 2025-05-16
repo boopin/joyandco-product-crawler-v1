@@ -1,0 +1,10 @@
+id: good-morning-mug-Qe5Bej
+title: Good Morning Mug
+description: Good Morning Mug
+price: 110
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/good-morning-mug-Qe5Bej
+brand: Joy and Co

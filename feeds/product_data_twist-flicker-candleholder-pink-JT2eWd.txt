@@ -1,0 +1,10 @@
+id: twist-flicker-candleholder-pink-JT2eWd
+title: Twist & Flicker Candleholder Pink
+description: Twist & Flicker Candleholder Pink
+price: 145
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/twist-flicker-candleholder-pink-JT2eWd
+brand: Joy and Co

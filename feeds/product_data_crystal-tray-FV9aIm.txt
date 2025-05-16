@@ -1,0 +1,10 @@
+id: crystal-tray-FV9aIm
+title: Crystal Tray
+description: Crystal Tray
+price: 415
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/crystal-tray-FV9aIm
+brand: Joy and Co

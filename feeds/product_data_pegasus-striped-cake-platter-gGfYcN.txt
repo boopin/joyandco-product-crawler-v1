@@ -1,0 +1,10 @@
+id: pegasus-striped-cake-platter-gGfYcN
+title: Pegasus Striped Cake Platter
+description: Pegasus Striped Cake Platter
+price: 350
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/pegasus-striped-cake-platter-gGfYcN
+brand: Joy and Co

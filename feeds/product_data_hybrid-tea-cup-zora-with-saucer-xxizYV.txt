@@ -1,0 +1,10 @@
+id: hybrid-tea-cup-zora-with-saucer-xxizYV
+title: Hybrid Tea Cup Zora with Saucer
+description: Hybrid Tea Cup Zora with Saucer
+price: 165
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/hybrid-tea-cup-zora-with-saucer-xxizYV
+brand: Joy and Co

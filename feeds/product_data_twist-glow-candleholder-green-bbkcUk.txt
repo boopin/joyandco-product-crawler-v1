@@ -1,0 +1,10 @@
+id: twist-glow-candleholder-green-bbkcUk
+title: Twist & Glow Candleholder Green
+description: Twist & Glow Candleholder Green
+price: 245
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/twist-glow-candleholder-green-bbkcUk
+brand: Joy and Co

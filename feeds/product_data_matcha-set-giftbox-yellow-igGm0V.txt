@@ -1,0 +1,10 @@
+id: matcha-set-giftbox-yellow-igGm0V
+title: Matcha set giftbox yellow
+description: Matcha set giftbox yellow
+price: 390
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/matcha-set-giftbox-yellow-igGm0V
+brand: Joy and Co

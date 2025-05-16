@@ -1,0 +1,10 @@
+id: rock-style-wqoBAi
+title: Rock Style
+description: Rock Style
+price: 1450
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/rock-style-wqoBAi
+brand: Joy and Co

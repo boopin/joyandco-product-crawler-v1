@@ -1,0 +1,10 @@
+id: retro-cushion-yellow-YRVYAZ
+title: Retro Cushion Yellow
+description: Retro Cushion Yellow
+price: 245
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/retro-cushion-yellow-YRVYAZ
+brand: Joy and Co

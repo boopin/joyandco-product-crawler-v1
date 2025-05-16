@@ -1,0 +1,10 @@
+id: good-morning-breakfast-plate-apSbJE
+title: Good Morning Breakfast Plate
+description: Good Morning Breakfast Plate
+price: 145
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/good-morning-breakfast-plate-apSbJE
+brand: Joy and Co

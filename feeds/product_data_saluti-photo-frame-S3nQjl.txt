@@ -1,0 +1,10 @@
+id: saluti-photo-frame-S3nQjl
+title: Saluti Photo Frame
+description: Saluti Photo Frame
+price: 95
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/saluti-photo-frame-S3nQjl
+brand: Joy and Co

@@ -1,0 +1,10 @@
+id: chinoiserie-birds-linen-placemat-set-of-4-BVCL8N
+title: Chinoiserie Birds Linen Placemat Set of 4
+description: Chinoiserie Birds Linen Placemat Set of 4
+price: 420
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/chinoiserie-birds-linen-placemat-set-of-4-BVCL8N
+brand: Joy and Co

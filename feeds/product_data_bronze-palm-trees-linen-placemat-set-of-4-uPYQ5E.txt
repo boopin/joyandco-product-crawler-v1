@@ -1,0 +1,10 @@
+id: bronze-palm-trees-linen-placemat-set-of-4-uPYQ5E
+title: Bronze Palm Trees Linen Placemat Set of 2
+description: Bronze Palm Trees Linen Placemat Set of 2
+price: 225
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/bronze-palm-trees-linen-placemat-set-of-4-uPYQ5E
+brand: Joy and Co

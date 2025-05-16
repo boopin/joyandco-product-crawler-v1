@@ -1,0 +1,10 @@
+id: fancy-candle-holder-OnKt5h
+title: Fancy Candle Holder
+description: Fancy Candle Holder
+price: 228
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/fancy-candle-holder-OnKt5h
+brand: Joy and Co

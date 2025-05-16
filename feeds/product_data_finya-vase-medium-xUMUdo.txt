@@ -1,0 +1,10 @@
+id: finya-vase-medium-xUMUdo
+title: Finya Vase Medium
+description: Finya Vase Medium
+price: 310
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/finya-vase-medium-xUMUdo
+brand: Joy and Co

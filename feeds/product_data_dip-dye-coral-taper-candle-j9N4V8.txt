@@ -1,0 +1,10 @@
+id: dip-dye-coral-taper-candle-j9N4V8
+title: Pack of 4 Dip Dye Coral Taper Candle
+description: Pack of 4 Dip Dye Coral Taper Candle
+price: 45
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/dip-dye-coral-taper-candle-j9N4V8
+brand: Joy and Co

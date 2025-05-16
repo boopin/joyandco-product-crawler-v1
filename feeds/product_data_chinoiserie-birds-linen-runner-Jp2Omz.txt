@@ -1,0 +1,10 @@
+id: chinoiserie-birds-linen-runner-Jp2Omz
+title: Chinoiserie Birds Linen Runner
+description: Chinoiserie Birds Linen Runner
+price: 275
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/chinoiserie-birds-linen-runner-Jp2Omz
+brand: Joy and Co

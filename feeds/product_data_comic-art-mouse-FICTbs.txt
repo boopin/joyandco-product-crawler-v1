@@ -1,0 +1,10 @@
+id: comic-art-mouse-FICTbs
+title: Comic Art Mouse
+description: Comic Art Mouse
+price: 1550
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/comic-art-mouse-FICTbs
+brand: Joy and Co

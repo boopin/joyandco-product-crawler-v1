@@ -1,0 +1,10 @@
+id: soup-plate-pagoda-classics-on-acid-x829dw
+title: Soup Plate Pagoda - Classics on Acid
+description: Soup Plate Pagoda - Classics on Acid
+price: 345
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/soup-plate-pagoda-classics-on-acid-x829dw
+brand: Joy and Co

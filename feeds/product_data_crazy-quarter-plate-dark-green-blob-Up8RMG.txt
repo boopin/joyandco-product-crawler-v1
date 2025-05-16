@@ -1,0 +1,10 @@
+id: crazy-quarter-plate-dark-green-blob-Up8RMG
+title: Crazy Quarter Plate Dark Green Blob
+description: Crazy Quarter Plate Dark Green Blob
+price: 145
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/crazy-quarter-plate-dark-green-blob-Up8RMG
+brand: Joy and Co

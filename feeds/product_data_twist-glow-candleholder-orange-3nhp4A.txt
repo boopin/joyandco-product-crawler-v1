@@ -1,0 +1,10 @@
+id: twist-glow-candleholder-orange-3nhp4A
+title: Twist & Glow Candleholder Orange
+description: Twist & Glow Candleholder Orange
+price: 245
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/twist-glow-candleholder-orange-3nhp4A
+brand: Joy and Co

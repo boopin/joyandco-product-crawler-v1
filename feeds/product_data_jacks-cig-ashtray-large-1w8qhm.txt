@@ -1,0 +1,10 @@
+id: jacks-cig-ashtray-large-1w8qhm
+title: Jack’s Cig Ashtray Large
+description: Jack’s Cig Ashtray Large
+price: 690
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/jacks-cig-ashtray-large-1w8qhm
+brand: Joy and Co

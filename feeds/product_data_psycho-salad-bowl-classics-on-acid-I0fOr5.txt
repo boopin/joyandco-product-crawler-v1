@@ -1,0 +1,10 @@
+id: psycho-salad-bowl-classics-on-acid-I0fOr5
+title: Psycho Salad Bowl - Classics on Acid
+description: Psycho Salad Bowl - Classics on Acid
+price: 496
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/psycho-salad-bowl-classics-on-acid-I0fOr5
+brand: Joy and Co

@@ -1,0 +1,10 @@
+id: wine-chiller-vYnM0O
+title: Wine Chiller
+description: Wine Chiller
+price: 670
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/wine-chiller-vYnM0O
+brand: Joy and Co

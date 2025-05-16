@@ -1,0 +1,10 @@
+id: jug-emily-sky-matte-sjVqjD
+title: Jug 'Emily' Sky Matte
+description: Jug 'Emily' Sky Matte
+price: 540
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/jug-emily-sky-matte-sjVqjD
+brand: Joy and Co

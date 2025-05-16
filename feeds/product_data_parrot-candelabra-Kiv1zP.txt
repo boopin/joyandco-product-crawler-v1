@@ -1,0 +1,10 @@
+id: parrot-candelabra-Kiv1zP
+title: Parrot Candelabra
+description: Parrot Candelabra
+price: 377
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/parrot-candelabra-Kiv1zP
+brand: Joy and Co

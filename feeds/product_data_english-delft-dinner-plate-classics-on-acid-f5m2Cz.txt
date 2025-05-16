@@ -1,0 +1,10 @@
+id: english-delft-dinner-plate-classics-on-acid-f5m2Cz
+title: English Delft Dinner Plate - Classics on Acid
+description: English Delft Dinner Plate - Classics on Acid
+price: 295
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/english-delft-dinner-plate-classics-on-acid-f5m2Cz
+brand: Joy and Co

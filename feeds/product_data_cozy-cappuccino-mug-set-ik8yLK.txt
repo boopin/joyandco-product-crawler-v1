@@ -1,0 +1,10 @@
+id: cozy-cappuccino-mug-set-ik8yLK
+title: Cozy Cappuccino Mug Set
+description: Cozy Cappuccino Mug Set
+price: 500
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/cozy-cappuccino-mug-set-ik8yLK
+brand: Joy and Co

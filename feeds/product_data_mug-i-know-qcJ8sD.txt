@@ -1,0 +1,10 @@
+id: mug-i-know-qcJ8sD
+title: Mug I Know
+description: Mug I Know
+price: 110
+currency: AED
+image_link: https://joyandco.com/placeholder.jpg
+availability: out of stock
+condition: new
+link: https://joyandco.com/product/mug-i-know-qcJ8sD
+brand: Joy and Co
