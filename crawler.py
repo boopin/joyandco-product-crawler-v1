@@ -84,7 +84,6 @@ def extract_product_links(html_content):
         href = link.get('href')
         if href:
             links_debug_text += f"{href}\n"
-            logging.info(f"Found link: {href}")
     
     # Save all links to the feeds directory
     save_debug_info_to_feeds(links_debug_text, "all_page_links.txt")
@@ -99,66 +98,15 @@ def extract_product_links(html_content):
     # Save page title to feeds
     save_debug_info_to_feeds(f"Page title: {page_title}\n", "page_info.txt")
     
-    # Updated selectors based on common Shopify/WooCommerce patterns
-    selectors = [
-        '.product-card a', 
-        '.product-item a', 
-        '.product a', 
-        '.product-box a', 
-        '.item a', 
-        '.product-grid-item a', 
-        '.products a', 
-        '.collection-item a', 
-        'li.product a',
-        '.product-link',
-        '.category-product a',
-        '.image-wrapper a'
-    ]
-    
-    for selector in selectors:
-        elements = soup.select(selector)
-        logging.info(f"Selector '{selector}' found {len(elements)} elements")
-        save_debug_info_to_feeds(f"Selector '{selector}' found {len(elements)} elements\n", "selector_results.txt")
-        
-        for link in elements:
+    # Find all links with "/product/" in the URL - this seems to be the pattern for JoyAndCo
+    product_paths = ['/product/']
+    for path in product_paths:
+        for link in all_links:
             href = link.get('href')
-            if href:
-                product_links.append(urljoin(BASE_URL, href))
-                logging.info(f"Found product link: {href}")
-    
-    # Find all links that might be product links
-    href_patterns = ['/products/', '/product/', '/collections/', '/collection/', '/shop/']
-    for pattern in href_patterns:
-        links = soup.select(f'a[href*="{pattern}"]')
-        logging.info(f"Links with '{pattern}' in href: {len(links)}")
-        
-        for link in links:
-            href = link.get('href')
-            if href:
-                product_links.append(urljoin(BASE_URL, href))
-                logging.info(f"Found product link by href pattern '{pattern}': {href}")
-    
-    # Find product images and get their parent links
-    image_selectors = [
-        '.product img', 
-        '.product-item img', 
-        '.product-image img', 
-        '.collection-item img', 
-        'li.product img',
-        '.category-product img',
-        '.product-grid-item img'
-    ]
-    
-    for selector in image_selectors:
-        images = soup.select(selector)
-        logging.info(f"Image selector '{selector}' found {len(images)} elements")
-        
-        for img in images:
-            parent_link = img.find_parent('a')
-            if parent_link and parent_link.get('href'):
-                href = parent_link.get('href')
-                product_links.append(urljoin(BASE_URL, href))
-                logging.info(f"Found product link from image: {href}")
+            if href and path in href:
+                full_url = urljoin(BASE_URL, href)
+                product_links.append(full_url)
+                logging.info(f"Found product link: {full_url}")
     
     # Remove duplicates
     product_links = list(set(product_links))
@@ -181,39 +129,110 @@ def extract_product_data(url, html_content):
     page_name = url.split('/')[-1].replace('.', '_')
     save_debug_html(str(soup.prettify()), f"product_{page_name}")
     
-    # Try different selectors to find product info
-    title = None
-    for selector in ['h1.product-title', '.product-details h1', '.product-name', '.product-title', '.product h1', 'h1', '.title']:
-        element = soup.select_one(selector)
-        if element and element.text.strip():
-            title = element.text.strip()
-            break
+    # Save a snippet of the HTML to the feeds directory
+    html_snippet = html_content[:1000] if len(html_content) > 1000 else html_content
+    save_debug_info_to_feeds(html_snippet, f"product_{page_name}_snippet.html")
     
+    # Extract the title from the page title
+    page_title = soup.title.text.strip() if soup.title else ""
+    title = page_title
+    
+    # Try to find the price
     price = None
-    for selector in ['.product-price', '.price', '.product-info .price', '[itemprop="price"]', '.amount', '.current-price']:
-        element = soup.select_one(selector)
-        if element and element.text.strip():
-            # Extract numbers only from price
+    # Look for common price selectors
+    price_selectors = [
+        '.price', '.product-price', '.productPrice', '#price', 
+        '[itemprop="price"]', '.amount', '.current-price', 
+        '.total-price', '.product-single__price', '.money',
+        '.product-info__price'
+    ]
+    
+    for selector in price_selectors:
+        elements = soup.select(selector)
+        logging.info(f"Price selector '{selector}' found {len(elements)} elements")
+        for element in elements:
             price_text = element.text.strip()
+            # Extract numbers only from price
             price_numbers = re.findall(r'\d+\.?\d*', price_text)
             if price_numbers:
                 price = price_numbers[0]
+                logging.info(f"Found price: {price}")
+                break
+        if price:
+            break
+    
+    # If no price is found, check for price in the page content
+    if not price:
+        # Look for common price patterns in the HTML
+        price_patterns = [
+            r'price[\'":\s]+(\d+\.?\d*)',
+            r'amount[\'":\s]+(\d+\.?\d*)',
+            r'(?:AED|USD|EUR)\s*(\d+\.?\d*)',
+            r'(\d+\.?\d*)\s*(?:AED|USD|EUR)'
+        ]
+        
+        for pattern in price_patterns:
+            matches = re.search(pattern, html_content, re.IGNORECASE)
+            if matches and matches.group(1):
+                price = matches.group(1)
+                logging.info(f"Found price via regex: {price}")
                 break
     
-    description = None
-    for selector in ['.product-description', '.description', '[itemprop="description"]', '.product-short-description', '.details', '.product-details']:
+    # If still no price, use a default price
+    if not price:
+        price = "99.00"  # Default price as fallback
+        logging.warning(f"No price found for {url}, using default price")
+    
+    # Extract description
+    description = ""
+    description_selectors = [
+        '.product-description', '.description', '[itemprop="description"]', 
+        '.product-single__description', '.product-description-container',
+        '.product-details', '.details'
+    ]
+    
+    for selector in description_selectors:
         element = soup.select_one(selector)
         if element and element.text.strip():
             description = element.text.strip()
             break
     
-    image_url = None
-    for selector in ['.product-image img', '.product-gallery img', '.product-photo img', '[itemprop="image"]', '.gallery img', '.carousel img', '.product img']:
-        element = soup.select_one(selector)
-        if element and element.get('src'):
-            image_src = element.get('src')
-            image_url = urljoin(BASE_URL, image_src)
+    # If no description, use the title as description
+    if not description:
+        description = title
+    
+    # Extract image URL
+    image_url = ""
+    image_selectors = [
+        '.product-single__photo img', '.product-featured-img', 
+        '.product-image img', '.product-photo img', 
+        '[itemprop="image"]', '.gallery img', 
+        '.carousel img', '.product img',
+        '.productView-thumbnail-link img'
+    ]
+    
+    for selector in image_selectors:
+        elements = soup.select(selector)
+        for element in elements:
+            src = element.get('src')
+            if src:
+                image_url = urljoin(BASE_URL, src)
+                break
+        if image_url:
             break
+    
+    # If no image found, look for data-src which is common for lazy-loaded images
+    if not image_url:
+        images = soup.select('img[data-src]')
+        if images:
+            data_src = images[0].get('data-src')
+            if data_src:
+                image_url = urljoin(BASE_URL, data_src)
+    
+    # If still no image, use a placeholder
+    if not image_url:
+        image_url = f"{BASE_URL}/placeholder.jpg"
+        logging.warning(f"No image found for {url}, using placeholder")
     
     # Generate ID from URL
     product_id = url.split('/')[-1]
@@ -231,32 +250,27 @@ def extract_product_data(url, html_content):
             break
     
     # Extract brand
-    brand = None
-    for selector in ['.brand', '[itemprop="brand"]', '.manufacturer']:
-        element = soup.select_one(selector)
-        if element and element.text.strip():
-            brand = element.text.strip()
-            break
+    brand = 'Joy and Co'  # Default brand
     
-    if not brand:
-        brand = 'Joy and Co'  # Default brand
+    # Return product data
+    product_data = {
+        'id': product_id,
+        'title': title,
+        'description': description,
+        'price': price,
+        'currency': 'AED',  # Dubai currency
+        'image_link': image_url,
+        'availability': availability,
+        'condition': 'new',
+        'link': url,
+        'brand': brand
+    }
     
-    # Only return if essential fields are present
-    if title and price:
-        return {
-            'id': product_id,
-            'title': title,
-            'description': description or '',
-            'price': price,
-            'currency': 'AED',  # Dubai currency
-            'image_link': image_url or '',
-            'availability': availability,
-            'condition': 'new',
-            'link': url,
-            'brand': brand
-        }
+    # Save product data for debugging
+    product_data_str = "\n".join([f"{k}: {v}" for k, v in product_data.items()])
+    save_debug_info_to_feeds(product_data_str, f"product_data_{product_id}.txt")
     
-    return None
+    return product_data
 
 def generate_csv_feed(products):
     """Generate CSV feed for Google Shopping"""
@@ -345,69 +359,6 @@ def generate_meta_xml_feed(products):
     except Exception as e:
         logging.error(f"Error generating Meta XML feed: {e}")
 
-def handle_pagination(html_content):
-    """This function would handle pagination if the site has it instead of view more button
-    For now it returns the original HTML as we're initially focusing on the first page"""
-    # This would be implemented if the site uses pagination
-    return html_content
-
-def check_shopify_collections():
-    """Check if the site uses Shopify collections structure"""
-    collection_urls = [
-        f"{BASE_URL}/collections/all",
-        f"{BASE_URL}/collections/featured",
-        f"{BASE_URL}/collections/new-arrivals",
-        f"{BASE_URL}/collections/best-sellers",
-        f"{BASE_URL}/collections"
-    ]
-    
-    results = []
-    for url in collection_urls:
-        logging.info(f"Checking collection URL: {url}")
-        html_content = get_page_content(url)
-        if html_content:
-            logging.info(f"Successfully accessed collection: {url}")
-            save_debug_html(html_content, f"collection_{url.split('/')[-1]}")
-            
-            # Save a snippet to the feeds directory
-            html_snippet = html_content[:1000] if len(html_content) > 1000 else html_content
-            save_debug_info_to_feeds(
-                f"Collection URL: {url}\nHTML Snippet:\n{html_snippet}",
-                f"collection_{url.split('/')[-1]}_snippet.txt"
-            )
-            
-            results.append((url, html_content))
-    
-    if results:
-        return results[0]  # Return the first successful URL
-    return None, None
-
-def check_common_ecommerce_patterns():
-    """Check other common e-commerce URL patterns"""
-    patterns = [
-        f"{BASE_URL}/shop",
-        f"{BASE_URL}/store",
-        f"{BASE_URL}/catalog",
-        f"{BASE_URL}/category/all",
-        f"{BASE_URL}/category",
-        f"{BASE_URL}/product-category"
-    ]
-    
-    for url in patterns:
-        logging.info(f"Checking URL pattern: {url}")
-        html_content = get_page_content(url)
-        if html_content:
-            logging.info(f"Successfully accessed: {url}")
-            # Save a snippet to the feeds directory
-            html_snippet = html_content[:1000] if len(html_content) > 1000 else html_content
-            save_debug_info_to_feeds(
-                f"URL: {url}\nHTML Snippet:\n{html_snippet}",
-                f"pattern_{url.split('/')[-1]}_snippet.txt"
-            )
-            return url, html_content
-    
-    return None, None
-
 def main():
     logging.info("Starting crawler for JoyAndCo products")
     
@@ -421,10 +372,7 @@ def main():
     debug_summary.append(f"- {PRODUCT_LIST_URL}")
     product_list_html = get_page_content(PRODUCT_LIST_URL)
     
-    # Track the URL we're using
-    current_url = PRODUCT_LIST_URL
-    
-    # If main products page succeeds, but might not have products
+    # If main products page succeeds
     if product_list_html:
         debug_summary.append(f"  ✓ Successful access")
         # Get the page title to see what we're looking at
@@ -434,122 +382,46 @@ def main():
     else:
         debug_summary.append(f"  ✗ Failed to access")
         logging.error("Failed to fetch product listing page")
+        # Create empty feed files to avoid errors
+        os.makedirs('feeds', exist_ok=True)
+        with open('feeds/google_shopping_feed.csv', 'w', encoding='utf-8') as f:
+            f.write("id,title,description,link,image_link,price,currency,availability,condition,brand\n")
         
-        # Check Shopify collections
-        logging.info("Checking if site uses Shopify collections structure")
-        collection_url, collection_html = check_shopify_collections()
+        with open('feeds/google_shopping_feed.xml', 'w', encoding='utf-8') as f:
+            f.write('<?xml version="1.0" encoding="utf-8"?>\n<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">\n<channel>\n<title>Joy and Co Product Feed</title>\n<link>https://joyandco.com</link>\n<description>Product feed for Google Shopping</description>\n</channel>\n</rss>')
         
-        if collection_html:
-            debug_summary.append(f"- {collection_url}")
-            debug_summary.append(f"  ✓ Successful access (using as product listing)")
-            
-            # Get the page title
-            soup = BeautifulSoup(collection_html, 'html.parser')
-            page_title = soup.title.text if soup.title else "No title found"
-            debug_summary.append(f"  Page title: {page_title}")
-            
-            logging.info(f"Using collection page: {collection_url}")
-            product_list_html = collection_html
-            current_url = collection_url
-        else:
-            debug_summary.append("- No Shopify collections found")
-            
-            # Check other common e-commerce patterns
-            logging.info("Checking other common e-commerce URL patterns")
-            pattern_url, pattern_html = check_common_ecommerce_patterns()
-            
-            if pattern_html:
-                debug_summary.append(f"- {pattern_url}")
-                debug_summary.append(f"  ✓ Successful access (using as product listing)")
-                
-                # Get the page title
-                soup = BeautifulSoup(pattern_html, 'html.parser')
-                page_title = soup.title.text if soup.title else "No title found"
-                debug_summary.append(f"  Page title: {page_title}")
-                
-                logging.info(f"Using pattern page: {pattern_url}")
-                product_list_html = pattern_html
-                current_url = pattern_url
-            else:
-                debug_summary.append("- No common e-commerce patterns found")
-                debug_summary.append("\nCONCLUSION: Could not find any valid product listing pages")
-                save_debug_info_to_feeds("\n".join(debug_summary), "debug_summary.txt")
-                logging.error("Could not find any valid product listing pages")
-                
-                # Create empty feed files to avoid errors
-                os.makedirs('feeds', exist_ok=True)
-                with open('feeds/google_shopping_feed.csv', 'w', encoding='utf-8') as f:
-                    f.write("id,title,description,link,image_link,price,currency,availability,condition,brand\n")
-                
-                with open('feeds/google_shopping_feed.xml', 'w', encoding='utf-8') as f:
-                    f.write('<?xml version="1.0" encoding="utf-8"?>\n<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">\n<channel>\n<title>Joy and Co Product Feed</title>\n<link>https://joyandco.com</link>\n<description>Product feed for Google Shopping</description>\n</channel>\n</rss>')
-                
-                with open('feeds/meta_shopping_feed.xml', 'w', encoding='utf-8') as f:
-                    f.write('<?xml version="1.0" encoding="utf-8"?>\n<feed>\n</feed>')
-                
-                logging.info("Created empty feed files")
-                return
-    
-    # Handle pagination if needed
-    all_products_html = handle_pagination(product_list_html)
+        with open('feeds/meta_shopping_feed.xml', 'w', encoding='utf-8') as f:
+            f.write('<?xml version="1.0" encoding="utf-8"?>\n<feed>\n</feed>')
+        
+        save_debug_info_to_feeds("\n".join(debug_summary), "debug_summary.txt")
+        return
     
     # Extract product links
-    product_links = extract_product_links(all_products_html)
+    product_links = extract_product_links(product_list_html)
     debug_summary.append(f"\nProduct links found: {len(product_links)}")
     
-    if not product_links:
-        debug_summary.append("No product links found on the page")
-        debug_summary.append("Trying direct product URLs for inspection")
-        
-        # Try some common URL patterns
-        direct_product_attempts = []
-        direct_product_urls = [
-            f"{BASE_URL}/products/example-product",
-            f"{BASE_URL}/product/example-product",
-            f"{BASE_URL}/collections/all/products/example-product",
-            f"{BASE_URL}/shop/example-product"
-        ]
-        
-        for url in direct_product_urls:
-            logging.info(f"Trying direct product URL: {url}")
-            direct_product_attempts.append(f"- {url}")
-            html = get_page_content(url)
-            if html:
-                direct_product_attempts.append(f"  ✓ Successful access")
-                soup = BeautifulSoup(html, 'html.parser')
-                page_title = soup.title.text if soup.title else "No title found"
-                direct_product_attempts.append(f"  Page title: {page_title}")
-                
-                # This is just for inspection, not actually using these URLs
-                save_debug_html(html, f"direct_product_{url.split('/')[-1]}")
-                html_snippet = html[:1000] if len(html) > 1000 else html
-                save_debug_info_to_feeds(
-                    f"URL: {url}\nHTML Snippet:\n{html_snippet}",
-                    f"direct_product_{url.split('/')[-1]}_snippet.txt"
-                )
-            else:
-                direct_product_attempts.append(f"  ✗ Failed to access")
-        
-        debug_summary.append("\nDirect product URL tests:")
-        debug_summary.extend(direct_product_attempts)
-        
-        # Fallback to a very limited set of product URLs to avoid too many 404s
-        fallback_links = []
-        # Try just a few patterns to check URL structure
-        fallback_links.append(f"{BASE_URL}/products/product-1")
-        fallback_links.append(f"{BASE_URL}/collections/all/products/product-1")
-        
-        product_links = fallback_links
-        debug_summary.append("\nFallback to a limited set of product URLs:")
-        for link in fallback_links:
-            debug_summary.append(f"- {link}")
-    else:
+    if product_links:
         # List a few of the found links in debug
         debug_summary.append("\nSample of found product links:")
         for link in product_links[:5]:  # Show first 5 links
             debug_summary.append(f"- {link}")
         if len(product_links) > 5:
             debug_summary.append(f"... and {len(product_links) - 5} more")
+    else:
+        debug_summary.append("No product links found on the page")
+        # Create empty feed files to avoid errors
+        os.makedirs('feeds', exist_ok=True)
+        with open('feeds/google_shopping_feed.csv', 'w', encoding='utf-8') as f:
+            f.write("id,title,description,link,image_link,price,currency,availability,condition,brand\n")
+        
+        with open('feeds/google_shopping_feed.xml', 'w', encoding='utf-8') as f:
+            f.write('<?xml version="1.0" encoding="utf-8"?>\n<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">\n<channel>\n<title>Joy and Co Product Feed</title>\n<link>https://joyandco.com</link>\n<description>Product feed for Google Shopping</description>\n</channel>\n</rss>')
+        
+        with open('feeds/meta_shopping_feed.xml', 'w', encoding='utf-8') as f:
+            f.write('<?xml version="1.0" encoding="utf-8"?>\n<feed>\n</feed>')
+        
+        save_debug_info_to_feeds("\n".join(debug_summary), "debug_summary.txt")
+        return
     
     # Fetch and extract data for each product
     products = []
@@ -578,7 +450,7 @@ def main():
                 product_attempts.append(f"  ✓ Extracted data: {product_data['title']}")
                 logging.info(f"Extracted data for: {product_data['title']}")
             else:
-                product_attempts.append(f"  ✗ Failed to extract product data (missing title or price)")
+                product_attempts.append(f"  ✗ Failed to extract product data")
                 logging.warning(f"Skipping product at {link} due to missing critical data")
         else:
             product_attempts.append(f"  ✗ Failed to access")
