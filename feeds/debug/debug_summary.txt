@@ -2099,6 +2099,7 @@ Feed files created:
 - feeds/google/shopping_feed.csv
 - feeds/google/shopping_feed.xml
 - feeds/meta/shopping_feed.xml
+- feeds/meta/shopping_feed.csv
 - feeds/google_shopping_feed.csv (compatibility copy)
 - feeds/google_shopping_feed.xml (compatibility copy)
 - feeds/meta_shopping_feed.xml (compatibility copy)
