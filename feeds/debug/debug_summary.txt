@@ -2000,7 +2000,7 @@ Product 221: https://joyandco.com/product/hollandia-flowers-dinner-plate-classic
         Hollandia Flowers Dinner Plate - Classics on Acid    
   ✓ Extracted data: Hollandia Flowers Dinner Plate - Classics on Acid
     • Image: https://joyandco.com/storage/app/public/product/meta/def.webp
-    • Price: 285 AED
+    • Price: 295 AED
     • Availability: in stock
 
 Product 222: https://joyandco.com/product/forever-always-plate-4gLiFv
