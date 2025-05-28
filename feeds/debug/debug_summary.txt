@@ -200,7 +200,7 @@ Product 21: https://joyandco.com/product/pink-scalloped-dinner-plate-fMD6g5
         Pink Scalloped Dinner Plate    
   ✓ Extracted data: Pink Scalloped Dinner Plate
     • Image: https://joyandco.com/storage/app/public/product/meta/def.webp
-    • Price: 160 AED
+    • Price: 165 AED
     • Availability: in stock
 
 Product 22: https://joyandco.com/product/chinoiserie-birds-linen-runner-Jp2Omz
@@ -443,7 +443,7 @@ Product 48: https://joyandco.com/product/blue-scalloped-dinner-plate-S6VT1h
         Blue Scalloped Dinner Plate    
   ✓ Extracted data: Blue Scalloped Dinner Plate
     • Image: https://joyandco.com/storage/app/public/product/meta/def.webp
-    • Price: 160 AED
+    • Price: 165 AED
     • Availability: in stock
 
 Product 49: https://joyandco.com/product/checkmate-vase-o3SZCR

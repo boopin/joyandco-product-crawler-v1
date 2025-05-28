@@ -1,7 +1,7 @@
 id: blue-scalloped-dinner-plate-S6VT1h
 title: Blue Scalloped Dinner Plate
 description: Blue Scalloped Dinner Plate
-price: 160
+price: 165
 currency: AED
 image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
 availability: in stock
