@@ -1,7 +1,7 @@
 id: mandarino-vase-oSs5Fd
 title: Mandarino Vase
 description: Mandarino Vase
-price: 495
+price: 580
 currency: AED
 image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
 availability: in stock

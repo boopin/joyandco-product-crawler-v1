@@ -191,7 +191,7 @@ Product 20: https://joyandco.com/product/mandarino-vase-oSs5Fd
         Mandarino Vase    
   ✓ Extracted data: Mandarino Vase
     • Image: https://joyandco.com/storage/app/public/product/meta/def.webp
-    • Price: 495 AED
+    • Price: 580 AED
     • Availability: in stock
 
 Product 21: https://joyandco.com/product/pink-scalloped-dinner-plate-fMD6g5
@@ -830,7 +830,7 @@ Product 91: https://joyandco.com/product/papillion-lidded-jar-hEOqcQ
         Papillion Lidded Jar    
   ✓ Extracted data: Papillion Lidded Jar
     • Image: https://joyandco.com/storage/app/public/product/meta/def.webp
-    • Price: 385 AED
+    • Price: 450 AED
     • Availability: in stock
 
 Product 92: https://joyandco.com/product/nora-green-candle-holder-hLo94e
@@ -983,7 +983,7 @@ Product 108: https://joyandco.com/product/jardin-lidded-vase-F3AkBV
         Jardin Lidded Vase    
   ✓ Extracted data: Jardin Lidded Vase
     • Image: https://joyandco.com/storage/app/public/product/meta/2025-02-20-67b711f3658a8.webp
-    • Price: 455 AED
+    • Price: 580 AED
     • Availability: in stock
 
 Product 109: https://joyandco.com/product/candelabra-eric-bone-matte-GgNYWF
@@ -1262,7 +1262,7 @@ Product 139: https://joyandco.com/product/papillion-lidded-vase-oSf7xQ
         Papillion Lidded Vase    
   ✓ Extracted data: Papillion Lidded Vase
     • Image: https://joyandco.com/storage/app/public/product/meta/2025-02-20-67b710fe36c49.webp
-    • Price: 455 AED
+    • Price: 580 AED
     • Availability: in stock
 
 Product 140: https://joyandco.com/product/fancy-tea-cup-set-with-saucer-gW5enB
@@ -1343,7 +1343,7 @@ Product 148: https://joyandco.com/product/mandarino-vase-RRwhKz
         Mandarino Vase    
   ✓ Extracted data: Mandarino Vase
     • Image: https://joyandco.com/storage/app/public/product/meta/def.webp
-    • Price: 690 AED
+    • Price: 760 AED
     • Availability: in stock
 
 Product 149: https://joyandco.com/product/roots-black-candle-holder-5uYzA6
@@ -1829,7 +1829,7 @@ Product 202: https://joyandco.com/product/striped-lidded-vase-vV1XPo
         Striped Lidded Vase    
   ✓ Extracted data: Striped Lidded Vase
     • Image: https://joyandco.com/storage/app/public/product/meta/def.webp
-    • Price: 680 AED
+    • Price: 760 AED
     • Availability: in stock
 
 Product 203: https://joyandco.com/product/sweetkeeper-light-yellow-jar-MfSjub

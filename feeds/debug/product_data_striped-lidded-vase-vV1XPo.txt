@@ -1,7 +1,7 @@
 id: striped-lidded-vase-vV1XPo
 title: Striped Lidded Vase
 description: Striped Lidded Vase
-price: 680
+price: 760
 currency: AED
 image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
 availability: in stock

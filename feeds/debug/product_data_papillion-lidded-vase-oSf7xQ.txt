@@ -1,7 +1,7 @@
 id: papillion-lidded-vase-oSf7xQ
 title: Papillion Lidded Vase
 description: Papillion Lidded Vase
-price: 455
+price: 580
 currency: AED
 image_link: https://joyandco.com/storage/app/public/product/meta/2025-02-20-67b710fe36c49.webp
 availability: in stock

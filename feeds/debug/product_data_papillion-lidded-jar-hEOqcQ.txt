@@ -1,7 +1,7 @@
 id: papillion-lidded-jar-hEOqcQ
 title: Papillion Lidded Jar
 description: Papillion Lidded Jar
-price: 385
+price: 450
 currency: AED
 image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
 availability: in stock

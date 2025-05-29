@@ -1,7 +1,7 @@
 id: jardin-lidded-vase-F3AkBV
 title: Jardin Lidded Vase
 description: Jardin Lidded Vase
-price: 455
+price: 580
 currency: AED
 image_link: https://joyandco.com/storage/app/public/product/meta/2025-02-20-67b711f3658a8.webp
 availability: in stock
