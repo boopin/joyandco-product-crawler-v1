@@ -1,7 +1,7 @@
 id: vase-oscar-sky-matte-0TnEkm
 title: Vase 'Óscar' Sky Matte
 description: Vase 'Óscar' Sky Matte
-price: 700
+price: 720
 currency: AED
 image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
 availability: in stock

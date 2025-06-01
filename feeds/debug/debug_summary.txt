@@ -389,7 +389,7 @@ Product 42: https://joyandco.com/product/vase-oscar-bone-gloss-aA1JJf
         Vase 'Óscar' Bone Gloss    
   ✓ Extracted data: Vase 'Óscar' Bone Gloss
     • Image: https://joyandco.com/storage/app/public/product/meta/def.webp
-    • Price: 700 AED
+    • Price: 720 AED
     • Availability: in stock
 
 Product 43: https://joyandco.com/product/shut-up-mug-91SeML
@@ -1307,7 +1307,7 @@ Product 144: https://joyandco.com/product/vase-oscar-sky-matte-0TnEkm
         Vase 'Óscar' Sky Matte    
   ✓ Extracted data: Vase 'Óscar' Sky Matte
     • Image: https://joyandco.com/storage/app/public/product/meta/def.webp
-    • Price: 700 AED
+    • Price: 720 AED
     • Availability: in stock
 
 Product 145: https://joyandco.com/product/philine-candle-holder-hGtibu
@@ -1397,7 +1397,7 @@ Product 154: https://joyandco.com/product/vase-oscar-bubblegum-gloss-NiYPpf
         Vase 'Óscar' Bubblegum Gloss    
   ✓ Extracted data: Vase 'Óscar' Bubblegum Gloss
     • Image: https://joyandco.com/storage/app/public/product/meta/def.webp
-    • Price: 700 AED
+    • Price: 720 AED
     • Availability: in stock
 
 Product 155: https://joyandco.com/product/i-love-you-plate-sUITA2

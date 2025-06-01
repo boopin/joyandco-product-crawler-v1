@@ -1,7 +1,7 @@
 id: vase-oscar-bubblegum-gloss-NiYPpf
 title: Vase 'Óscar' Bubblegum Gloss
 description: Vase 'Óscar' Bubblegum Gloss
-price: 700
+price: 720
 currency: AED
 image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
 availability: in stock
