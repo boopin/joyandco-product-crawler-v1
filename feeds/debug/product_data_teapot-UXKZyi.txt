@@ -1,7 +1,7 @@
 id: teapot-UXKZyi
 title: Teapot
 description: Teapot
-price: 173
+price: 199
 currency: AED
 image_link: https://joyandco.com/storage/app/public/product/meta/2025-02-19-67b633d824799.webp
 availability: in stock

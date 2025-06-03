@@ -218,7 +218,7 @@ Product 23: https://joyandco.com/product/sugar-bowl-KoIAB8
         Sugar Bowl    
   ✓ Extracted data: Sugar Bowl
     • Image: https://joyandco.com/storage/app/public/product/meta/2025-02-26-67bf585e9c6fa.webp
-    • Price: 108 AED
+    • Price: 155 AED
     • Availability: in stock
 
 Product 24: https://joyandco.com/product/bold-stripes-vase-IErdVl
@@ -479,7 +479,7 @@ Product 52: https://joyandco.com/product/tea-cups-wplate-set-of-two-fKGiZh
         Tea Cups W/Plate Set of Two    
   ✓ Extracted data: Tea Cups W/Plate Set of Two
     • Image: https://joyandco.com/storage/app/public/product/meta/2025-02-19-67b634d47cefa.webp
-    • Price: 156 AED
+    • Price: 176 AED
     • Availability: in stock
 
 Product 53: https://joyandco.com/product/abracadabra-incanto-deep-plate-f6f3Fa
@@ -1469,7 +1469,7 @@ Product 162: https://joyandco.com/product/teapot-UXKZyi
         Teapot    
   ✓ Extracted data: Teapot
     • Image: https://joyandco.com/storage/app/public/product/meta/2025-02-19-67b633d824799.webp
-    • Price: 173 AED
+    • Price: 199 AED
     • Availability: in stock
 
 Product 163: https://joyandco.com/product/classic-yellow-porcelain-vase-m-oMwtLG
