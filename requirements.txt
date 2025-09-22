@@ -1,20 +1,19 @@
-# Core dependencies for crawler
-requests==2.31.0
-beautifulsoup4==4.12.2
+# Core dependencies (for crawler only)
+playwright==1.38.0
+asyncio==3.4.3
 lxml==4.9.3
-pandas==2.1.0
-pillow==10.0.0
-openpyxl==3.1.2
-
-# Additional dependencies for enhanced crawler
 python-dateutil==2.8.2
 pytz==2023.3
 
-# Optional: Other dependencies (if needed by other scripts)
-playwright==1.38.0
-asyncio==3.4.3
+# Streamlit dashboard components
 streamlit==1.27.0
+pandas==2.1.0
 plotly==5.17.0
+pillow>=7.1.0,<10.0.0  # Updated to be compatible with Streamlit 1.27.0
+
+# Utilities
+requests==2.31.0
+beautifulsoup4==4.12.2
 tqdm==4.66.1
 rich==13.5.3
 xmltodict==0.13.0
