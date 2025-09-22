@@ -10,6 +10,8 @@ import random
 import pandas as pd
 import json
 from urllib.parse import urljoin
+from PIL import Image
+from io import BytesIO
 
 # Configure logging
 logging.basicConfig(
@@ -83,8 +85,83 @@ def read_product_urls_from_excel(excel_file_path):
         logging.error(f"Error reading Excel file: {e}")
         return []
 
+def validate_image_for_meta(image_url, max_retries=2):
+    """
+    Validate image URL for Meta ads requirements
+    Returns: (is_valid, validated_url, error_message)
+    """
+    if not image_url:
+        return False, None, "No image URL provided"
+    
+    # Ensure HTTPS
+    original_url = image_url
+    if image_url.startswith('http://'):
+        image_url = image_url.replace('http://', 'https://', 1)
+        logging.info(f"Converted HTTP to HTTPS: {image_url}")
+    elif image_url.startswith('//'):
+        image_url = 'https:' + image_url
+        logging.info(f"Added HTTPS protocol: {image_url}")
+    elif not image_url.startswith('https://'):
+        if image_url.startswith('/'):
+            image_url = BASE_URL + image_url
+        else:
+            return False, image_url, "Image URL must use HTTPS protocol"
+    
+    # Quick validation without downloading full image (for performance)
+    try:
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+            'Accept': 'image/webp,image/apng,image/*,*/*;q=0.8'
+        }
+        
+        # Try HEAD request first
+        response = requests.head(image_url, headers=headers, timeout=10, allow_redirects=True)
+        
+        # If HEAD request fails, try GET with limited data
+        if response.status_code != 200:
+            response = requests.get(image_url, headers=headers, timeout=10, stream=True)
+            if response.status_code != 200:
+                return False, image_url, f"HTTP {response.status_code} error accessing image"
+        
+        # Check content type
+        content_type = response.headers.get('content-type', '').lower()
+        if not content_type.startswith('image/'):
+            return False, image_url, f"URL doesn't point to an image (content-type: {content_type})"
+        
+        # Check file size (Meta limit: 8MB)
+        content_length = response.headers.get('content-length')
+        if content_length:
+            size_mb = int(content_length) / (1024 * 1024)
+            if size_mb > 8:
+                return False, image_url, f"Image too large: {size_mb:.1f}MB (max 8MB)"
+        
+        logging.info(f"Image validated for Meta: {image_url}")
+        return True, image_url, None
+            
+    except requests.exceptions.RequestException as e:
+        return False, image_url, f"Cannot access image URL: {str(e)}"
+    except Exception as e:
+        return False, image_url, f"Image validation error: {str(e)}"
+
+def get_fallback_image_for_meta():
+    """Get a reliable fallback image that meets Meta requirements"""
+    # You should upload a default product image to your domain that meets Meta specs
+    fallback_options = [
+        f"{BASE_URL}/images/default-product-500x500.jpg",
+        f"{BASE_URL}/assets/default-product.jpg",
+        "https://via.placeholder.com/500x500/CCCCCC/FFFFFF?text=Product+Image"  # Last resort
+    ]
+    
+    for fallback in fallback_options:
+        is_valid, validated_url, error = validate_image_for_meta(fallback)
+        if is_valid:
+            return validated_url
+    
+    # If all else fails, return a basic placeholder
+    return "https://via.placeholder.com/500x500/CCCCCC/FFFFFF?text=No+Image"
+
 def extract_product_data(url, html_content):
-    """Extract product data from a product page"""
+    """Extract product data from a product page with enhanced image validation"""
     if not html_content:
         return None
     
@@ -165,94 +242,92 @@ def extract_product_data(url, html_content):
     if not description:
         description = title
     
-    # ----- IMPROVED IMAGE EXTRACTION -----
+    # ----- ENHANCED IMAGE EXTRACTION WITH META VALIDATION -----
     image_url = None
+    image_candidates = []
     
     # 1. Try to find Open Graph meta tag images (usually high quality)
     og_image = soup.find('meta', property='og:image')
     if og_image and og_image.get('content'):
-        image_url = og_image.get('content')
-        logging.info(f"Found image in og:image meta tag: {image_url}")
+        image_candidates.append(('og:image', og_image.get('content')))
     
     # 2. If no OG image, try Twitter card image
-    if not image_url:
-        twitter_image = soup.find('meta', attrs={'name': 'twitter:image'})
-        if twitter_image and twitter_image.get('content'):
-            image_url = twitter_image.get('content')
-            logging.info(f"Found image in twitter:image meta tag: {image_url}")
+    twitter_image = soup.find('meta', attrs={'name': 'twitter:image'})
+    if twitter_image and twitter_image.get('content'):
+        image_candidates.append(('twitter:image', twitter_image.get('content')))
     
     # 3. Look for JSON-LD structured data (common in e-commerce)
-    if not image_url:
-        json_ld_scripts = soup.find_all('script', type='application/ld+json')
-        for script in json_ld_scripts:
-            try:
-                json_data = json.loads(script.string)
-                # Look for images in Product schema
-                if isinstance(json_data, dict):
-                    if '@type' in json_data and json_data['@type'] == 'Product' and 'image' in json_data:
-                        if isinstance(json_data['image'], str):
-                            image_url = json_data['image']
-                            logging.info(f"Found image in JSON-LD: {image_url}")
-                            break
-                        elif isinstance(json_data['image'], list) and len(json_data['image']) > 0:
-                            image_url = json_data['image'][0]
-                            logging.info(f"Found image in JSON-LD array: {image_url}")
-                            break
-            except (json.JSONDecodeError, AttributeError) as e:
-                logging.warning(f"Error parsing JSON-LD: {e}")
+    json_ld_scripts = soup.find_all('script', type='application/ld+json')
+    for script in json_ld_scripts:
+        try:
+            json_data = json.loads(script.string)
+            # Look for images in Product schema
+            if isinstance(json_data, dict):
+                if '@type' in json_data and json_data['@type'] == 'Product' and 'image' in json_data:
+                    if isinstance(json_data['image'], str):
+                        image_candidates.append(('json-ld', json_data['image']))
+                    elif isinstance(json_data['image'], list) and len(json_data['image']) > 0:
+                        image_candidates.append(('json-ld', json_data['image'][0]))
+        except (json.JSONDecodeError, AttributeError) as e:
+            logging.warning(f"Error parsing JSON-LD: {e}")
     
-    # 4. Try common image selectors if still no image
-    if not image_url:
-        image_selectors = [
-            '.product-featured-img', '.product-single__photo img',
-            '.product-image img', '.product-photo img', 
-            '.carousel-item.active img', '.slick-active img',
-            '.gallery img:first-child', '.product img:first-child',
-            '#product-image', '.main-product-image img'
-        ]
-        
-        for selector in image_selectors:
-            elements = soup.select(selector)
-            for element in elements:
-                # Try src attribute first
-                src = element.get('src')
-                if src and not src.endswith('.svg') and not 'placeholder' in src.lower():
-                    image_url = urljoin(BASE_URL, src)
-                    logging.info(f"Found image with selector '{selector}': {image_url}")
-                    break
-                
-                # Try data-src for lazy-loaded images
-                data_src = element.get('data-src')
-                if data_src and not data_src.endswith('.svg') and not 'placeholder' in data_src.lower():
-                    image_url = urljoin(BASE_URL, data_src)
-                    logging.info(f"Found image in data-src with selector '{selector}': {image_url}")
-                    break
+    # 4. Try common image selectors
+    image_selectors = [
+        '.product-featured-img', '.product-single__photo img',
+        '.product-image img', '.product-photo img', 
+        '.carousel-item.active img', '.slick-active img',
+        '.gallery img:first-child', '.product img:first-child',
+        '#product-image', '.main-product-image img'
+    ]
+    
+    for selector in image_selectors:
+        elements = soup.select(selector)
+        for element in elements:
+            # Try src attribute first
+            src = element.get('src')
+            if src and not src.endswith('.svg') and not 'placeholder' in src.lower():
+                image_candidates.append((f'selector-{selector}', src))
             
-            if image_url:
-                break
+            # Try data-src for lazy-loaded images
+            data_src = element.get('data-src')
+            if data_src and not data_src.endswith('.svg') and not 'placeholder' in data_src.lower():
+                image_candidates.append((f'data-src-{selector}', data_src))
     
-    # 5. If still no specific image, try to find any relevant image
-    if not image_url:
-        all_images = soup.find_all('img')
-        for img in all_images:
-            src = img.get('src')
-            if src and not src.endswith('.svg') and not 'placeholder' in src.lower() and not 'logo' in src.lower():
-                if 'product' in src.lower() or 'item' in src.lower() or '/uploads/' in src.lower():
-                    image_url = urljoin(BASE_URL, src)
-                    logging.info(f"Found potential product image: {image_url}")
-                    break
+    # 5. Try to find any relevant image
+    all_images = soup.find_all('img')
+    for img in all_images:
+        src = img.get('src')
+        if src and not src.endswith('.svg') and not 'placeholder' in src.lower() and not 'logo' in src.lower():
+            if 'product' in src.lower() or 'item' in src.lower() or '/uploads/' in src.lower():
+                image_candidates.append(('general-search', src))
     
-    # If still no image found, use placeholder
+    # Validate image candidates for Meta compatibility
+    for source, candidate_url in image_candidates:
+        # Convert to absolute URL
+        if candidate_url.startswith('/'):
+            candidate_url = BASE_URL + candidate_url
+        elif not candidate_url.startswith(('http://', 'https://')):
+            candidate_url = urljoin(BASE_URL, candidate_url)
+        
+        # Validate for Meta requirements
+        is_valid, validated_url, error = validate_image_for_meta(candidate_url)
+        if is_valid:
+            image_url = validated_url
+            logging.info(f"Found valid image from {source}: {image_url}")
+            break
+        else:
+            logging.warning(f"Image from {source} failed validation: {error}")
+    
+    # If no valid image found, use fallback
     if not image_url:
-        image_url = f"{BASE_URL}/placeholder.jpg"
-        logging.warning(f"No image found for {url}, using placeholder")
+        image_url = get_fallback_image_for_meta()
+        logging.warning(f"No valid image found for {url}, using fallback: {image_url}")
     
     # ----- IMPROVED AVAILABILITY DETECTION -----
     # Default to in stock unless proven otherwise
     availability = 'in stock'
     
     # 1. Try to find availability in JSON-LD
-    json_ld_scripts = soup.find_all('script', type='application/ld+json')
     for script in json_ld_scripts:
         try:
             json_data = json.loads(script.string)
@@ -359,6 +434,33 @@ def extract_product_data(url, html_content):
     
     return product_data
 
+def batch_validate_images_for_meta(products):
+    """Validate all images in a batch of products for Meta compatibility"""
+    validated_products = []
+    
+    for product in products:
+        if product.get('image_link'):
+            is_valid, validated_url, error = validate_image_for_meta(product['image_link'])
+            if is_valid:
+                product['image_link'] = validated_url
+                validated_products.append(product)
+                logging.info(f"Product {product['id']} image validated: {validated_url}")
+            else:
+                logging.error(f"Product {product['id']} has invalid image: {error}")
+                # Replace with fallback
+                fallback = get_fallback_image_for_meta()
+                product['image_link'] = fallback
+                validated_products.append(product)
+                logging.warning(f"Product {product['id']} using fallback image: {fallback}")
+        else:
+            # No image link, use fallback
+            fallback = get_fallback_image_for_meta()
+            product['image_link'] = fallback
+            validated_products.append(product)
+            logging.warning(f"Product {product['id']} had no image, using fallback: {fallback}")
+    
+    return validated_products
+
 def generate_csv_feed(products):
     """Generate CSV feed for Google Shopping"""
     os.makedirs('feeds/google', exist_ok=True)
@@ -432,15 +534,18 @@ def generate_xml_feed(products):
         logging.error(f"Error generating Google XML feed: {e}")
 
 def generate_meta_xml_feed(products):
-    """Generate XML feed for Meta Catalog"""
+    """Generate XML feed for Meta Catalog with enhanced image validation"""
     try:
         # Create subdirectory for Meta feeds
         os.makedirs('feeds/meta', exist_ok=True)
         
+        # Validate all images for Meta before generating feed
+        validated_products = batch_validate_images_for_meta(products.copy())
+        
         # Create XML structure for Meta Catalog
         root = ET.Element('feed')
         
-        for product in products:
+        for product in validated_products:
             item = ET.SubElement(root, 'item')
             
             ET.SubElement(item, 'id').text = str(product['id'])
@@ -460,15 +565,15 @@ def generate_meta_xml_feed(products):
         # Also write to the original location for backward compatibility
         tree.write('feeds/meta_shopping_feed.xml', encoding='utf-8', xml_declaration=True)
         
-        logging.info(f"Meta Shopping XML feed generated at feeds/meta/shopping_feed.xml")
+        logging.info(f"Meta Shopping XML feed generated at feeds/meta/shopping_feed.xml with {len(validated_products)} validated products")
         
         # Generate CSV feed for Meta as well
-        generate_meta_csv_feed(products)
+        generate_meta_csv_feed(validated_products)
     except Exception as e:
         logging.error(f"Error generating Meta XML feed: {e}")
         
 def generate_meta_csv_feed(products):
-    """Generate CSV feed for Meta Catalog"""
+    """Generate CSV feed for Meta Catalog with pre-validated images"""
     os.makedirs('feeds/meta', exist_ok=True)
     
     logging.info(f"Generating CSV feed for Meta with {len(products)} products")
@@ -492,11 +597,25 @@ def generate_meta_csv_feed(products):
                 writer.writerow(meta_product)
                 
         logging.info(f"CSV feed for Meta generated at feeds/meta/shopping_feed.csv")
+        
+        # Also create compatibility copy
+        with open('feeds/meta_shopping_feed.csv', 'w', newline='', encoding='utf-8') as csvfile:
+            fieldnames = ['id', 'title', 'description', 'link', 'image_link', 'price', 'availability', 'condition', 'brand']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            
+            writer.writeheader()
+            for product in products:
+                meta_product = product.copy()
+                meta_product['price'] = f"{product['price']} {product['currency']}"
+                if 'currency' in meta_product:
+                    del meta_product['currency']
+                writer.writerow(meta_product)
+                
     except Exception as e:
         logging.error(f"Error generating CSV feed for Meta: {e}")
 
 def main():
-    logging.info("Starting crawler for JoyAndCo products")
+    logging.info("Starting crawler for JoyAndCo products with enhanced Meta image validation")
     
     # Create feed directory structure
     os.makedirs('feeds/google', exist_ok=True)
@@ -504,7 +623,7 @@ def main():
     os.makedirs('feeds/debug', exist_ok=True)
     
     # Create debug info summary file
-    debug_summary = ["JoyAndCo Crawler Debug Summary\n"]
+    debug_summary = ["JoyAndCo Crawler Debug Summary with Meta Image Validation\n"]
     debug_summary.append(f"Base URL: {BASE_URL}")
     
     # Read product URLs from Excel file
@@ -537,6 +656,9 @@ def main():
             
         with open('feeds/meta_shopping_feed.xml', 'w', encoding='utf-8') as f:
             f.write('<?xml version="1.0" encoding="utf-8"?>\n<feed>\n</feed>')
+            
+        with open('feeds/meta_shopping_feed.csv', 'w', encoding='utf-8') as f:
+            f.write("id,title,description,link,image_link,price,availability,condition,brand\n")
         
         save_debug_info_to_feeds("\n".join(debug_summary), "debug_summary.txt")
         return
@@ -553,6 +675,7 @@ def main():
     # Fetch and extract data for each product
     products = []
     product_attempts = []
+    image_validation_results = []
     
     # Process a batch of products at a time to avoid overwhelming
     batch_size = 50  # Process in batches for better handling
@@ -588,6 +711,14 @@ def main():
                     product_attempts.append(f"    • Image: {product_data['image_link']}")
                     product_attempts.append(f"    • Price: {product_data['price']} {product_data['currency']}")
                     product_attempts.append(f"    • Availability: {product_data['availability']}")
+                    
+                    # Validate image for Meta specifically
+                    is_valid, validated_url, error = validate_image_for_meta(product_data['image_link'])
+                    if is_valid:
+                        image_validation_results.append(f"  ✓ {product_data['title']}: Image valid for Meta")
+                    else:
+                        image_validation_results.append(f"  ✗ {product_data['title']}: Image issue - {error}")
+                    
                     logging.info(f"Extracted data for: {product_data['title']}")
                 else:
                     product_attempts.append(f"  ✗ Failed to extract product data")
@@ -599,6 +730,9 @@ def main():
     debug_summary.append("\nProduct fetch attempts:")
     debug_summary.extend(product_attempts)
     
+    debug_summary.append(f"\nImage validation results for Meta:")
+    debug_summary.extend(image_validation_results)
+    
     # Generate feeds
     if products:
         generate_csv_feed(products)
@@ -607,12 +741,22 @@ def main():
         debug_summary.append(f"\nFeed files created:")
         debug_summary.append(f"- feeds/google/shopping_feed.csv")
         debug_summary.append(f"- feeds/google/shopping_feed.xml")
-        debug_summary.append(f"- feeds/meta/shopping_feed.xml")
-        debug_summary.append(f"- feeds/meta/shopping_feed.csv")
+        debug_summary.append(f"- feeds/meta/shopping_feed.xml (with enhanced image validation)")
+        debug_summary.append(f"- feeds/meta/shopping_feed.csv (with enhanced image validation)")
         debug_summary.append(f"- feeds/google_shopping_feed.csv (compatibility copy)")
         debug_summary.append(f"- feeds/google_shopping_feed.xml (compatibility copy)")
         debug_summary.append(f"- feeds/meta_shopping_feed.xml (compatibility copy)")
+        debug_summary.append(f"- feeds/meta_shopping_feed.csv (compatibility copy)")
+        
+        # Count validation results
+        valid_images = len([r for r in image_validation_results if "✓" in r])
+        invalid_images = len([r for r in image_validation_results if "✗" in r])
+        debug_summary.append(f"\nImage validation summary:")
+        debug_summary.append(f"- Valid images for Meta: {valid_images}")
+        debug_summary.append(f"- Images requiring fallbacks: {invalid_images}")
+        
         logging.info(f"Successfully generated product feeds for {len(products)} products")
+        logging.info(f"Meta image validation: {valid_images} valid, {invalid_images} using fallbacks")
     else:
         debug_summary.append("\nERROR: No products found to generate feeds")
         logging.warning("No products found to generate feeds")
@@ -639,12 +783,46 @@ def main():
             
         with open('feeds/meta_shopping_feed.xml', 'w', encoding='utf-8') as f:
             f.write('<?xml version="1.0" encoding="utf-8"?>\n<feed>\n</feed>')
+            
+        with open('feeds/meta_shopping_feed.csv', 'w', encoding='utf-8') as f:
+            f.write("id,title,description,link,image_link,price,availability,condition,brand\n")
         
         debug_summary.append("Created empty feed files")
         logging.info("Created empty feed files")
     
     # Save final debug summary
     save_debug_info_to_feeds("\n".join(debug_summary), "debug_summary.txt")
+    
+    # Create a separate detailed image validation report
+    image_report = ["Detailed Image Validation Report for Meta Ads\n"]
+    image_report.append("="*50)
+    image_report.append(f"Total products processed: {len(products)}")
+    
+    if products:
+        image_report.append("\nImage validation details:")
+        for product in products:
+            image_report.append(f"\nProduct: {product['title']}")
+            image_report.append(f"Image URL: {product['image_link']}")
+            
+            # Re-validate to get detailed info
+            is_valid, validated_url, error = validate_image_for_meta(product['image_link'])
+            if is_valid:
+                image_report.append("Status: ✓ VALID for Meta ads")
+                if validated_url != product['image_link']:
+                    image_report.append(f"Corrected URL: {validated_url}")
+            else:
+                image_report.append(f"Status: ✗ INVALID - {error}")
+                image_report.append("Action: Will use fallback image in Meta feed")
+        
+        image_report.append(f"\nRecommendations:")
+        image_report.append("1. Ensure all product images are HTTPS")
+        image_report.append("2. Verify images are at least 500x500 pixels")
+        image_report.append("3. Check that image URLs are accessible")
+        image_report.append("4. Consider uploading a default product image that meets Meta specs")
+        
+    save_debug_info_to_feeds("\n".join(image_report), "meta_image_validation_report.txt")
+    
+    logging.info("Crawler completed with enhanced Meta image validation")
 
 if __name__ == "__main__":
     main()
