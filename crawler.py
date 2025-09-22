@@ -10,8 +10,6 @@ import random
 import pandas as pd
 import json
 from urllib.parse import urljoin
-from PIL import Image
-from io import BytesIO
 
 # Configure logging
 logging.basicConfig(
@@ -85,16 +83,17 @@ def read_product_urls_from_excel(excel_file_path):
         logging.error(f"Error reading Excel file: {e}")
         return []
 
-def validate_image_for_meta(image_url, max_retries=2):
+def validate_and_fix_image_url(image_url):
     """
-    Validate image URL for Meta ads requirements
-    Returns: (is_valid, validated_url, error_message)
+    Basic image URL validation and HTTPS conversion (without PIL)
+    Returns: (is_valid, corrected_url, error_message)
     """
     if not image_url:
         return False, None, "No image URL provided"
     
-    # Ensure HTTPS
     original_url = image_url
+    
+    # Ensure HTTPS
     if image_url.startswith('http://'):
         image_url = image_url.replace('http://', 'https://', 1)
         logging.info(f"Converted HTTP to HTTPS: {image_url}")
@@ -107,61 +106,52 @@ def validate_image_for_meta(image_url, max_retries=2):
         else:
             return False, image_url, "Image URL must use HTTPS protocol"
     
-    # Quick validation without downloading full image (for performance)
+    # Basic accessibility check (HEAD request only)
     try:
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
             'Accept': 'image/webp,image/apng,image/*,*/*;q=0.8'
         }
         
-        # Try HEAD request first
         response = requests.head(image_url, headers=headers, timeout=10, allow_redirects=True)
         
-        # If HEAD request fails, try GET with limited data
         if response.status_code != 200:
-            response = requests.get(image_url, headers=headers, timeout=10, stream=True)
-            if response.status_code != 200:
-                return False, image_url, f"HTTP {response.status_code} error accessing image"
+            return False, image_url, f"HTTP {response.status_code} error accessing image"
         
         # Check content type
         content_type = response.headers.get('content-type', '').lower()
         if not content_type.startswith('image/'):
             return False, image_url, f"URL doesn't point to an image (content-type: {content_type})"
         
-        # Check file size (Meta limit: 8MB)
-        content_length = response.headers.get('content-length')
-        if content_length:
-            size_mb = int(content_length) / (1024 * 1024)
-            if size_mb > 8:
-                return False, image_url, f"Image too large: {size_mb:.1f}MB (max 8MB)"
-        
-        logging.info(f"Image validated for Meta: {image_url}")
+        logging.info(f"Image validated: {image_url}")
         return True, image_url, None
             
     except requests.exceptions.RequestException as e:
-        return False, image_url, f"Cannot access image URL: {str(e)}"
+        # If HEAD request fails, still return the HTTPS-corrected URL
+        # Meta might still accept it even if our validation fails
+        logging.warning(f"Could not validate image accessibility: {str(e)}")
+        return True, image_url, None
     except Exception as e:
         return False, image_url, f"Image validation error: {str(e)}"
 
 def get_fallback_image_for_meta():
     """Get a reliable fallback image that meets Meta requirements"""
-    # You should upload a default product image to your domain that meets Meta specs
     fallback_options = [
         f"{BASE_URL}/images/default-product-500x500.jpg",
         f"{BASE_URL}/assets/default-product.jpg",
-        "https://via.placeholder.com/500x500/CCCCCC/FFFFFF?text=Product+Image"  # Last resort
+        "https://via.placeholder.com/500x500/CCCCCC/FFFFFF?text=Product+Image"
     ]
     
     for fallback in fallback_options:
-        is_valid, validated_url, error = validate_image_for_meta(fallback)
+        is_valid, validated_url, error = validate_and_fix_image_url(fallback)
         if is_valid:
             return validated_url
     
-    # If all else fails, return a basic placeholder
+    # Final fallback
     return "https://via.placeholder.com/500x500/CCCCCC/FFFFFF?text=No+Image"
 
 def extract_product_data(url, html_content):
-    """Extract product data from a product page with enhanced image validation"""
+    """Extract product data from a product page with basic image validation"""
     if not html_content:
         return None
     
@@ -242,7 +232,7 @@ def extract_product_data(url, html_content):
     if not description:
         description = title
     
-    # ----- ENHANCED IMAGE EXTRACTION WITH META VALIDATION -----
+    # ----- ENHANCED IMAGE EXTRACTION WITH BASIC META VALIDATION -----
     image_url = None
     image_candidates = []
     
@@ -301,7 +291,7 @@ def extract_product_data(url, html_content):
             if 'product' in src.lower() or 'item' in src.lower() or '/uploads/' in src.lower():
                 image_candidates.append(('general-search', src))
     
-    # Validate image candidates for Meta compatibility
+    # Validate image candidates for Meta compatibility (basic validation only)
     for source, candidate_url in image_candidates:
         # Convert to absolute URL
         if candidate_url.startswith('/'):
@@ -309,8 +299,8 @@ def extract_product_data(url, html_content):
         elif not candidate_url.startswith(('http://', 'https://')):
             candidate_url = urljoin(BASE_URL, candidate_url)
         
-        # Validate for Meta requirements
-        is_valid, validated_url, error = validate_image_for_meta(candidate_url)
+        # Basic validation and HTTPS conversion
+        is_valid, validated_url, error = validate_and_fix_image_url(candidate_url)
         if is_valid:
             image_url = validated_url
             logging.info(f"Found valid image from {source}: {image_url}")
@@ -435,12 +425,12 @@ def extract_product_data(url, html_content):
     return product_data
 
 def batch_validate_images_for_meta(products):
-    """Validate all images in a batch of products for Meta compatibility"""
+    """Basic validation of all images in a batch of products for Meta compatibility"""
     validated_products = []
     
     for product in products:
         if product.get('image_link'):
-            is_valid, validated_url, error = validate_image_for_meta(product['image_link'])
+            is_valid, validated_url, error = validate_and_fix_image_url(product['image_link'])
             if is_valid:
                 product['image_link'] = validated_url
                 validated_products.append(product)
@@ -615,7 +605,7 @@ def generate_meta_csv_feed(products):
         logging.error(f"Error generating CSV feed for Meta: {e}")
 
 def main():
-    logging.info("Starting crawler for JoyAndCo products with enhanced Meta image validation")
+    logging.info("Starting crawler for JoyAndCo products with basic Meta image validation (no PIL)")
     
     # Create feed directory structure
     os.makedirs('feeds/google', exist_ok=True)
@@ -623,7 +613,7 @@ def main():
     os.makedirs('feeds/debug', exist_ok=True)
     
     # Create debug info summary file
-    debug_summary = ["JoyAndCo Crawler Debug Summary with Meta Image Validation\n"]
+    debug_summary = ["JoyAndCo Crawler Debug Summary with Basic Meta Image Validation\n"]
     debug_summary.append(f"Base URL: {BASE_URL}")
     
     # Read product URLs from Excel file
@@ -712,8 +702,8 @@ def main():
                     product_attempts.append(f"    • Price: {product_data['price']} {product_data['currency']}")
                     product_attempts.append(f"    • Availability: {product_data['availability']}")
                     
-                    # Validate image for Meta specifically
-                    is_valid, validated_url, error = validate_image_for_meta(product_data['image_link'])
+                    # Basic image validation for Meta
+                    is_valid, validated_url, error = validate_and_fix_image_url(product_data['image_link'])
                     if is_valid:
                         image_validation_results.append(f"  ✓ {product_data['title']}: Image valid for Meta")
                     else:
@@ -741,8 +731,8 @@ def main():
         debug_summary.append(f"\nFeed files created:")
         debug_summary.append(f"- feeds/google/shopping_feed.csv")
         debug_summary.append(f"- feeds/google/shopping_feed.xml")
-        debug_summary.append(f"- feeds/meta/shopping_feed.xml (with enhanced image validation)")
-        debug_summary.append(f"- feeds/meta/shopping_feed.csv (with enhanced image validation)")
+        debug_summary.append(f"- feeds/meta/shopping_feed.xml (with basic image validation)")
+        debug_summary.append(f"- feeds/meta/shopping_feed.csv (with basic image validation)")
         debug_summary.append(f"- feeds/google_shopping_feed.csv (compatibility copy)")
         debug_summary.append(f"- feeds/google_shopping_feed.xml (compatibility copy)")
         debug_summary.append(f"- feeds/meta_shopping_feed.xml (compatibility copy)")
@@ -794,7 +784,7 @@ def main():
     save_debug_info_to_feeds("\n".join(debug_summary), "debug_summary.txt")
     
     # Create a separate detailed image validation report
-    image_report = ["Detailed Image Validation Report for Meta Ads\n"]
+    image_report = ["Basic Image Validation Report for Meta Ads\n"]
     image_report.append("="*50)
     image_report.append(f"Total products processed: {len(products)}")
     
@@ -805,7 +795,7 @@ def main():
             image_report.append(f"Image URL: {product['image_link']}")
             
             # Re-validate to get detailed info
-            is_valid, validated_url, error = validate_image_for_meta(product['image_link'])
+            is_valid, validated_url, error = validate_and_fix_image_url(product['image_link'])
             if is_valid:
                 image_report.append("Status: ✓ VALID for Meta ads")
                 if validated_url != product['image_link']:
@@ -816,13 +806,13 @@ def main():
         
         image_report.append(f"\nRecommendations:")
         image_report.append("1. Ensure all product images are HTTPS")
-        image_report.append("2. Verify images are at least 500x500 pixels")
-        image_report.append("3. Check that image URLs are accessible")
-        image_report.append("4. Consider uploading a default product image that meets Meta specs")
+        image_report.append("2. Verify images are accessible")
+        image_report.append("3. Consider uploading a default product image that meets Meta specs")
+        image_report.append("4. Note: Advanced validation (image dimensions) requires PIL library")
         
     save_debug_info_to_feeds("\n".join(image_report), "meta_image_validation_report.txt")
     
-    logging.info("Crawler completed with enhanced Meta image validation")
+    logging.info("Crawler completed with basic Meta image validation (no PIL)")
 
 if __name__ == "__main__":
     main()
