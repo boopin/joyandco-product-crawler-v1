@@ -1,20 +1,27 @@
-# Core dependencies (for crawler only)
-playwright==1.38.0
-asyncio==3.4.3
-lxml==4.9.3
+# Core dependencies for web crawling
+requests==2.31.0
+beautifulsoup4==4.12.2
+lxml>=5.0.0  # Fixed: Updated to compatible version
+pandas>=2.0.0  # Fixed: More flexible versioning
 python-dateutil==2.8.2
 pytz==2023.3
 
-# Streamlit dashboard components
-streamlit==1.27.0
-pandas==2.1.0
-plotly==5.17.0
-pillow>=7.1.0,<10.0.0  # Updated to be compatible with Streamlit 1.27.0
-
 # Utilities
-requests==2.31.0
-beautifulsoup4==4.12.2
 tqdm==4.66.1
 rich==13.5.3
 xmltodict==0.13.0
 pyyaml==6.0.1
+
+# Excel support
+openpyxl>=3.1.0
+
+# Google Sheets integration (for workflow)
+gspread>=6.0.0
+google-auth>=2.20.0
+google-auth-oauthlib>=1.0.0
+google-auth-httplib2>=0.2.0
+
+# Optional: Streamlit dashboard (only if you need the dashboard)
+# streamlit==1.27.0
+# plotly==5.17.0
+# pillow>=7.1.0,<10.0.0
