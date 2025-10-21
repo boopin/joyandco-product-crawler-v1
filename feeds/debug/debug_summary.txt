@@ -116,10 +116,10 @@ Product 11: https://joyandco.com/product/neon-citrine-hobnail-tumblers-set-of-6-
 Product 12: https://joyandco.com/product/flower-girl-set-of-4-ADbOHH
   ✓ Successful access
   Page title: 
-        Flower Girl Set Of 4    
-  ✓ Extracted data: Flower Girl Set Of 4
+        Flower Girl Set Of 3    
+  ✓ Extracted data: Flower Girl Set Of 3
     • Image: https://joyandco.com/storage/app/public/product/meta/def.webp
-    • Price: 299 AED
+    • Price: 220 AED
     • Availability: in stock
 
 Product 13: https://joyandco.com/product/crystal-hobnail-jug-with-gold-handle-U5RN5L

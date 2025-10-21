@@ -1,7 +1,7 @@
 id: flower-girl-set-of-4-ADbOHH
-title: Flower Girl Set Of 4
-description: Flower Girl Set Of 4
-price: 299
+title: Flower Girl Set Of 3
+description: Flower Girl Set Of 3
+price: 220
 currency: AED
 image_link: https://joyandco.com/storage/app/public/product/meta/def.webp
 availability: in stock
